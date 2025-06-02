@@ -32,7 +32,6 @@
     },
     "git.blame.editorDecoration.enabled": false,
     "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
-    "openrouter.apiKey": "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",
     "tabby.endpoint": "",
     "roo-cline.allowedCommands": [
         "npm test",
