@@ -1,0 +1,97 @@
+{
+    "workbench.colorTheme": "GNOME dark",
+    "workbench.iconTheme": "vscode-great-icons",
+    "workbench.startupEditor": "none",
+    "explorer.autoReveal": false,
+    "editor.minimap.enabled": false,
+    "ruff.configurationPreference": "filesystemFirst",
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.autoFormatStrings": true,
+    "python.analysis.displayEnglishDiagnostics": true,
+    "python.analysis.generateWithTypeAnnotation": true,
+    "python.analysis.inlayHints.callArgumentNames": "all",
+    "python.analysis.inlayHints.functionReturnTypes": true,
+    "python.languageServer": "Jedi",
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "roo-cline.allowedCommands": [
+        "npm test",
+        "npm install",
+        "tsc",
+        "git log",
+        "git diff",
+        "git show"
+    ],
+    "dbcode.tunnels": [
+        {
+            "id": "orX4tK7mBK1leCPgqFQCE",
+            "type": "ssh",
+            "name": "hr_toolkit",
+            "host": "95.216.216.102",
+            "port": 22,
+            "username": "hr_toolkit",
+            "authType": "key",
+            "password": "",
+            "savePassword": "secretStorage",
+            "privateKeyPath": "/home/work/.ssh/id_rsa"
+        }
+    ],
+    "dbcode.connections": [
+        {
+            "connectionId": "DjBi3FkF_dzq6CzOADrOJ",
+            "name": "dev",
+            "driver": "postgres",
+            "connectionType": "host",
+            "host": "localhost",
+            "port": 5432,
+            "ssl": false,
+            "username": "hradmin",
+            "password": "",
+            "savePassword": "secretStorage",
+            "tunnelId": "orX4tK7mBK1leCPgqFQCE",
+            "database": "hrtoolkit",
+            "readOnly": false,
+            "connectionTimeout": 30
+        },
+        {
+            "connectionId": "B_FCOES-5EO_LFPwX9RK1",
+            "name": "local",
+            "driver": "postgres",
+            "connectionType": "host",
+            "host": "localhost",
+            "port": 5432,
+            "ssl": false,
+            "username": "hradmin",
+            "password": "",
+            "savePassword": "secretStorage",
+            "database": "hrtoolkit",
+            "readOnly": false,
+            "connectionTimeout": 30
+        }
+    ],
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "pgsql.serverGroups": [
+        {
+            "name": "Servers",
+            "id": "B26F028E-FBC1-4231-8B66-C59ECEA5BAAA",
+            "isDefault": true
+        }
+    ],
+    "vscode-office.editorTheme": "One Dark",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "roo-cline.deniedCommands": [],
+    "syncfusionDocumentViewer.readOnly": false,
+    "editor.quickSuggestions": {
+        "other": "off"
+    },
+    "editor.suggestOnTriggerCharacters": false,
+    "editor.hover.enabled": false,
+    "basedpyright.analysis.autoFormatStrings": false,
+    "basedpyright.analysis.typeCheckingMode": "off",
+    "editor.parameterHints.enabled": false,
+    "basedpyright.analysis.inlayHints.variableTypes": false
+}
