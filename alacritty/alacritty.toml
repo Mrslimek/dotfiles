@@ -1,0 +1,26 @@
+# Alacritty configuration
+
+[font]
+normal = { family = "Liberation Mono", style = "Regular" }
+bold = { family = "Liberation Mono", style = "Bold" }
+italic = { family = "Liberation Mono", style = "Italic" }
+size = 16
+
+[colors.primary]
+background = "0x000000"
+foreground = "0xFFFFFF"
+
+[window]
+decorations = "none"
+padding = { x = 5, y = 5 }
+
+[cursor]
+style = { shape = "Block", blinking = "On" }
+
+[scrolling]
+history = 10000
+
+[bell]
+animation = "EaseOutSine"
+duration = 0
+color = "0xFFFFFF"
