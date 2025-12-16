@@ -12,7 +12,7 @@
     "python.analysis.generateWithTypeAnnotation": true,
     "python.analysis.inlayHints.callArgumentNames": "all",
     "python.analysis.inlayHints.functionReturnTypes": true,
-    "python.languageServer": "Jedi",
+    "python.languageServer": "None",
     "[html]": {
         "editor.defaultFormatter": "vscode.html-language-features"
     },
