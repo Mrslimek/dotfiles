@@ -1,0 +1,77 @@
+{
+  "window_decorations": "client",
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "agent": {
+    "dock": "left",
+    "default_model": {
+      "provider": "ZAI",
+      "model": "glm-4.7",
+    },
+    "model_parameters": [],
+  },
+  "outline_panel": {
+    "button": false,
+  },
+  "git_panel": {
+    "dock": "left",
+    "status_style": "icon",
+  },
+  "notification_panel": {
+    "button": false,
+  },
+  "collaboration_panel": {
+    "button": false,
+  },
+  "features": {
+    "edit_prediction_provider": "zed",
+  },
+  "diagnostics": {
+    "button": true,
+  },
+  "terminal": {
+    "button": false,
+  },
+  "status_bar": {
+    "cursor_position_button": false,
+    "active_language_button": true,
+  },
+  "debugger": {
+    "button": false,
+  },
+  "project_panel": {
+    "button": true,
+    "dock": "right",
+  },
+  "ui_font_weight": 400.0,
+  "ui_font_family": ".ZedSans",
+  "buffer_font_family": ".ZedMono",
+  "icon_theme": "VSCode Great Icons Theme",
+  "ui_font_size": 20.0,
+  "buffer_font_size": 15,
+  "theme": "macOS Classic Dark",
+  "hover_popover_enabled": false,
+  "show_completions_on_input": false,
+  "language_models": {
+    "openai_compatible": {
+      "ZAI": {
+        "api_url": "https://api.z.ai/api/coding/paas/v4",
+        "available_models": [
+          {
+            "name": "glm-4.7",
+            "display_name": "glm-4.7",
+            "max_tokens": 200000,
+            "max_output_tokens": 32000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false,
+            },
+          },
+        ],
+      },
+    },
+  },
+}
