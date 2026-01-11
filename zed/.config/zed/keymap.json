@@ -1,0 +1,44 @@
+[
+  {
+    "bindings": {
+      // Unlike vs code, zed doesnt have toggle actions for every panel,
+      // so we only can toggle last opened panel on the right and left.
+      // I figured out that q and e buttons work fine for this
+      "ctrl-e": "workspace::ToggleRightDock",
+      "ctrl-q": "workspace::ToggleLeftDock",
+      // TODO: Remove ability to close left and right docks with ctrl w, like tabs
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-tab": "editor::Hover",
+      "ctrl-d": "editor::DuplicateLineDown",
+      "alt-left": "editor::MoveToBeginningOfLine",
+      "alt-right": "editor::MoveToEndOfLine",
+      "home": null,
+      "end": null,
+      "pageup": null,
+      "pagedown": null,
+      "ctrl-j": "pane::GoBack",
+      "ctrl-k": "pane::GoForward",
+    },
+  },
+  // Basic zed ctrl f binding is opening buffer search. To close it with same keybinding we use:
+  // Context of buffer search
+  // Action: buffer_search::Dismiss
+  {
+    "context": "BufferSearchBar",
+    "bindings": {
+      "ctrl-f": "buffer_search::Dismiss",
+    },
+  },
+  // I have no idea what this shit is doing,
+  // but without it i can open right dock with both ctrl e and ctrl shift e (this keybinding somehow remove ctrl shift e binding)
+  {
+    "context": "!ContextEditor > (Editor && mode == full)",
+    "bindings": {
+      "ctrl-shift-e": null,
+    },
+  },
+]
