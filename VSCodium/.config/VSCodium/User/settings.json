@@ -1,0 +1,50 @@
+{
+    "workbench.colorTheme": "GNOME dark",
+    "workbench.iconTheme": "vscode-great-icons",
+    "workbench.startupEditor": "none",
+    "explorer.autoReveal": false,
+    "editor.minimap.enabled": false,
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "python.languageServer": "None",
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.quickSuggestions": {
+        "other": "off"
+    },
+    "editor.suggestOnTriggerCharacters": false,
+    "editor.hover.enabled": "off",
+    "basedpyright.analysis.autoFormatStrings": false,
+    "basedpyright.analysis.typeCheckingMode": "off",
+    "editor.parameterHints.enabled": false,
+    "basedpyright.analysis.inlayHints.variableTypes": false,
+    "database-client.autoSync": true,
+    "git.suggestSmartCommit": false,
+    "editor.fontFamily": "Courier New",
+    "python.createEnvironment.trigger": "off",
+    "[python]": {
+        "diffEditor.ignoreTrimWhitespace": false
+    },
+    "rust-analyzer.diagnostics.disabled": [
+        "unlinked-file"
+    ],
+    "svelte.enable-ts-plugin": true,
+    "redhat.telemetry.enabled": false,
+    "yaml.schemas": {
+        "file:///home/viktor/.vscode-oss/extensions/continue.continue-1.2.11-linux-x64/config-yaml-schema.json": [
+            ".continue/**/*.yaml"
+        ]
+    },
+    "continue.enableTabAutocomplete": false,
+    "http.systemCertificatesNode": true,
+    "geminicodeassist.enableTelemetry": false,
+    "claudeCode.preferredLocation": "panel",
+    // "http.proxy": "http://localhost:10808",
+    // "http.proxyStrictSSL": false,
+    // "http.proxySupport": "on",
+    // "google.cloudcode.gemini.enable": true
+}

@@ -1,0 +1,24 @@
+# Some default settings from HyDE
+GRUB_DEFAULT=saved
+GRUB_SAVEDEFAULT=true
+GRUB_TIMEOUT=0
+GRUB_TIMEOUT_STYLE=hidden
+GRUB_DISTRIBUTOR="Arch"
+GRUB_DISABLE_RECOVERY=true
+
+# Kernel parameters
+# Here i setup following rules:
+# 1. loglevel=3 to see logs of grub during boot of computer
+# 2. acpi_lib_error_level=0x00000000 to not display warnings of acpi_lib (if close laptop during active ly display manager)
+# it would trigger some problems in acpi_lib or bios idk, but everything would work okay, so i just ignore these logs
+# 3. Display only on main monitor of laptop
+# GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 acpi_lib_error_level=0x00000000 video=eDP-1:3200x2000 video=HDMI-A-1:d"
+GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 acpi_lib_error_level=0x00000000"
+GRUB_CMDLINE_LINUX="rootfstype=btrfs"
+
+GRUB_PRELOAD_MODULES="part_gpt part_msdos"
+GRUB_TERMINAL_INPUT=console
+# 800*600 here because grub menu is too small in any bigger resolution.
+# 800*600 is blurry, but still the most comfortable variant
+GRUB_GFXMODE=800x600x32,auto
+GRUB_GFXPAYLOAD_LINUX=keep
