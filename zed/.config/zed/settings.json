@@ -1,13 +1,30 @@
 {
+  "search": {
+    "include_ignored": true,
+  },
+  "file_finder": {
+    "include_ignored": "all",
+  },
+  "languages": {
+    "Rust": {
+      "show_edit_predictions": false,
+      "show_completions_on_input": true,
+    },
+    "Python": {
+      "format_on_save": "off",
+      "language_servers": ["ty", "!basedpyright", "!pyright", "..."],
+    },
+  },
   "window_decorations": "client",
   "session": {
     "trust_all_worktrees": true,
   },
   "agent": {
+    "default_profile": "write",
     "dock": "left",
     "default_model": {
-      "provider": "ZAI",
-      "model": "glm-4.7",
+      "provider": "GPTProxy",
+      "model": "gpt-5.2",
     },
     "model_parameters": [],
   },
@@ -55,13 +72,30 @@
   "show_completions_on_input": false,
   "language_models": {
     "openai_compatible": {
+      "GPTProxy": {
+        "api_url": "https://gpt-proxy.p3.54origins.com/api",
+        "available_models": [
+          {
+            "name": "gpt-5.2",
+            "max_tokens": 200000,
+            "max_output_tokens": 32000,
+            "max_completion_tokens": 20000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false,
+            },
+          },
+        ],
+      },
       "ZAI": {
         "api_url": "https://api.z.ai/api/coding/paas/v4",
         "available_models": [
           {
             "name": "glm-4.7",
             "display_name": "glm-4.7",
-            "max_tokens": 200000,
+            "max_tokens": 1000000,
             "max_output_tokens": 32000,
             "capabilities": {
               "tools": true,
