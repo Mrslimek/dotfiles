@@ -43,6 +43,13 @@
     "http.systemCertificatesNode": true,
     "geminicodeassist.enableTelemetry": false,
     "claudeCode.preferredLocation": "panel",
+    "roo-cline.debug": false,
+    "roo-cline.allowedCommands": [
+        "git log",
+        "git diff",
+        "git show"
+    ],
+    "roo-cline.deniedCommands": [],
     // "http.proxy": "http://localhost:10808",
     // "http.proxyStrictSSL": false,
     // "http.proxySupport": "on",
