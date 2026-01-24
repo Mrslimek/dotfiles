@@ -1,0 +1,55 @@
+[global]
+    width = 300
+    height = (0, 110)
+    origin = top-right
+    offset = (20, 20)
+    
+    font = Open Sans, Noto Color Emoji 10
+    corner_radius = 8
+    frame_width = 2
+    
+    frame_color = "#e78a4e"
+    separator_color = "#d4be98"
+
+    padding = 10
+    horizontal_padding = 12
+    text_icon_padding = 10
+
+    progress_bar = true
+    progress_bar_height = 6
+    progress_bar_frame_width = 1
+    progress_bar_min_width = 150
+    progress_bar_max_width = 300
+
+    # icon_path = /usr/share/icons/Papirus-Dark/16x16/status/:/usr/share/icons/Gruvbox-Plus-Dark/16x16/devices/:/usr/share/icons//16x16/apps/
+    icon_theme = "Papirus-Dark"
+    enable_recursive_icon_lookup = true
+    max_icon_size = 64
+    icon_position = left
+    min_icon_size = 32
+
+[urgency_low]
+    background = "#282828"
+    foreground = "#928374"
+    timeout = 3
+
+[urgency_normal]
+    background = "#282828"
+    foreground = "#d4be98"
+    timeout = 6
+
+[urgency_critical]
+    background = "#282828"
+    foreground = "#ea6962"
+    frame_color = "#ea6962"
+    timeout = 0
+
+[telegram_rule]
+    desktop_entry = org.telegram.desktop
+    frame_color = "#7daea3"
+    timeout = 10
+
+[element_style]
+    appname = io.element.Element.desktop
+    frame_color = "#a9b665"
+    timeout = 10

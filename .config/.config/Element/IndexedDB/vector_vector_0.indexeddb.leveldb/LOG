@@ -1,0 +1,37 @@
+2026/01/24-17:53:37.800 6eac5 Reusing MANIFEST /home/viktor/.config/Element/IndexedDB/vector_vector_0.indexeddb.leveldb/MANIFEST-000001
+2026/01/24-17:53:37.800 6eac5 Recovering log #28
+2026/01/24-17:53:37.801 6eac5 Reusing old log /home/viktor/.config/Element/IndexedDB/vector_vector_0.indexeddb.leveldb/000028.log 
+2026/01/24-17:53:43.126 6eac5 Level-0 table #34: started
+2026/01/24-17:53:43.136 6eac5 Level-0 table #34: 138703 bytes OK
+2026/01/24-17:53:43.149 6eac5 Delete type=0 #28
+2026/01/24-17:53:43.149 6eac5 Manual compaction at level-0 from '\x00\x0f\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x10\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/01/24-17:53:43.157 6eb79 Level-0 table #36: started
+2026/01/24-17:53:43.160 6eb79 Level-0 table #36: 523 bytes OK
+2026/01/24-17:53:43.169 6eb79 Delete type=0 #33
+2026/01/24-17:53:43.170 6eb79 Manual compaction at level-0 from '\x00\x10\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x11\x00\x00\x00' @ 0 : 0; will stop at '\x00\x10\x00\x00\x05' @ 23925 : 1
+2026/01/24-17:53:43.170 6eb79 Compacting 1@0 + 1@1 files
+2026/01/24-17:53:43.179 6eb79 Generated table #37@0: 211 keys, 83813 bytes
+2026/01/24-17:53:43.179 6eb79 Compacted 1@0 + 1@1 files => 83813 bytes
+2026/01/24-17:53:43.193 6eb79 compacted to: files[ 0 1 2 0 0 0 0 ]
+2026/01/24-17:53:43.193 6eb79 Delete type=2 #36
+2026/01/24-17:53:43.193 6eb79 Manual compaction at level-0 from '\x00\x10\x00\x00\x05' @ 23925 : 1 .. '\x00\x11\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/01/24-17:53:43.194 6eb79 Level-0 table #39: started
+2026/01/24-17:53:43.198 6eb79 Level-0 table #39: 525 bytes OK
+2026/01/24-17:53:43.207 6eb79 Delete type=2 #34
+2026/01/24-17:53:43.207 6eb79 Delete type=0 #35
+2026/01/24-17:53:43.207 6eb79 Manual compaction at level-0 from '\x00\x11\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x12\x00\x00\x00' @ 0 : 0; will stop at '\x00\x11\x00\x00\x05' @ 23944 : 1
+2026/01/24-17:53:43.207 6eb79 Compacting 1@0 + 1@1 files
+2026/01/24-17:53:43.217 6eb79 Generated table #40@0: 215 keys, 83876 bytes
+2026/01/24-17:53:43.217 6eb79 Compacted 1@0 + 1@1 files => 83876 bytes
+2026/01/24-17:53:43.226 6eb79 compacted to: files[ 0 1 2 0 0 0 0 ]
+2026/01/24-17:53:43.227 6eb79 Delete type=2 #39
+2026/01/24-17:53:43.227 6eb79 Manual compaction at level-0 from '\x00\x11\x00\x00\x05' @ 23944 : 1 .. '\x00\x12\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/01/24-17:53:44.353 6eb79 Compacting 1@1 + 2@2 files
+2026/01/24-17:53:44.412 6eb79 Generated table #41@1: 2421 keys, 2145323 bytes
+2026/01/24-17:53:44.440 6eb79 Generated table #42@1: 2044 keys, 301556 bytes
+2026/01/24-17:53:44.440 6eb79 Compacted 1@1 + 2@2 files => 2446879 bytes
+2026/01/24-17:53:44.449 6eb79 compacted to: files[ 0 0 2 0 0 0 0 ]
+2026/01/24-17:53:44.450 6eb79 Delete type=2 #30
+2026/01/24-17:53:44.450 6eb79 Delete type=2 #31
+2026/01/24-17:53:44.450 6eb79 Delete type=2 #37
+2026/01/24-17:53:44.450 6eb79 Delete type=2 #40

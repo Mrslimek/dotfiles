@@ -1,0 +1,17 @@
+{
+	"warnBeforeExit": true,
+	"minimizeToTray": true,
+	"spellCheckerEnabled": true,
+	"autoHideMenuBar": true,
+	"disableHardwareAcceleration": false,
+	"enableContentProtection": false,
+	"openAtLoginMinimised": true,
+	"safeStorageBackend": "basic_text",
+	"locale": [
+		"en"
+	],
+	"safeStorage": {
+		"@victor-re:syn-p3-54origins-com|INMZYNHRZG": "djEwX0CHhW1BcUeCz6iiMlCcKJqlPiDE/20Np7IwnnSsyx1ZLDUMVpmd8mWIzLOBdH3s",
+		"seshat|@victor-re:syn-p3-54origins-com|INMZYNHRZG": "djEwfioZzrkzSenmNNfFjmWA8mc6xun96DzCKgQ+kvM14wURfCJ2i/fELIW+kCVsLOHI"
+	}
+}

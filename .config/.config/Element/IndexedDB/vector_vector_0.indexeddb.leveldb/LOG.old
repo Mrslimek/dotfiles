@@ -1,0 +1,35 @@
+2026/01/24-16:11:03.230 6795e Reusing MANIFEST /home/viktor/.config/Element/IndexedDB/vector_vector_0.indexeddb.leveldb/MANIFEST-000001
+2026/01/24-16:11:03.230 6795e Recovering log #17
+2026/01/24-16:11:03.236 6795e Reusing old log /home/viktor/.config/Element/IndexedDB/vector_vector_0.indexeddb.leveldb/000017.log 
+2026/01/24-16:11:05.654 67a14 Manual compaction at level-0 from '\x00\x0c\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0d\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/01/24-16:11:05.684 67a14 Level-0 table #23: started
+2026/01/24-16:11:05.746 67a14 Level-0 table #23: 2122094 bytes OK
+2026/01/24-16:11:05.753 67a14 Delete type=0 #17
+2026/01/24-16:11:05.754 6795e Manual compaction at level-0 from '\x00\x0d\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0e\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/01/24-16:11:05.756 67a14 Level-0 table #25: started
+2026/01/24-16:11:05.760 67a14 Level-0 table #25: 525 bytes OK
+2026/01/24-16:11:05.766 67a14 Delete type=0 #22
+2026/01/24-16:11:05.767 6795e Manual compaction at level-0 from '\x00\x0e\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0f\x00\x00\x00' @ 0 : 0; will stop at '\x00\x0e\x00\x00\x05' @ 10329 : 1
+2026/01/24-16:11:05.767 6795e Compacting 1@0 + 1@1 files
+2026/01/24-16:11:05.797 6795e Generated table #26@0: 4561 keys, 872866 bytes
+2026/01/24-16:11:05.797 6795e Compacted 1@0 + 1@1 files => 872866 bytes
+2026/01/24-16:11:05.804 6795e compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/01/24-16:11:05.804 6795e Delete type=2 #25
+2026/01/24-16:11:05.805 6795e Manual compaction at level-0 from '\x00\x0e\x00\x00\x05' @ 10329 : 1 .. '\x00\x0f\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/01/24-16:12:42.358 67a13 Compacting 1@1 + 1@2 files
+2026/01/24-16:12:42.389 67a13 Generated table #27@1: 1922 keys, 859515 bytes
+2026/01/24-16:12:42.389 67a13 Compacted 1@1 + 1@2 files => 859515 bytes
+2026/01/24-16:12:42.397 67a13 compacted to: files[ 0 0 1 0 0 0 0 ]
+2026/01/24-16:12:42.397 67a13 Delete type=2 #20
+2026/01/24-16:12:42.397 67a13 Delete type=2 #23
+2026/01/24-16:12:42.397 67a13 Delete type=2 #26
+2026/01/24-16:22:34.695 6795e Level-0 table #29: started
+2026/01/24-16:22:37.475 6795e Level-0 table #29: 2570757 bytes OK
+2026/01/24-16:22:37.492 6795e Delete type=0 #24
+2026/01/24-16:22:41.525 67a13 Compacting 1@1 + 1@2 files
+2026/01/24-16:22:41.585 67a13 Generated table #30@1: 2991 keys, 2147165 bytes
+2026/01/24-16:22:41.606 67a13 Generated table #31@1: 1416 keys, 228213 bytes
+2026/01/24-16:22:41.607 67a13 Compacted 1@1 + 1@2 files => 2375378 bytes
+2026/01/24-16:22:41.616 67a13 compacted to: files[ 0 0 2 0 0 0 0 ]
+2026/01/24-16:22:41.617 67a13 Delete type=2 #27
+2026/01/24-16:22:41.617 67a13 Delete type=2 #29
