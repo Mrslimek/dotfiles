@@ -14,7 +14,7 @@ GRUB_DISABLE_RECOVERY=true
 # 3. Display only on main monitor of laptop
 # GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 acpi_lib_error_level=0x00000000 video=eDP-1:3200x2000 video=HDMI-A-1:d"
 GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 acpi_lib_error_level=0x00000000"
-GRUB_CMDLINE_LINUX="rootfstype=btrfs"
+GRUB_CMDLINE_LINUX="cryptdevice=UUID=9691b2f5-cd9a-4ddc-a5f7-f91f89899ef7:cryptlvm root=/dev/ArchinstallVg/root zswap.enabled=0 rootfstype=btrfs"
 
 GRUB_PRELOAD_MODULES="part_gpt part_msdos"
 GRUB_TERMINAL_INPUT=console

@@ -1,9 +1,10 @@
 # Alacritty configuration
 
 [font]
-normal = { family = "Liberation Mono", style = "Regular" }
-bold = { family = "Liberation Mono", style = "Bold" }
-italic = { family = "Liberation Mono", style = "Italic" }
+# I use hack nerd font here because open sans dont work :/
+normal = { family = "Hack Nerd Font", style = "Regular" }
+bold = { family = "Hack Nerd Font", style = "Bold" }
+italic = { family = "Hack Nerd Font", style = "Italic" }
 size = 16
 
 [colors.primary]
