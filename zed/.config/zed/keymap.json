@@ -7,7 +7,9 @@
       "ctrl-e": "workspace::ToggleRightDock",
       "ctrl-q": "workspace::ToggleLeftDock",
       // TODO: Remove ability to close left and right docks with ctrl w, like tabs
-      // TODO: Make ctrl k ctrl o available in editor context
+      "ctrl-k ctrl-o": "workspace::Open",
+      "ctrl-`": "terminal_panel::Toggle",
+      "ctrl-j": null,
     },
   },
   {
@@ -21,8 +23,8 @@
       "end": null,
       "pageup": null,
       "pagedown": null,
-      "ctrl-j": "pane::GoBack",
-      "ctrl-k": "pane::GoForward",
+      "ctrl-alt-j": "pane::GoBack",
+      "ctrl-alt-k": "pane::GoForward"
     },
   },
   // Basic zed ctrl f binding is opening buffer search. To close it with same keybinding we use:

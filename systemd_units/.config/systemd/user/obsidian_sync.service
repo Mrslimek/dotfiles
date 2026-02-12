@@ -1,0 +1,7 @@
+[Unit]
+Description=Sync Obsidian folder with Google Drive using rclone
+
+[Service]
+Type=oneshot
+# If this fails, try running manually same command with --resync in the end
+ExecStart=/usr/sbin/rclone bisync gdrive:/Obsidian /home/$USER/Obsidian --conflict-resolve newer --resilient

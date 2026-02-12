@@ -1,0 +1,92 @@
+### 📦 Packages List for Dotfiles
+
+#### **1. Core & System**
+
+*Essential system components and package management.*
+
+* `base`, `base-devel`: Minimal package set and build tools.
+* `linux`, `linux-firmware`: Kernel and firmware.
+* `amd-ucode`: Microcode updates (assuming AMD CPU based on installed firmware).
+* `paru`: AUR helper.
+* `pacman-contrib`: Additional tools for pacman.
+* `stow`: Dotfile management symlink farm manager.
+* `sbctl`: Secure Boot key manager.
+* `ly`: Console display manager (login screen).
+* `networkmanager`: Network connection manager.
+* `bluez`, `bluez-libs`: Bluetooth stack.
+
+#### **2. Window Management (Hyprland Ecosystem)**
+
+*The Wayland compositor and its specific tools.*
+
+* `hyprland`: The compositor itself.
+* `hyprlock`: Screen locker.
+* `hypridle`: Idle management daemon.
+* `hyprpaper`: Wallpaper utility.
+* `hyprsunset`: Blue light filter / temperature adjustment.
+* `hyprpolkitagent`: Polkit authentication agent.
+* `xdg-desktop-portal-hyprland`: XDG Portals for Hyprland.
+* `dunst`: Notification daemon.
+* `nwg-look`: GTK3 settings editor for Wayland.
+* `nwg-displays`: Monitor management utility.
+* `qt5-wayland`, `qt6-wayland`: Qt support for Wayland.
+
+#### **3. User Interface & Theming**
+
+*Fonts, icons, and cursor themes.*
+
+* **Fonts:** `ttf-jetbrains-mono`, `ttf-hack-nerd`, `ttf-terminus-nerd`, `noto-fonts-emoji`.
+* **Icons:** `papirus-icon-theme`, `adwaita-icon-theme`, `gruvbox-plus-icon-theme-git`.
+* **Theme:** `gruvbox-material-gtk-theme-git`, `kvantum`, `kvantum-theme-gruvbox-git`.
+* **Cursor:** `bibata-cursor-theme-bin`, `adwaita-cursors`.
+
+#### **4. Terminal & Shell**
+
+*Terminal emulators and CLI productivity tools.*
+
+* `alacritty`: GPU-accelerated terminal emulator.
+* `zsh`: The Z shell.
+* `fastfetch`: System information tool (modern Neofetch replacement).
+* `eza`: Modern replacement for `ls`.
+* `bat`: Modern replacement for `cat`.
+* `ripgrep`: Modern, faster replacement for `grep`.
+* `fd`: Simple, fast and user-friendly alternative to `find`.
+* `htop`: Interactive process viewer.
+* `zram-generator`: RAM compression.
+
+#### **5. Development Tools**
+
+*Programming languages, editors, and containers.*
+
+* **Editors:** `zed` (High-performance editor), `micro` (Intuitive terminal editor), `nano`.
+* **Containers:** `docker`, `docker-compose`.
+* **Rust:** `rustup` (The Rust toolchain installer).
+* **Python:** `python`, `python-pip`, `python-virtualenv`, `python-pipenv`, `pyenv`.
+* **NodeJS:** `nodejs`, `npm`, `pnpm`.
+* **Databases:** `postgresql-libs`, `pgcli` (CLI for Postgres), `pgadmin4-bin` (GUI for Postgres).
+* **API Testing:** `postman-bin`.
+* **Version Control:** `git`.
+
+#### **6. Internet & Networking**
+
+*Browsers, communication, and VPN.*
+
+* **Browsers:** `zen-browser-bin` (Primary), `firefox`.
+* **Communication:** `telegram-desktop`, `element-desktop` (Matrix client).
+* **VPN/Proxy:** `xray`, `v2ray-geoip`, `v2ray-domain-list-community`, `openvpn`.
+* **Utils:** `wget`, `curl`, `bind` (contains dig), `openssh`.
+
+#### **7. Multimedia & Graphics**
+
+*Audio, video, and image tools.*
+
+* **Audio:** `pipewire`, `wireplumber`, `pipewire-audio`, `pipewire-alsa`, `pipewire-pulse`.
+* **Video:** `mpv` (Video player), `ffmpeg` (Multimedia framework).
+* **Screenshot/Recording:** `grim` (Grab image), `slurp` (Select region), `satty` (Annotation tool), `wl-clipboard`.
+* **File Manager:** `thunar`, `thunar-volman`, `tumbler` (Thumbnail service).
+
+#### **8. Education & Misc**
+
+* `anki`: Spaced repetition flashcard program.
+* `man-db`: Manual pages.
+* `unzip`, `zip`, `tar`, `zstd`: Archiving tools.

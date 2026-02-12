@@ -28,6 +28,8 @@
     icon_position = left
     min_icon_size = 32
 
+    follow = mouse
+
 [urgency_low]
     background = "#282828"
     foreground = "#928374"

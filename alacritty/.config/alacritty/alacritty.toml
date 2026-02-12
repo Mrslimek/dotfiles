@@ -7,6 +7,10 @@ bold = { family = "Hack Nerd Font", style = "Bold" }
 italic = { family = "Hack Nerd Font", style = "Italic" }
 size = 16
 
+[hints]
+# Do not highlight links
+enabled = []
+
 [colors.primary]
 background = "0x000000"
 foreground = "0xFFFFFF"
