@@ -1,92 +1,53 @@
-### 📦 Packages List for Dotfiles
+## 🧠 AI & Core Development
+- **zed** — High-performance code editor written in Rust.
+- **cherry-studio** — Desktop IDE for multiple LLMs.
+- **docker / docker-compose** — Containerization and service orchestration.
+- **go** — Go programming language environment.
+- **uv** — Modern Python package and version manager.
+- **overmind-bin** — Process manager for Procfile-based apps.
+- **postman-bin / pgadmin4-bin / pgcli** — API testing and PostgreSQL management tools.
+- **pyenv / python-pipenv** — Legacy Python management (Better not install it on fresh system and use uv).
 
-#### **1. Core & System**
+## 🖥️ Window Manager & Wayland
+- **vicinae** — Raycast-compatible focus launcher.
+- **hyprland** — Dynamic tiling Wayland compositor.
+- **hyprlock / hypridle** — Screen locker and idle management daemon.
+- **hyprpaper / hyprsunset** — Wallpaper utility and blue light filter.
+- **hyprpolkitagent** — Privilege elevation (Polkit) agent.
+- **nwg-displays / nwg-look** — Display configuration and GTK theme settings.
+- **dunst** — Notification daemon.
+- **satty** — Screenshot tool with annotation support.
+- **wev** — Wayland event viewer for debugging keys/input.
+- **wlopm** — Wayland output power management.
 
-*Essential system components and package management.*
+## 🛠️ System Reliability & Low-level
+- **sbctl / efitools / efibootmgr** — Secure Boot management stack.
+- **snapper** — Btrfs snapshot management for system rollbacks.
+- **ly** — TUI display manager for login.
+- **zram-generator** — RAM optimization via compressed swap.
+- **power-profiles-daemon / powertop** — Power management and battery optimization.
+- **amd-ucode / xf86-video-amdgpu** — CPU microcode and GPU drivers for AMD.
 
-* `base`, `base-devel`: Minimal package set and build tools.
-* `linux`, `linux-firmware`: Kernel and firmware.
-* `amd-ucode`: Microcode updates (assuming AMD CPU based on installed firmware).
-* `paru`: AUR helper.
-* `pacman-contrib`: Additional tools for pacman.
-* `stow`: Dotfile management symlink farm manager.
-* `sbctl`: Secure Boot key manager.
-* `ly`: Console display manager (login screen).
-* `networkmanager`: Network connection manager.
-* `bluez`, `bluez-libs`: Bluetooth stack.
+## 📂 File Management & CLI Tools
+- **nautilus / tumbler** — GNOME file manager and thumbnail generator.
+- **eza / fd / dust / dysk** — Modern Rust-based alternatives for ls, find, du, and df.
+- **stow** — Symlink farm manager.
+- **paru** — Feature-rich AUR helper.
+- **zsh** — Interactive shell with custom configs.
+- **git-delta** — Syntax-highlighting pager for git.
+- **htop / wget / rsync** — Essential system monitoring and networking tools.
+- **xdg-ninja** — Script to clean up the home directory.
 
-#### **2. Window Management (Hyprland Ecosystem)**
+## 🌐 Internet & Communication
+- **zen-browser-bin / firefox / chromium** — Browsers (Zen as primary, Chromium/firefox for dev).
+- **telegram-desktop / element-desktop** — Messengers.
+- **qbittorrent / transmission-gtk** — BitTorrent clients.
+- **xray / openvpn** — Network security and proxy tools.
 
-*The Wayland compositor and its specific tools.*
-
-* `hyprland`: The compositor itself.
-* `hyprlock`: Screen locker.
-* `hypridle`: Idle management daemon.
-* `hyprpaper`: Wallpaper utility.
-* `hyprsunset`: Blue light filter / temperature adjustment.
-* `hyprpolkitagent`: Polkit authentication agent.
-* `xdg-desktop-portal-hyprland`: XDG Portals for Hyprland.
-* `dunst`: Notification daemon.
-* `nwg-look`: GTK3 settings editor for Wayland.
-* `nwg-displays`: Monitor management utility.
-* `qt5-wayland`, `qt6-wayland`: Qt support for Wayland.
-
-#### **3. User Interface & Theming**
-
-*Fonts, icons, and cursor themes.*
-
-* **Fonts:** `ttf-jetbrains-mono`, `ttf-hack-nerd`, `ttf-terminus-nerd`, `noto-fonts-emoji`.
-* **Icons:** `papirus-icon-theme`, `adwaita-icon-theme`, `gruvbox-plus-icon-theme-git`.
-* **Theme:** `gruvbox-material-gtk-theme-git`, `kvantum`, `kvantum-theme-gruvbox-git`.
-* **Cursor:** `bibata-cursor-theme-bin`, `adwaita-cursors`.
-
-#### **4. Terminal & Shell**
-
-*Terminal emulators and CLI productivity tools.*
-
-* `alacritty`: GPU-accelerated terminal emulator.
-* `zsh`: The Z shell.
-* `fastfetch`: System information tool (modern Neofetch replacement).
-* `eza`: Modern replacement for `ls`.
-* `bat`: Modern replacement for `cat`.
-* `ripgrep`: Modern, faster replacement for `grep`.
-* `fd`: Simple, fast and user-friendly alternative to `find`.
-* `htop`: Interactive process viewer.
-* `zram-generator`: RAM compression.
-
-#### **5. Development Tools**
-
-*Programming languages, editors, and containers.*
-
-* **Editors:** `zed` (High-performance editor), `micro` (Intuitive terminal editor), `nano`.
-* **Containers:** `docker`, `docker-compose`.
-* **Rust:** `rustup` (The Rust toolchain installer).
-* **Python:** `python`, `python-pip`, `python-virtualenv`, `python-pipenv`, `pyenv`.
-* **NodeJS:** `nodejs`, `npm`, `pnpm`.
-* **Databases:** `postgresql-libs`, `pgcli` (CLI for Postgres), `pgadmin4-bin` (GUI for Postgres).
-* **API Testing:** `postman-bin`.
-* **Version Control:** `git`.
-
-#### **6. Internet & Networking**
-
-*Browsers, communication, and VPN.*
-
-* **Browsers:** `zen-browser-bin` (Primary), `firefox`.
-* **Communication:** `telegram-desktop`, `element-desktop` (Matrix client).
-* **VPN/Proxy:** `xray`, `v2ray-geoip`, `v2ray-domain-list-community`, `openvpn`.
-* **Utils:** `wget`, `curl`, `bind` (contains dig), `openssh`.
-
-#### **7. Multimedia & Graphics**
-
-*Audio, video, and image tools.*
-
-* **Audio:** `pipewire`, `wireplumber`, `pipewire-audio`, `pipewire-alsa`, `pipewire-pulse`.
-* **Video:** `mpv` (Video player), `ffmpeg` (Multimedia framework).
-* **Screenshot/Recording:** `grim` (Grab image), `slurp` (Select region), `satty` (Annotation tool), `wl-clipboard`.
-* **File Manager:** `thunar`, `thunar-volman`, `tumbler` (Thumbnail service).
-
-#### **8. Education & Misc**
-
-* `anki`: Spaced repetition flashcard program.
-* `man-db`: Manual pages.
-* `unzip`, `zip`, `tar`, `zstd`: Archiving tools.
+## 🎨 Media, Visuals & Fonts
+- **imv** — Fast image viewer for Wayland.
+- **obsidian** — Knowledge base and Markdown note-taking.
+- **anki** — Spaced repetition flashcards.
+- **adw-gtk-theme / kvantum-theme-libadwaita-git** — Core Libadwaita rice components.
+- **bibata-cursor-theme-bin / papirus-icon-theme** — Cursors and icons.
+- **ttf-jetbrains-mono / ttf-iosevka-nerd / ttf-opensans** — System and coding fonts.

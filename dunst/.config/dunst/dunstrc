@@ -1,57 +1,70 @@
 [global]
+    ### --- GEOMETRY --- ###
     width = 300
     height = (0, 110)
     origin = top-right
     offset = (20, 20)
     
-    font = Open Sans, Noto Color Emoji 10
-    corner_radius = 8
+    ### --- LIBADWAITA STYLE --- ###
+    # Fonts: Standard Fedora/GNOME typography
+    font = Cantarell, Noto Color Emoji 10
+    # Rounded corners matching GNOME 45+
+    corner_radius = 11
     frame_width = 2
     
-    frame_color = "#e78a4e"
-    separator_color = "#d4be98"
+    # Color Palette: Slate Grey base with Fedora Blue accent
+    background = "#1e1e1e"
+    foreground = "#dedede"
+    frame_color = "#78aeed"        # Soft Fedora Blue
+    separator_color = "#353c45"    # Dark grey separator
 
-    padding = 10
-    horizontal_padding = 12
+    padding = 12
+    horizontal_padding = 15
     text_icon_padding = 10
 
+    ### --- PROGRESS BAR --- ###
     progress_bar = true
-    progress_bar_height = 6
+    progress_bar_height = 8
     progress_bar_frame_width = 1
     progress_bar_min_width = 150
-    progress_bar_max_width = 300
+    progress_bar_max_width = 270
 
-    # icon_path = /usr/share/icons/Papirus-Dark/16x16/status/:/usr/share/icons/Gruvbox-Plus-Dark/16x16/devices/:/usr/share/icons//16x16/apps/
-    icon_theme = "Papirus-Dark"
+    ### --- ICONS --- ###
+    # Using system Adwaita theme for consistency
+    icon_theme = "Adwaita"
     enable_recursive_icon_lookup = true
-    max_icon_size = 64
+    max_icon_size = 58
     icon_position = left
     min_icon_size = 32
 
     follow = mouse
 
+### --- URGENCY LEVELS (ADWAITA PALETTE) --- ###
+
 [urgency_low]
-    background = "#282828"
-    foreground = "#928374"
+    background = "#1e1e1e"
+    foreground = "#9a9996" # Muted grey
     timeout = 3
 
 [urgency_normal]
-    background = "#282828"
-    foreground = "#d4be98"
+    background = "#1e1e1e"
+    foreground = "#dedede"
     timeout = 6
 
 [urgency_critical]
-    background = "#282828"
-    foreground = "#ea6962"
-    frame_color = "#ea6962"
+    background = "#1e1e1e"
+    foreground = "#e01b24" # Adwaita Red (Destructive)
+    frame_color = "#e01b24"
     timeout = 0
+
+### --- APPLICATION RULES (FEDORA ACCENTS) --- ###
 
 [telegram_rule]
     desktop_entry = org.telegram.desktop
-    frame_color = "#7daea3"
+    frame_color = "#3584e4" # Classic Telegram Blue
     timeout = 10
 
 [element_style]
     appname = io.element.Element.desktop
-    frame_color = "#a9b665"
+    frame_color = "#2ec27e" # Success Green
     timeout = 10
