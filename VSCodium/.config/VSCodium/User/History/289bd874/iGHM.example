@@ -1,0 +1,12 @@
+# Get token from: https://vk.com/group<GROUP_ID>?act=manage -> Управление -> Работа с API
+VK_TOKEN=your_vk_bot_token_here
+
+PODRUCHNIY_BACKEND_API_BASE_URL=https://api.example.com
+PODRUCHNIY_BACKEND_API_USERNAME=bot_user_username
+PODRUCHNIY_BACKEND_API_PASSWORD=bot_user_password
+
+PODRUCHNIY_BACKEND_API_FIND_BY_ID_PARTY_ENDPOINT=/api/v1.0/portal/dadata/find-by-id-party/
+PODRUCHNIY_BACKEND_API_TOKEN_ENDPOINT=/api/token
+PODRUCHNIY_BACKEND_API_REFRESH_ENDPOINT=/api/token/refresh
+
+LOG_LEVEL=INFO

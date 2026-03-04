@@ -1,0 +1,64 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: entityservice54-app
+    ports:
+      - "8000:8000"
+    # Project requires a Python module file at service54/local_settings.py.
+    # Create ./service54/local_settings.py on the host (you can start from deploy/config_samples/local_settings.py)
+    # and adjust DB/Redis/auth/service keys & domains for your environment.
+    volumes:
+      - ./service54/local_settings.py:/app/service54/local_settings.py:ro
+    environment:
+      # Make sure your mounted local_settings.py points to these service names.
+      # DATABASE["HOST"] should be "db" and REDIS_HOST should be "redis".
+      TZ: UTC
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    restart: unless-stopped
+    command:
+      - uvicorn
+      - asgi:app
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+
+  db:
+    image: postgres:13
+    container_name: entityservice54-db
+    environment:
+      POSTGRES_DB: entity
+      POSTGRES_USER: entity
+      POSTGRES_PASSWORD: entityPass
+      TZ: UTC
+    ports:
+      - "5452:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./deploy/sql/uuid_extension.sql:/docker-entrypoint-initdb.d/uuid_extension.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U entity -d entity"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  redis:
+    image: redis:6-alpine
+    container_name: entityservice54-redis
+    ports:
+      - "6381:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+
+volumes:
+  postgres_data:
+  redis_data:

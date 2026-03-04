@@ -1,0 +1,93 @@
+{
+    "telemetry.sqmId": "",
+    "telemetry.machineId": "b3d5302f4f0b810348be5f741cfad1ce86cfec2ab9c9dc2654275ab4e3946b71",
+    "telemetry.devDeviceId": "680cf492-5292-41e1-8174-5be122c0f77b",
+    "backupWorkspaces": {
+        "workspaces": [],
+        "folders": [
+            {
+                "folderUri": "file:///home/viktor/ecosystem54/entity_new_python"
+            }
+        ],
+        "emptyWindows": []
+    },
+    "windowControlHeight": 42,
+    "profileAssociations": {
+        "workspaces": {
+            "file:///home/viktor/veta/vk_bot": "__default__profile__",
+            "file:///home/viktor/ecosystem54/10004_backend_entityservice54": "__default__profile__",
+            "file:///home/viktor/ecosystem54/entity_chat_muting": "__default__profile__",
+            "file:///home/viktor/ecosystem54/entity_new_python": "__default__profile__"
+        },
+        "emptyWindows": {}
+    },
+    "theme": "vs-dark",
+    "themeBackground": "#1f1f1f",
+    "windowSplash": {
+        "zoomLevel": 0,
+        "baseTheme": "vs-dark",
+        "colorInfo": {
+            "foreground": "#cccccc",
+            "background": "#1f1f1f",
+            "editorBackground": "#1f1f1f",
+            "titleBarBackground": "#181818",
+            "titleBarBorder": "#2b2b2b",
+            "activityBarBackground": "#181818",
+            "activityBarBorder": "#2b2b2b",
+            "sideBarBackground": "#181818",
+            "sideBarBorder": "#2b2b2b",
+            "statusBarBackground": "#181818",
+            "statusBarBorder": "#2b2b2b",
+            "statusBarNoFolderBackground": "#1f1f1f"
+        },
+        "layoutInfo": {
+            "sideBarSide": "left",
+            "editorPartMinWidth": 220,
+            "titleBarHeight": 35,
+            "activityBarWidth": 0,
+            "sideBarWidth": 314,
+            "auxiliaryBarWidth": 216,
+            "statusBarHeight": 22,
+            "windowBorder": false
+        }
+    },
+    "windowsState": {
+        "lastActiveWindow": {
+            "folder": "file:///home/viktor/ecosystem54/entity_new_python",
+            "backupPath": "/home/viktor/.config/VSCodium/Backups/d338ec85bc3672f896c4881e48df2c4e",
+            "uiState": {
+                "mode": 0,
+                "x": 0,
+                "y": 0,
+                "width": 900,
+                "height": 700,
+                "zoomLevel": 1
+            }
+        },
+        "openedWindows": []
+    },
+    "windowSplashWorkspaceOverride": {
+        "layoutInfo": {
+            "sideBarWidth": 314,
+            "auxiliaryBarWidth": 216,
+            "workspaces": {
+                "04672559c3b7deaa5d05040deca0d817": {
+                    "sideBarVisible": true,
+                    "auxiliaryBarVisible": false
+                },
+                "948ba327208a6b4d09c812c17c776414": {
+                    "sideBarVisible": true,
+                    "auxiliaryBarVisible": true
+                },
+                "154839bc7f25fb7f8d916e90706348f0": {
+                    "sideBarVisible": true,
+                    "auxiliaryBarVisible": true
+                },
+                "7c58d7e4e5e6805c0f665470c163c9a9": {
+                    "sideBarVisible": true,
+                    "auxiliaryBarVisible": true
+                }
+            }
+        }
+    }
+}

@@ -17,7 +17,7 @@
    },
    "theme": {
       "dark": {
-         "name": "one-dark",
+         "name": "vicinae-dark",
          "icon_theme": "Adwaita"
       }
    },
@@ -25,13 +25,6 @@
       "opacity": 1
    },
    "providers": {
-      "@Gelei/store.vicinae.bluetooth": {
-         "entrypoints": {
-            "scan": {
-               "enabled": false
-            }
-         }
-      },
       "applications": {
          "preferences": {
             "paths": [
@@ -39,6 +32,9 @@
             ]
          },
          "entrypoints": {
+            "HyPrism": {
+               "enabled": false
+            },
             "avahi-discover": {
                "enabled": false
             },
