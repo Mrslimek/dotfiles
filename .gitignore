@@ -1,0 +1,6 @@
+# VSCodium trash and cache
+**/VSCodium/**/CachedExtensionVSIXs/
+**/VSCodium/**/CachedData/
+**/VSCodium/**/Cache/
+**/VSCodium/**/.trash/
+**/VSCodium/**/User/workspaceStorage/

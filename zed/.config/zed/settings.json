@@ -1,4 +1,6 @@
 {
+  "use_system_prompts": false,
+  "use_system_path_prompts": false,
   "ssh_connections": [
     {
       "host": "65.108.89.34",
@@ -6,13 +8,22 @@
       "args": [],
       "projects": [
         {
-          "paths": ["/home/entity/10004_backend_entityservice54/./"],
+          "paths": [
+            "/etc/systemd/system"
+          ]
         },
         {
-          "paths": ["/home/entity/entity_new_python"],
+          "paths": [
+            "/home/entity/10004_backend_entityservice54/./"
+          ]
         },
-      ],
-    },
+        {
+          "paths": [
+            "/home/entity/entity_new_python"
+          ]
+        }
+      ]
+    }
   ],
   "edit_predictions": {
     "provider": "zed",
@@ -48,7 +59,7 @@
     "default_profile": "write",
     "dock": "left",
     "default_model": {
-      "provider": "Z.AI",
+      "provider": "GLM 4.7",
       "model": "glm-4.7",
     },
     "model_parameters": [],
@@ -94,24 +105,6 @@
   "show_completions_on_input": false,
   "language_models": {
     "openai_compatible": {
-      "Z.AI": {
-        "api_url": "https://api.z.ai/api/coding/paas/v4",
-        "available_models": [
-          {
-            "name": "glm-4.7",
-            "max_tokens": 200000,
-            "max_output_tokens": 32000,
-            "max_completion_tokens": 200000,
-            "capabilities": {
-              "tools": true,
-              "images": false,
-              "parallel_tool_calls": false,
-              "prompt_cache_key": false,
-              "chat_completions": true
-            }
-          }
-        ]
-      },
       "GLM 4.7": {
         "api_url": "https://api.z.ai/api/coding/paas/v4",
         "available_models": [

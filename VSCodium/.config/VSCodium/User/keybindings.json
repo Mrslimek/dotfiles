@@ -121,5 +121,13 @@
     {
         "key": "ctrl+shift+/",
         "command": "roo-cline.focusInput"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "ctrl+e",
+        "command": "workbench.action.toggleAuxiliaryBar"
     }
 ]

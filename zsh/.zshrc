@@ -5,8 +5,8 @@ export XDG_DATA_HOME=$HOME/.local/share
 export XDG_STATE_HOME=$HOME/.local/state
 
 # Пути для инструментов (Rust & Go)
-export CARGO_HOME="$XDG_DATA_HOME/cargo"
-export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+# export CARGO_HOME="$XDG_DATA_HOME/cargo"
+# export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export GOPATH="$XDG_DATA_HOME/go"
 
 # Wayland & Система
@@ -15,13 +15,16 @@ export EDITOR="micro"
 export VISUAL="micro"
 
 # Node.js & NPM (Твой новый "источник правды")
-export PATH="$HOME/.local/share/npm-global/bin:$PATH"
+# export PATH="$HOME/.local/share/npm-global/bin:$PATH"
 export NODE_OPTIONS="--no-deprecation"
 
 # История ZSH
 export HISTFILE="$XDG_STATE_HOME/zsh_history"
 export HISTSIZE=10000
 export SAVEHIST=10000
+
+# Random bullshit
+export ADW_DISABLE_PORTAL=1
 
 # Oh My Zsh
 export ZSH="$XDG_DATA_HOME/oh-my-zsh"
