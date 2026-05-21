@@ -1,5 +1,4 @@
 {
-  "cli_default_open_behavior": "existing_window",
   "diff_view_style": "unified",
   "format_on_save": "off",
   "agent_servers": {
@@ -56,7 +55,7 @@
     "include_ignored": false,
   },
   "file_finder": {
-    "include_ignored": "smart",
+    "include_ignored": null,
   },
   "languages": {
     "Rust": {
@@ -89,25 +88,6 @@
     "notify_when_agent_waiting": "never",
     "tool_permissions": {
       "tools": {
-        "fetch": {
-          "default": "allow"
-        },
-        "terminal": {
-          "always_allow": [
-            {
-              "pattern": "^psql\\b"
-            },
-            {
-              "pattern": "^PGPASSWORD=viktor\\s+psql(\\s|$)"
-            },
-            {
-              "pattern": "^hyprctl\\s+getoption(\\s|$)"
-            },
-            {
-              "pattern": "^echo\\b"
-            }
-          ]
-        },
         "move_path": {
           "default": "allow"
         },
@@ -120,13 +100,12 @@
     "dock": "left",
     "default_model": {
       "enable_thinking": false,
-      "provider": "Z.AI",
-      "model": "glm-5.1",
+      "provider": "GPT proxy",
+      "model": "gpt-5.2",
     },
     "model_parameters": [],
   },
   "outline_panel": {
-    "dock": "left",
     "button": false,
   },
   "git_panel": {
@@ -137,7 +116,6 @@
     "button": false,
   },
   "collaboration_panel": {
-    "dock": "left",
     "button": false,
   },
   "diagnostics": {

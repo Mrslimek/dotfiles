@@ -46,3 +46,4 @@ alias btrfs-assistant="sudo -E btrfs-assistant-bin --platform wayland"
 
 # Системный Path (Pipx и локальные бинарники)
 export PATH="$PATH:/home/viktor/.local/bin"
+export PATH="$HOME/.local/share/npm-global/bin:$PATH"

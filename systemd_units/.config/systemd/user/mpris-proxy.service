@@ -1,0 +1,11 @@
+[Unit]
+Description=Forward Bluetooth Media Controls to MPRIS
+After=network.target sound.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/mpris-proxy
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

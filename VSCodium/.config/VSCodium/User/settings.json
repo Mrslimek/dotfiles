@@ -46,10 +46,10 @@
     "roo-cline.allowedCommands": [
         "git log",
         "git diff",
-        "git show"
+        "git show",
+        "*"
     ],
     "roo-cline.deniedCommands": [],
-    "workbench.colorTheme": "Monochromator Dark Emerald",
     "git.openRepositoryInParentFolders": "never",
     "workbench.activityBar.location": "bottom",
     "diffEditor.renderSideBySide": false,
@@ -58,9 +58,9 @@
     "window.confirmBeforeClose": "always",
     "window.customTitleBarVisibility": "never",
     "window.dialogStyle": "custom",
-    "window.menuBarVisibility": "toggle",
     "window.menuStyle": "native",
     "window.openFoldersInNewWindow": "off",
+    "window.customMenuBarAltFocus": false,
     // "http.proxy": "http://localhost:10808",
     // "http.proxyStrictSSL": false,
     // "http.proxySupport": "on",

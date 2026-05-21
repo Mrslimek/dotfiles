@@ -17,14 +17,32 @@
    },
    "theme": {
       "dark": {
-         "name": "vicinae-dark",
+         "name": "zenwritten-dark",
          "icon_theme": "Adwaita"
       }
    },
    "launcher_window": {
       "opacity": 1
    },
+   "favorites": [
+      "@Mrslimek/system-info-dashboard:check",
+      "clipboard:history"
+   ],
    "providers": {
+      "@Mrslimek/status-check": {
+         "enabled": false
+      },
+      "@Mrslimek/workspace-notes": {
+         "enabled": false
+      },
+      "@marcjulian/store.raycast.obsidian": {
+         "preferences": {
+            "removeLatex": false,
+            "removeLinks": false,
+            "removeYAML": false,
+            "vaultPath": "/home/viktor/Obsidian"
+         }
+      },
       "applications": {
          "preferences": {
             "paths": [
@@ -89,6 +107,7 @@
          }
       },
       "browser-extension": {
+         "enabled": true,
          "entrypoints": {
             "browse-tabs": {
                "enabled": false
@@ -102,6 +121,12 @@
          "enabled": false
       },
       "clipboard": {
+         "preferences": {
+            "encryption": false,
+            "eraseOnStartup": false,
+            "ignorePasswords": false,
+            "monitoring": true
+         },
          "entrypoints": {
             "clear": {
                "enabled": false
@@ -176,7 +201,7 @@
          }
       },
       "raycast-compat": {
-         "enabled": false
+         "enabled": true
       },
       "system": {
          "entrypoints": {
