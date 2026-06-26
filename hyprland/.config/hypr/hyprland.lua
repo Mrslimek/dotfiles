@@ -39,6 +39,7 @@ end)
 hl.monitor({
     output   = "eDP-1",
     mode     = "3200x2000@120",
+    -- mode     = "3200x2000@60",
     position = "1841x1080",
     scale    = 2.0,
 })
@@ -134,8 +135,8 @@ hl.config({
     },
 
     xwayland = {
-        enabled            = false,
-        -- force_zero_scaling = true,
+        enabled            = true,
+        force_zero_scaling = true,
     },
 })
 

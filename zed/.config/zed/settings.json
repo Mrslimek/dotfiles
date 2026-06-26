@@ -105,6 +105,12 @@
             },
             {
               "pattern": "^echo\\b"
+            },
+            {
+              "pattern": "^cargo\\s+tree(\\s|$)"
+            },
+            {
+              "pattern": "^grep\\s+tower-sessions-core(\\s|$)"
             }
           ]
         },
@@ -163,7 +169,7 @@
   "icon_theme": "VSCode Great Icons Theme",
   "ui_font_size": 20.0,
   "buffer_font_size": 15,
-  "theme": "Gruvbox Baby",
+  "theme": "Gruvbox Dark",
   "hover_popover_enabled": false,
   "show_completions_on_input": false,
   "language_models": {

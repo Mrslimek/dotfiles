@@ -38,11 +38,13 @@ source $ZSH/oh-my-zsh.sh
 
 alias cat="bat"
 alias ls="eza --icons=always"
-alias grep="rg"
+# alias grep="rg"
 alias find="fd"
 alias zed="zeditor"
 alias venv="source venv/bin/activate"
 alias btrfs-assistant="sudo -E btrfs-assistant-bin --platform wayland"
+alias cargo_run_without_wgpu_validation="WGPU_VALIDATION=0 cargo run"
+alias steam="env STEAM_FORCE_DESKTOPUI_SCALING=1.5 steam"
 
 # Системный Path (Pipx и локальные бинарники)
 export PATH="$PATH:/home/viktor/.local/bin"
