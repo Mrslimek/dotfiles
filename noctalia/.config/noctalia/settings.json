@@ -231,12 +231,12 @@
         ]
     },
     "colorSchemes": {
-        "darkMode": true,
-        "generationMethod": "rainbow",
+        "darkMode": false,
+        "generationMethod": "tonal-spot",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
-        "predefinedScheme": "Nord",
+        "predefinedScheme": "Catppuccin",
         "schedulingMode": "off",
         "syncGsettings": true,
         "useWallpaperColors": true
@@ -621,6 +621,38 @@
     },
     "templates": {
         "activeTemplates": [
+            {
+                "enabled": true,
+                "id": "hyprland"
+            },
+            {
+                "enabled": true,
+                "id": "gtk"
+            },
+            {
+                "enabled": true,
+                "id": "zed"
+            },
+            {
+                "enabled": true,
+                "id": "zenBrowser"
+            },
+            {
+                "enabled": true,
+                "id": "telegram"
+            },
+            {
+                "enabled": true,
+                "id": "starship"
+            },
+            {
+                "enabled": true,
+                "id": "vicinae"
+            },
+            {
+                "enabled": true,
+                "id": "alacritty"
+            }
         ],
         "enableUserTheming": false
     },
@@ -640,7 +672,7 @@
     },
     "wallpaper": {
         "automationEnabled": false,
-        "directory": "/home/viktor/Pictures",
+        "directory": "/home/viktor/Pictures/Wallpapers",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "favorites": [
@@ -648,7 +680,7 @@
         "fillColor": "#000000",
         "fillMode": "crop",
         "hideWallpaperFilenames": false,
-        "linkLightAndDarkWallpapers": false,
+        "linkLightAndDarkWallpapers": true,
         "monitorDirectories": [
         ],
         "overviewBlur": 0.4,
@@ -659,9 +691,9 @@
         "setWallpaperOnAllMonitors": true,
         "showHiddenFiles": false,
         "skipStartupTransition": false,
-        "solidColor": "#1a1a2e",
+        "solidColor": "#1acd53",
         "sortOrder": "name",
-        "transitionDuration": 1500,
+        "transitionDuration": 1000,
         "transitionEdgeSmoothness": 0.05,
         "transitionType": [
             "fade",
@@ -673,18 +705,18 @@
         ],
         "useOriginalImages": false,
         "useSolidColor": false,
-        "useWallhaven": false,
+        "useWallhaven": true,
         "viewMode": "single",
         "wallhavenApiKey": "",
-        "wallhavenCategories": "111",
+        "wallhavenCategories": "010",
         "wallhavenOrder": "desc",
-        "wallhavenPurity": "100",
+        "wallhavenPurity": "000",
         "wallhavenQuery": "",
-        "wallhavenRatios": "",
+        "wallhavenRatios": "16x10",
         "wallhavenResolutionHeight": "",
         "wallhavenResolutionMode": "atleast",
         "wallhavenResolutionWidth": "",
-        "wallhavenSorting": "relevance",
+        "wallhavenSorting": "views",
         "wallpaperChangeMode": "random"
     }
 }

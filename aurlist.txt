@@ -1,5 +1,4 @@
 bibata-cursor-theme-bin
-dbflux
 euphonica
 gpu-screen-recorder-gtk
 grimblast-git
@@ -9,9 +8,12 @@ kvantum-theme-gruvbox-git
 kvantum-theme-libadwaita-git
 ldtk
 localsend-bin
+noctalia-git
+noctalia-qs
 noctalia-shell
 ox-bin
 paru
+paru-debug
 pyprland
 tableplus
 vicinae-bin

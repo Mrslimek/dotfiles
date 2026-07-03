@@ -1,13 +1,5 @@
-GRUV_ACCENT=e78a4e
-GRUV_BG=282828
-GRUV_FG=d4be98
-GRUV_RED=ea6962
-GRUV_ORANGE=e78a4e
-GRUV_YELLOW=d8a657
-GRUV_GREEN=a9b665
-GRUV_AQUA=89b482
-
-# export http_proxy="http://127.0.0.1:10808"
-# export https_proxy=$http_proxy
-# export HTTP_PROXY=$http_proxy
-# export HTTPS_PROXY=$http_proxy
+#
+# This file is parsed by pam_env module
+#
+# Syntax: simple "KEY=VAL" pairs on separate lines
+#

@@ -11,6 +11,7 @@ export GOPATH="$XDG_DATA_HOME/go"
 
 # Wayland & Система
 export ELECTRON_OZONE_PLATFORM_HINT=wayland
+export STEAM_FORCE_DESKTOPUI_SCALING=1.5
 export EDITOR="micro"
 export VISUAL="micro"
 

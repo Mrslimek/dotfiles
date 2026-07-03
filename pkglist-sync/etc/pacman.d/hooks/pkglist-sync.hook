@@ -1,0 +1,23 @@
+# Pacman hook: регенерирует dotfiles/pkglist.txt и aurlist.txt
+# после любой транзакции установки/обновления/удаления пакетов.
+#
+# Список обновляет /usr/local/bin/pkglist-sync.sh — он же определяет
+# целевого пользователя (через SUDO_USER), чтобы файлы принадлежали ему, а не root.
+#
+# Trigger: Type = Package с Target = * срабатывает на ЛЮБОЙ транзакции
+# с ЛЮБЫМ пакетом (install/upgrade/remove). Это надёжнее, чем Type = Path,
+# потому что Path сопоставляется только со списком файлов из manifest пакета,
+# а не с произвольными системными путями (подробности в alpm-hooks(5)).
+
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Operation = Remove
+Type = Package
+Target = *
+
+[Action]
+Description = Syncing dotfiles package lists (pkglist.txt, aurlist.txt)
+When = PostTransaction
+Exec = /usr/local/bin/pkglist-sync.sh
+Depends = bash

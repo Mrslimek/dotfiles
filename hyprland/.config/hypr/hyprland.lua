@@ -71,7 +71,7 @@ hl.config({
         border_size = 2,
         gaps_in     = 5,
         gaps_out    = 10,
-        layout      = "scrolling",
+        -- layout      = "scrolling",
 
         col = {
             active_border   = { colors = { THEME.active_border_1, THEME.active_border_2 }, angle = 45 },
