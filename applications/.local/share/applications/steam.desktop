@@ -3,7 +3,7 @@ Type=Application
 Name=Steam
 Comment=Application for managing and playing games on Steam
 Comment[ru]=Приложение для игр и управления играми в Steam
-Exec=/usr/bin/steam --forcedesktopscaling 1.5 %U
+Exec=/usr/bin/steam %U
 Icon=steam
 Terminal=false
 Categories=Network;FileTransfer;Game;
@@ -15,43 +15,43 @@ X-KDE-RunOnDiscreteGpu=true
 [Desktop Action Store]
 Name=Store
 Name[ru]=Магазин
-Exec=/usr/bin/steam --forcedesktopscaling 1.5 steam://store
+Exec=/usr/bin/steam steam://store
 
 [Desktop Action Community]
 Name=Community
 Name[ru]=Сообщество
-Exec=/usr/bin/steam --forcedesktopscaling 1.5 steam://url/CommunityHome/
+Exec=/usr/bin/steam steam://url/CommunityHome/
 
 [Desktop Action Library]
 Name=Library
 Name[ru]=Библиотека
-Exec=/usr/bin/steam --forcedesktopscaling 1.5 steam://open/games
+Exec=/usr/bin/steam steam://open/games
 
 [Desktop Action Servers]
 Name=Servers
 Name[ru]=Серверы
-Exec=/usr/bin/steam --forcedesktopscaling 1.5 steam://open/servers
+Exec=/usr/bin/steam steam://open/servers
 
 [Desktop Action Screenshots]
 Name=Screenshots
 Name[ru]=Скриншоты
-Exec=/usr/bin/steam --forcedesktopscaling 1.5 steam://open/screenshots
+Exec=/usr/bin/steam steam://open/screenshots
 
 [Desktop Action News]
 Name=News
 Name[ru]=Новости
-Exec=/usr/bin/steam --forcedesktopscaling 1.5 steam://openurl/https://store.steampowered.com/news
+Exec=/usr/bin/steam steam://openurl/https://store.steampowered.com/news
 
 [Desktop Action Settings]
 Name=Settings
 Name[ru]=Настройки
-Exec=/usr/bin/steam --forcedesktopscaling 1.5 steam://open/settings
+Exec=/usr/bin/steam steam://open/settings
 
 [Desktop Action BigPicture]
 Name=Big Picture
-Exec=/usr/bin/steam --forcedesktopscaling 1.5 steam://open/bigpicture
+Exec=/usr/bin/steam steam://open/bigpicture
 
 [Desktop Action Friends]
 Name=Friends
 Name[ru]=Друзья
-Exec=/usr/bin/steam --forcedesktopscaling 1.5 steam://open/friends
+Exec=/usr/bin/steam steam://open/friends
