@@ -23,6 +23,14 @@ local THEME = {
 hl.env("GDK_SCALE", "2")
 hl.env("GTK_THEME", THEME.gtk_theme_env)
 
+-- Отключаем DRM buffer modifiers (тилинг/DCC).
+-- На amdgpu DCN 3.1.4 (Radeon 780M) некоторые modifiers дают артефакты на
+-- последнем scanline — мерцающую белую 1px линию внизу экрана. Проявляется во
+-- ВСЕХ Wayland-композиторах (Hyprland, GNOME — Aquamarine/Mutter используют
+-- modifiers для DMA-BUF), но НЕ на TTY (там простой линейный framebuffer).
+-- Линейные буферы убирают артефакт ценой чуть большего потребления памяти.
+hl.env("AQ_DRM_NO_MODIFIERS", "1")
+
 -- ============================================================================
 -- AUTOSTART
 -- ============================================================================

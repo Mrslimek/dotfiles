@@ -1,0 +1,1 @@
+cryptdevice=PARTUUID=f69fd336-95bd-4dc3-aee3-a55049fbce54:root root=/dev/mapper/root zswap.enabled=0 rw rootfstype=ext4 amdgpu.dcdebugmask=0x4

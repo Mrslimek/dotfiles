@@ -700,8 +700,8 @@
             "disc",
             "stripes",
             "wipe",
-            "pixelate",
-            "honeycomb"
+            "honeycomb",
+            "pixelate"
         ],
         "useOriginalImages": false,
         "useSolidColor": false,
