@@ -40,6 +40,7 @@ gamescope
 ghostty
 git
 git-delta
+git-filter-repo
 gnome-themes-extra
 gptfdisk
 gpu-screen-recorder-gtk

@@ -1,1 +1,1 @@
-cryptdevice=PARTUUID=f69fd336-95bd-4dc3-aee3-a55049fbce54:root root=/dev/mapper/root zswap.enabled=0 rw rootfstype=ext4 amdgpu.dcdebugmask=0x4
+rd.luks.uuid=c2ec2a01-beec-4dda-a642-577447656585 root=UUID=e3fb36d1-37b6-461b-83d9-779e35926b06 zswap.enabled=0 rw amdgpu.dcdebugmask=0x4 rd.luks.options=tpm2-device=auto

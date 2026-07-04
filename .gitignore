@@ -4,3 +4,8 @@
 **/VSCodium/**/Cache/
 **/VSCodium/**/.trash/
 **/VSCodium/**/User/workspaceStorage/
+
+# Browser/messenger data — приватные данные приложений
+# (профиль, cookies, история, кэш, индексы — не для dotfiles)
+.config/.config/mozilla/
+.config/.config/Element/
