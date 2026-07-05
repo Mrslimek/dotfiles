@@ -30,6 +30,12 @@
       "clipboard:history"
    ],
    "providers": {
+      "@Gimblet/store.vicinae.noctalia-shell-wallpaper-selector": {
+         "preferences": {
+            "display_name": "eDP-1",
+            "wallpaper_directory": "/home/viktor/Pictures/Wallpapers"
+         }
+      },
       "@Mrslimek/status-check": {
          "enabled": false
       },

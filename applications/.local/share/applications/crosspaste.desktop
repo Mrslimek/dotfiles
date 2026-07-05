@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=CrossPaste
+Comment=Cross-device clipboard sync
+Comment[ru]=Синхронизация буфера обмена между устройствами
+GenericName=Clipboard Sync
+Exec=/home/viktor/Applications/CrossPaste.AppImage --no-windows %U
+Icon=edit-paste
+Terminal=false
+Categories=Utility;Network;System;
+Keywords=clipboard;sync;crosspaste;copy;paste;
+StartupWMClass=CrossPaste
+StartupNotify=true

@@ -93,7 +93,6 @@ nautilus
 ncdu
 netavark
 networkmanager
-network-manager-applet
 nmon
 noctalia-git
 noctalia-shell
@@ -232,6 +231,7 @@ virt-viewer
 vulkan-intel
 vulkan-nouveau
 vulkan-radeon
+webkit2gtk-4.1
 wev
 wf-recorder
 wget
