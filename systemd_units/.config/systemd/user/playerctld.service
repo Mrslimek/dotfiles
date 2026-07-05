@@ -1,0 +1,13 @@
+[Unit]
+Description=MPRIS media player controller daemon
+# Aggregates all MPRIS players (mpd, firefox, mpv) into a single
+# "most recent" player so playerctl buttons work regardless of focus.
+After=mpd.service sound.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/playerctld
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
