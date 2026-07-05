@@ -128,7 +128,7 @@
     "default_model": {
       "enable_thinking": false,
       "provider": "Z.AI",
-      "model": "glm-5.1",
+      "model": "glm-5.2",
     },
     "model_parameters": [],
   },
@@ -174,56 +174,75 @@
   "hover_popover_enabled": false,
   "show_completions_on_input": false,
   "language_models": {
-    "openai_compatible": {
+    // "openai_compatible": {
+    //   "Z.AI": {
+    //     "api_url": "https://api.z.ai/api/coding/paas/v4",
+    //     "available_models": [
+    //       {
+    //         "name": "glm-4.7",
+    //         "max_tokens": 200000,
+    //         "max_output_tokens": 32000,
+    //         "max_completion_tokens": 200000,
+    //         "capabilities": {
+    //           "tools": true,
+    //           "images": false,
+    //           "parallel_tool_calls": false,
+    //           "prompt_cache_key": false,
+    //           "chat_completions": true
+    //         }
+    //       },
+    //       {
+    //         "name": "glm-5.1",
+    //         "max_tokens": 200000,
+    //         "max_output_tokens": 32000,
+    //         "max_completion_tokens": 200000,
+    //         "capabilities": {
+    //           "tools": true,
+    //           "images": false,
+    //           "parallel_tool_calls": false,
+    //           "prompt_cache_key": false,
+    //           "chat_completions": true
+    //         }
+    //       }
+    //     ]
+    //   },
+    // },
+    "anthropic_compatible": {
       "Z.AI": {
-        "api_url": "https://api.z.ai/api/coding/paas/v4",
+        "api_url": "https://api.z.ai/api/anthropic",
         "available_models": [
           {
             "name": "glm-4.7",
             "max_tokens": 200000,
             "max_output_tokens": 32000,
-            "max_completion_tokens": 200000,
             "capabilities": {
               "tools": true,
               "images": false,
-              "parallel_tool_calls": false,
-              "prompt_cache_key": false,
-              "chat_completions": true
+              "prompt_caching": true
             }
           },
           {
             "name": "glm-5.1",
             "max_tokens": 200000,
             "max_output_tokens": 32000,
-            "max_completion_tokens": 200000,
             "capabilities": {
               "tools": true,
               "images": false,
-              "parallel_tool_calls": false,
-              "prompt_cache_key": false,
-              "chat_completions": true
+              "prompt_caching": true
+            }
+          },
+          {
+            "name": "glm-5.2",
+            "max_tokens": 200000,
+            "max_output_tokens": 32000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "prompt_caching": true
             }
           }
         ]
       },
-      "GPT proxy": {
-        "api_url": "https://gpt-proxy.p3.54origins.com/api",
-        "available_models": [
-          {
-            "name": "gpt-5.2",
-            "max_tokens": 200000,
-            "max_output_tokens": 32000,
-            "max_completion_tokens": 200000,
-            "capabilities": {
-              "tools": true,
-              "images": false,
-              "parallel_tool_calls": false,
-              "prompt_cache_key": false,
-              "chat_completions": true,
-            },
-          },
-        ],
-      },
-    },
+    }
   },
 }
