@@ -12,7 +12,7 @@ bibata-cursor-theme-bin
 blender
 bluez
 bluez-utils
-btrfs-assistant
+btop
 btrfsmaintenance
 btrfs-progs
 cmatrix
@@ -35,9 +35,7 @@ fastfetch
 fd
 ffmpegthumbnailer
 file-roller
-firefox
 gamescope
-ghostty
 git
 git-delta
 git-filter-repo
@@ -74,7 +72,6 @@ ldtk
 less
 libgsf
 libpulse
-libresprite
 libva-intel-driver
 libva-utils
 libvirt
@@ -231,7 +228,6 @@ uwsm
 vde2
 vicinae-bin
 vim
-virt-manager
 virt-viewer
 vulkan-intel
 vulkan-nouveau
