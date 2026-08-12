@@ -148,6 +148,7 @@ application/javascript=dev.zed.Zed.desktop
 # ===== Magnet/torrent → qBittorrent =====
 application/x-bittorrent=org.qbittorrent.qBittorrent.desktop
 x-scheme-handler/magnet=org.qbittorrent.qBittorrent.desktop
+x-scheme-handler/anytype=anytype.desktop
 
 [Added Associations]
 x-scheme-handler/http=zen.desktop;

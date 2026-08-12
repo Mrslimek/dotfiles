@@ -1,4 +1,6 @@
+anytype-bin
 bibata-cursor-theme-bin
+claude-code-stable-bin
 euphonica
 gpu-screen-recorder-gtk
 grimblast-git
@@ -8,13 +10,14 @@ kvantum-theme-gruvbox-git
 kvantum-theme-libadwaita-git
 ldtk
 localsend-bin
+moonlight-qt-axi-appimage
 noctalia-git
 noctalia-qs
 noctalia-shell
 ox-bin
 paru
 paru-debug
-pyprland
+python-pkg_resources
 tableplus
 vicinae-bin
 wl-color-picker

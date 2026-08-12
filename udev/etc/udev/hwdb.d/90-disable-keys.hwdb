@@ -1,0 +1,6 @@
+# Disable home, end, pgup, pgdn
+evdev:input:b0011v0001p0001*
+ KEYBOARD_KEY_c7=reserved
+ KEYBOARD_KEY_cf=reserved
+ KEYBOARD_KEY_c9=reserved
+ KEYBOARD_KEY_d1=reserved

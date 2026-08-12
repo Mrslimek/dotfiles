@@ -17,12 +17,6 @@
     "bindings": {
       "ctrl-tab": "editor::Hover",
       "ctrl-d": "editor::DuplicateLineDown",
-      "alt-left": "editor::MoveToBeginningOfLine",
-      "alt-right": "editor::MoveToEndOfLine",
-      "home": null,
-      "end": null,
-      "pageup": null,
-      "pagedown": null,
       "ctrl-alt-j": "pane::GoBack",
       "ctrl-alt-k": "pane::GoForward"
     },

@@ -36,8 +36,8 @@ hl.env("AQ_DRM_NO_MODIFIERS", "1")
 -- ============================================================================
 
 hl.on("hyprland.start", function()
-    hl.exec_cmd("uwsm app -- pypr")
     hl.exec_cmd("uwsm app -- noctalia")
+    hl.exec_cmd("hyprpm reload")
 end)
 
 -- ============================================================================
@@ -262,7 +262,7 @@ hl.bind(APPS.mod .. " + T", hl.dsp.exec_cmd("uwsm app -- " .. APPS.terminal))
 hl.bind(APPS.mod .. " + Grave", hl.dsp.exec_cmd("uwsm app -- pypr toggle term"))
 hl.bind(APPS.mod .. " + F", hl.dsp.exec_cmd("uwsm app -- " .. APPS.explorer))
 hl.bind(APPS.mod .. " + B", hl.dsp.exec_cmd("uwsm app -- " .. APPS.browser))
-hl.bind(APPS.mod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))
+-- hl.bind(APPS.mod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))
 hl.bind(APPS.mod .. " + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
 
 -- Vicinae
@@ -276,8 +276,8 @@ hl.bind(APPS.mod .. " + W", hl.dsp.window.float({ action = "toggle" }))
 hl.bind("SHIFT + F11", hl.dsp.window.fullscreen())
 
 -- Groups
-hl.bind(APPS.mod .. " + G", hl.dsp.group.toggle())
-hl.bind(APPS.mod .. " + Tab", hl.dsp.group.prev())
+-- hl.bind(APPS.mod .. " + G", hl.dsp.group.toggle())
+-- hl.bind(APPS.mod .. " + Tab", hl.dsp.group.prev())
 
 -- Мышь: Перемещение и Ресайз (bindm)
 hl.bind(APPS.mod .. " + Z", hl.dsp.window.drag(), { mouse = true })
@@ -296,17 +296,20 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(APPS.noctalia_msg .. " brightne
 
 -- Noctalia Shell: прочие хоткеи
 hl.bind("SUPER + slash", hl.dsp.exec_cmd(APPS.noctalia_msg .. " settings-toggle"))
-hl.bind("SUPER + l", hl.dsp.exec_cmd(APPS.noctalia_msg .. " session lock-and-suspend"))
+hl.bind("XF86Assistant", hl.dsp.exec_cmd(APPS.noctalia_msg .. " session lock-and-suspend"))
+-- hl.bind("F23", hl.dsp.exec_cmd(APPS.noctalia_msg .. " session lock-and-suspend"))
 hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd(APPS.noctalia_msg .. " panel-toggle session"))
-hl.bind("SUPER + c", hl.dsp.exec_cmd(APPS.noctalia_msg .. " panel-toggle control-center calendar"))
+-- hl.bind("SUPER + c", hl.dsp.exec_cmd(APPS.noctalia_msg .. " panel-toggle control-center calendar"))
 hl.bind("SUPER + m", hl.dsp.exec_cmd(APPS.noctalia_msg .. " panel-toggle control-center media"))
 hl.bind("SUPER + p", hl.dsp.exec_cmd(APPS.noctalia_msg .. " media toggle"))
 hl.bind("SUPER + bracketleft", hl.dsp.exec_cmd(APPS.noctalia_msg .. " media previous"))
 hl.bind("SUPER + bracketright", hl.dsp.exec_cmd(APPS.noctalia_msg .. " media next"))
 
 -- Скриншоты (Grimblast + Satty)
-hl.bind(APPS.mod .. " + ALT + P", hl.dsp.exec_cmd("grimblast save area - | satty --filename -"))
-hl.bind(APPS.mod .. " + ALT + o", hl.dsp.exec_cmd("grimblast save screen - | satty --filename -"))
+-- hl.bind(APPS.mod .. " + ALT + P", hl.dsp.exec_cmd("grimblast save area - | satty --filename -"))
+hl.bind("ALT + SHIFT + 2", hl.dsp.exec_cmd("grimblast save area - | satty --filename -"))
+hl.bind("Print", hl.plugin.hyprcapture.open)
+-- hl.bind(APPS.mod .. " + ALT + o", hl.dsp.exec_cmd("grimblast save screen - | satty --filename -"))
 
 -- Воркспейсы
 for i = 1, 10 do
@@ -345,6 +348,24 @@ hl.bind(APPS.mod .. " + CTRL + L", hl.dsp.layout("swapcol r"))
 
 -- Fit — вписать колонки в экран
 hl.bind(APPS.mod .. " + CTRL + F", hl.dsp.layout("fit visible"))
+
+-- hl.gesture({
+--     fingers = 3,
+--     direction = "up",
+--     action = function()
+--         hl.plugin.hymission.toggle()
+--     end
+-- })
+
+-- hl.bind("ALT + TAB", hl.plugin.hymission.toggle)
+hl.bind("ALT + TAB", function()
+    hl.plugin.hymission.toggle("onlycurrentworkspace")
+end)
+-- hl.bind("SUPER + A", function()
+--     hl.plugin.hymission.toggle("forceall")
+-- end)
+-- hl.bind("SUPER + M", hl.plugin.hymission.debug_current_layout)
+
 
 -- For Noctalia Color templates
 require("noctalia").apply_theme()

@@ -14,42 +14,7 @@
   "proxy": "http://localhost:10808",
   "use_system_prompts": false,
   "use_system_path_prompts": false,
-  "ssh_connections": [
-    {
-      "host": "65.108.89.34",
-      "username": "root",
-      "args": [],
-      "projects": [
-        {
-          "paths": [
-            "/etc/systemd/system"
-          ]
-        },
-        {
-          "paths": [
-            "/home/entity/10004_backend_entityservice54/./"
-          ]
-        },
-        {
-          "paths": [
-            "/home/entity/entity_new_python"
-          ]
-        }
-      ]
-    },
-    {
-      "host": "10.10.0.109",
-      "username": "root",
-      "args": [],
-      "projects": [
-        {
-          "paths": [
-            "/home/apidoc/09_54apidoc_service/./"
-          ]
-        }
-      ]
-    }
-  ],
+  "ssh_connections": [],
   "edit_predictions": {
     "provider": "zed",
   },
@@ -128,7 +93,7 @@
     "default_model": {
       "enable_thinking": false,
       "provider": "Z.AI",
-      "model": "glm-5.2",
+      "model": "glm-4.7",
     },
     "model_parameters": [],
   },
@@ -174,55 +139,12 @@
   "hover_popover_enabled": false,
   "show_completions_on_input": false,
   "language_models": {
-    // "openai_compatible": {
-    //   "Z.AI": {
-    //     "api_url": "https://api.z.ai/api/coding/paas/v4",
-    //     "available_models": [
-    //       {
-    //         "name": "glm-4.7",
-    //         "max_tokens": 200000,
-    //         "max_output_tokens": 32000,
-    //         "max_completion_tokens": 200000,
-    //         "capabilities": {
-    //           "tools": true,
-    //           "images": false,
-    //           "parallel_tool_calls": false,
-    //           "prompt_cache_key": false,
-    //           "chat_completions": true
-    //         }
-    //       },
-    //       {
-    //         "name": "glm-5.1",
-    //         "max_tokens": 200000,
-    //         "max_output_tokens": 32000,
-    //         "max_completion_tokens": 200000,
-    //         "capabilities": {
-    //           "tools": true,
-    //           "images": false,
-    //           "parallel_tool_calls": false,
-    //           "prompt_cache_key": false,
-    //           "chat_completions": true
-    //         }
-    //       }
-    //     ]
-    //   },
-    // },
     "anthropic_compatible": {
       "Z.AI": {
         "api_url": "https://api.z.ai/api/anthropic",
         "available_models": [
           {
             "name": "glm-4.7",
-            "max_tokens": 200000,
-            "max_output_tokens": 32000,
-            "capabilities": {
-              "tools": true,
-              "images": false,
-              "prompt_caching": true
-            }
-          },
-          {
-            "name": "glm-5.1",
             "max_tokens": 200000,
             "max_output_tokens": 32000,
             "capabilities": {

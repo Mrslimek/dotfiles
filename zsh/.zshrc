@@ -50,3 +50,7 @@ alias steam="env STEAM_FORCE_DESKTOPUI_SCALING=1.5 steam"
 # Системный Path (Pipx и локальные бинарники)
 export PATH="$PATH:/home/viktor/.local/bin"
 export PATH="$HOME/.local/share/npm-global/bin:$PATH"
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
+
+zstyle ':completion:*' menu select

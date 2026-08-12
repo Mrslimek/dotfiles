@@ -1,1 +1,1 @@
-rd.luks.uuid=c2ec2a01-beec-4dda-a642-577447656585 root=UUID=e3fb36d1-37b6-461b-83d9-779e35926b06 zswap.enabled=0 rw amdgpu.dcdebugmask=0x4 rd.luks.options=tpm2-device=auto
+rd.luks.uuid=c2ec2a01-beec-4dda-a642-577447656585 root=UUID=e3fb36d1-37b6-461b-83d9-779e35926b06 zswap.enabled=0 rw amdgpu.dcdebugmask=0x4 rd.luks.options=tpm2-device=auto,discard amd_pstate=guided
