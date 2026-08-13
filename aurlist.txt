@@ -4,10 +4,6 @@ claude-code-stable-bin
 euphonica
 gpu-screen-recorder-gtk
 grimblast-git
-gruvbox-material-gtk-theme-git
-gruvbox-plus-icon-theme-git
-kvantum-theme-gruvbox-git
-kvantum-theme-libadwaita-git
 ldtk
 localsend-bin
 moonlight-qt-axi-appimage
@@ -16,8 +12,6 @@ noctalia-qs
 noctalia-shell
 ox-bin
 paru
-paru-debug
-python-pkg_resources
 tableplus
 vicinae-bin
 wl-color-picker
