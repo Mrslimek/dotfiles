@@ -20,7 +20,6 @@ local THEME = {
 -- ENVIRONMENT VARIABLES
 -- ============================================================================
 
-hl.env("GDK_SCALE", "2")
 hl.env("GTK_THEME", THEME.gtk_theme_env)
 
 -- Отключаем DRM buffer modifiers (тилинг/DCC).
@@ -79,7 +78,7 @@ hl.config({
         border_size = 2,
         gaps_in     = 5,
         gaps_out    = 10,
-        -- layout      = "scrolling",
+        layout      = "dwindle",
 
         col         = {
             active_border   = { colors = { THEME.active_border_1, THEME.active_border_2 }, angle = 45 },
@@ -122,17 +121,6 @@ hl.config({
         },
     },
 
-    scrolling = {
-        fullscreen_on_one_column = true,
-        column_width             = 0.95,
-        explicit_column_widths   = "0.333,0.5,0.667,1.0",
-        direction                = "right",
-        focus_fit_method         = 0,
-        follow_focus             = 0,
-        wrap_focus               = true,
-        wrap_swapcol             = true,
-    },
-
     misc = {
         vrr                      = 0,
         disable_hyprland_logo    = true,
@@ -168,29 +156,12 @@ hl.device({
 })
 
 -- ============================================================================
--- GESTURES (тачпад)
+-- GESTURES
 -- ============================================================================
-
--- Скролл ленты scrolling layout тремя пальцами
-hl.gesture({
-    fingers   = 3,
-    direction = "horizontal",
-    action    = "scroll_move",
-})
-
--- Переключение воркспейсов четырьмя пальцами
--- hl.gesture({
---     fingers   = 4,
---     direction = "horizontal",
---     action    = "workspace",
--- })
 
 -- ============================================================================
 -- WINDOW RULES
 -- ============================================================================
-
--- Глобальное правило: делать ВСЁ плавающим по умолчанию
--- Исключения — приложения, явно объявленные как tile ниже
 hl.window_rule({
     name   = "float-all-by-default",
     match  = { class = ".*" },
@@ -198,20 +169,6 @@ hl.window_rule({
     center = true,
 })
 
--- Игра Hotline Miami Like
-hl.window_rule({
-    name  = "hotlinemiamilike",
-    match = { title = "^(Hotline Miami Like)$" },
-    float = true,
-})
-
--- ИСКЛЮЧЕНИЯ: строго тайловый режим (tile)
-hl.window_rule({ name = "tile-alacritty", match = { class = "Alacritty" }, float = false })
-hl.window_rule({ name = "tile-zed", match = { class = "dev.zed.Zed" }, float = false })
-hl.window_rule({ name = "tile-zen", match = { class = "zen" }, float = false })
-hl.window_rule({ name = "tile-firefox", match = { class = "firefox" }, float = false })
-
--- Picture-in-Picture
 hl.window_rule({
     name              = "pip-rules",
     match             = { title = "^([Pp]icture[-\\s]?[Ii]n[-\\s]?[Pp]icture)(.*)$" },
@@ -222,26 +179,35 @@ hl.window_rule({
     pin               = true,
 })
 
--- Специфичные окна Firefox
-hl.window_rule({ name = "float-firefox-about", match = { title = "^(About Mozilla Firefox)$" }, float = true })
-hl.window_rule({ name = "float-firefox-pip", match = { class = "^(firefox)$", title = "^(Picture-in-Picture)$" }, float = true })
-hl.window_rule({ name = "float-firefox-library", match = { class = "^(firefox)$", title = "^(Library)$" }, float = true })
+hl.window_rule({
+    name  = "satty",
+    match = { class = "^com.gabm.satty$" },
+    float = true,
+    max_size = { 1280, 720 },
+})
 
--- Общие модальные и системные диалоги
-hl.window_rule({ name = "modal-open", match = { title = "^(Open)$" }, float = true })
-hl.window_rule({ name = "modal-auth", match = { title = "^(Authentication Required)$" }, float = true })
-hl.window_rule({ name = "modal-addfolder", match = { title = "^(Add Folder to Workspace)$" }, float = true })
-hl.window_rule({ name = "modal-openfile", match = { title = "^(Open File)$" }, float = true })
-hl.window_rule({ name = "modal-choosefiles", match = { title = "^(Choose Files)$" }, float = true })
-hl.window_rule({ name = "modal-saveas", match = { title = "^(Save As)$" }, float = true })
-hl.window_rule({ name = "modal-confirm", match = { title = "^(Confirm to replace files)$" }, float = true })
-hl.window_rule({ name = "modal-fileprogress", match = { title = "^(File Operation Progress)$" }, float = true })
-hl.window_rule({ name = "modal-xdgportal", match = { class = "^([Xx]dg-desktop-portal-gtk)$" }, float = true })
-hl.window_rule({ name = "modal-fileupload", match = { title = "^(File Upload)(.*)$" }, float = true })
-hl.window_rule({ name = "modal-wallpaper", match = { title = "^(Choose wallpaper)(.*)$" }, float = true })
-hl.window_rule({ name = "modal-library", match = { title = "^(Library)(.*)$" }, float = true })
-hl.window_rule({ name = "modal-class-dialog", match = { class = "^(.*dialog.*)$" }, float = true })
-hl.window_rule({ name = "modal-title-dialog", match = { title = "^(.*dialog.*)$" }, float = true })
+local CASCADE_STEP = 36
+local CASCADE_WRAP  = 8
+
+hl.on("window.open", function(w)
+    if not w then return end
+
+    local is_float, wname = false, nil
+    pcall(function() is_float = w.floating; wname = w.workspace.name end)
+    if not is_float or not wname then return end
+
+    local count = 0
+    pcall(function()
+        for _, o in ipairs(hl.get_windows() or {}) do
+            local of, oname = false, nil
+            pcall(function() of = o.floating; oname = o.workspace.name end)
+            if of and oname == wname then count = count + 1 end
+        end
+    end)
+    if count < 2 then return end
+    local off = ((count - 1) % CASCADE_WRAP) * CASCADE_STEP
+    pcall(hl.dispatch, hl.dsp.window.move({ x = off, y = off, relative = true, window = w }))
+end)
 
 -- ============================================================================
 -- KEYBINDINGS
@@ -259,7 +225,6 @@ local APPS = {
 
 -- Launchers
 hl.bind(APPS.mod .. " + T", hl.dsp.exec_cmd("uwsm app -- " .. APPS.terminal))
-hl.bind(APPS.mod .. " + Grave", hl.dsp.exec_cmd("uwsm app -- pypr toggle term"))
 hl.bind(APPS.mod .. " + F", hl.dsp.exec_cmd("uwsm app -- " .. APPS.explorer))
 hl.bind(APPS.mod .. " + B", hl.dsp.exec_cmd("uwsm app -- " .. APPS.browser))
 -- hl.bind(APPS.mod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))
@@ -279,11 +244,10 @@ hl.bind("SHIFT + F11", hl.dsp.window.fullscreen())
 -- hl.bind(APPS.mod .. " + G", hl.dsp.group.toggle())
 -- hl.bind(APPS.mod .. " + Tab", hl.dsp.group.prev())
 
--- Мышь: Перемещение и Ресайз (bindm)
 hl.bind(APPS.mod .. " + Z", hl.dsp.window.drag(), { mouse = true })
 hl.bind(APPS.mod .. " + X", hl.dsp.window.resize(), { mouse = true })
 
--- Noctalia Shell: Громкость, Яркость, Медиа
+-- Noctalia Shell:
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(APPS.noctalia_msg .. " volume-up"),
     { repeating = true, locked = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(APPS.noctalia_msg .. " volume-down"),
@@ -293,8 +257,6 @@ hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd(APPS.noctalia_msg .. " brightness
     { repeating = true, locked = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(APPS.noctalia_msg .. " brightness-down"),
     { repeating = true, locked = true })
-
--- Noctalia Shell: прочие хоткеи
 hl.bind("SUPER + slash", hl.dsp.exec_cmd(APPS.noctalia_msg .. " settings-toggle"))
 hl.bind("XF86Assistant", hl.dsp.exec_cmd(APPS.noctalia_msg .. " session lock-and-suspend"))
 -- hl.bind("F23", hl.dsp.exec_cmd(APPS.noctalia_msg .. " session lock-and-suspend"))
@@ -305,57 +267,23 @@ hl.bind("SUPER + p", hl.dsp.exec_cmd(APPS.noctalia_msg .. " media toggle"))
 hl.bind("SUPER + bracketleft", hl.dsp.exec_cmd(APPS.noctalia_msg .. " media previous"))
 hl.bind("SUPER + bracketright", hl.dsp.exec_cmd(APPS.noctalia_msg .. " media next"))
 
--- Скриншоты (Grimblast + Satty)
+-- Screenshots
 -- hl.bind(APPS.mod .. " + ALT + P", hl.dsp.exec_cmd("grimblast save area - | satty --filename -"))
 hl.bind("ALT + SHIFT + 2", hl.dsp.exec_cmd("grimblast save area - | satty --filename -"))
 hl.bind("Print", hl.plugin.hyprcapture.open)
 -- hl.bind(APPS.mod .. " + ALT + o", hl.dsp.exec_cmd("grimblast save screen - | satty --filename -"))
 
--- Воркспейсы
+-- Workspaces
 for i = 1, 10 do
     local key = i % 10 -- 10 maps to key 0
     hl.bind(APPS.mod .. " + " .. key, hl.dsp.focus({ workspace = i }))
     hl.bind(APPS.mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
 
--- Специальные воркспейсы (Scratchpad)
+-- Special workspaces
 hl.bind(APPS.mod .. " + S", hl.dsp.workspace.toggle_special())
 hl.bind(APPS.mod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special" }))
 hl.bind(APPS.mod .. " + SHIFT + W", hl.dsp.window.move({ workspace = "+0" }))
-
--- ============================================================================
--- SCROLLING LAYOUT CONTROLS
--- ============================================================================
-
--- Ресайз колонок по preset-ам (из explicit_column_widths)
-hl.bind(APPS.mod .. " + minus", hl.dsp.layout("colresize -conf"))
-hl.bind(APPS.mod .. " + equal", hl.dsp.layout("colresize +conf"))
-
--- Центрировать текущую колонку
-hl.bind(APPS.mod .. " + U", hl.dsp.layout("center"))
-
--- Promote/Expel — управление окнами в колонках
-hl.bind(APPS.mod .. " + I", hl.dsp.layout("promote"))
-hl.bind(APPS.mod .. " + O", hl.dsp.layout("expel"))
-
--- Прокрутка viewport'а колонками
-hl.bind(APPS.mod .. " + CTRL + right", hl.dsp.layout("move +col"))
-hl.bind(APPS.mod .. " + CTRL + left", hl.dsp.layout("move -col"))
-
--- Перестановка колонок
-hl.bind(APPS.mod .. " + CTRL + H", hl.dsp.layout("swapcol l"))
-hl.bind(APPS.mod .. " + CTRL + L", hl.dsp.layout("swapcol r"))
-
--- Fit — вписать колонки в экран
-hl.bind(APPS.mod .. " + CTRL + F", hl.dsp.layout("fit visible"))
-
--- hl.gesture({
---     fingers = 3,
---     direction = "up",
---     action = function()
---         hl.plugin.hymission.toggle()
---     end
--- })
 
 -- hl.bind("ALT + TAB", hl.plugin.hymission.toggle)
 hl.bind("ALT + TAB", function()
