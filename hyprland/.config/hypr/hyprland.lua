@@ -69,8 +69,11 @@ hl.config({
         sensitivity = 0.3,
         touchpad    = {
             natural_scroll       = true,
-            tap_to_click         = true,
-            disable_while_typing = true,
+            tap_to_click   = true,
+            -- NOTE: Commented, because i use keyd to remap some keyboard buttons and it conflicts with hyprland
+            -- Configuration for this keyd virtual keyboard lives in /etc/libinput and /etc/keyd
+            -- NOTE: Try to configure everything, related to keyboard on low level, using keyd and use hyprland only for compositor-level configs
+            -- disable_while_typing = true,
         },
     },
 
