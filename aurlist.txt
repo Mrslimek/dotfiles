@@ -4,6 +4,7 @@ claude-code-stable-bin
 euphonica
 gpu-screen-recorder-gtk
 grimblast-git
+http-parser
 ldtk
 localsend-bin
 moonlight-qt-axi-appimage
@@ -12,6 +13,7 @@ noctalia-qs
 noctalia-shell
 ox-bin
 paru
+postman-bin
 tableplus
 vicinae-bin
 wl-color-picker

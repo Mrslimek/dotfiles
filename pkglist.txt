@@ -87,7 +87,6 @@ ntfs-3g
 nvme-cli
 nwg-displays
 nwg-look
-obsidian
 openvpn
 ox-bin
 pacman-contrib
@@ -100,6 +99,7 @@ pipewire-jack
 pipewire-pulse
 playerctl
 poppler-glib
+postman-bin
 powertop
 protontricks
 qbittorrent
