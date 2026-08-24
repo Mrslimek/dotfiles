@@ -39,6 +39,22 @@
     "trust_all_worktrees": true,
   },
   "agent": {
+    "sandbox_permissions": {
+      "network_hosts": [
+        "proxy.golang.org",
+        "sum.golang.org"
+      ],
+      "write_paths": [
+        {
+          "requested": "/home/viktor/.local/share/go/pkg",
+          "resolved": "/home/viktor/.local/share/go/pkg"
+        },
+        {
+          "requested": "/home/viktor/.cache/go-build",
+          "resolved": "/home/viktor/.cache/go-build"
+        }
+      ]
+    },
     "profiles": {
       "custom": {
         "default_model": {
@@ -55,10 +71,14 @@
     "notify_when_agent_waiting": "never",
     "tool_permissions": {
       "tools": {
+        "copy_path": {
+          "default": "allow"
+        },
         "fetch": {
           "default": "allow"
         },
         "terminal": {
+          "default": "allow",
           "always_allow": [
             {
               "pattern": "^psql\\b"
@@ -93,7 +113,7 @@
     "default_model": {
       "enable_thinking": false,
       "provider": "Z.AI",
-      "model": "glm-4.7",
+      "model": "glm-5.3",
     },
     "model_parameters": [],
   },
@@ -155,6 +175,16 @@
           },
           {
             "name": "glm-5.2",
+            "max_tokens": 200000,
+            "max_output_tokens": 32000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "prompt_caching": true
+            }
+          },
+          {
+            "name": "glm-5.3",
             "max_tokens": 200000,
             "max_output_tokens": 32000,
             "capabilities": {

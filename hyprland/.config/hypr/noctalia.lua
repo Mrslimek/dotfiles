@@ -2,8 +2,12 @@
 
 local primary = "rgb(e65050)"
 local surface = "rgb(f8f9fa)"
+local on_surface = "rgb(42474c)"
 local secondary = "rgb(ff8f40)"
+local on_secondary = "rgb(f8f9fa)"
 local error = "rgb(86b300)"
+local on_error = "rgb(f8f9fa)"
+local shadow = "rgb(f8f9fa)"
 
 local function apply_theme()
     hl.config({
@@ -13,7 +17,6 @@ local function apply_theme()
                 inactive_border = surface,
             },
         },
-
         group = {
             col = {
                 border_active = secondary,
@@ -23,12 +26,17 @@ local function apply_theme()
             },
 
             groupbar = {
+                gradients = true,
                 col = {
                     active = secondary,
                     inactive = surface,
                     locked_active = error,
                     locked_inactive = surface,
                 },
+                text_color = on_secondary,
+                text_color_inactive = on_surface,
+                text_color_locked_active = on_error,
+                text_color_locked_inactive = on_surface,
             },
         },
     })
@@ -38,8 +46,12 @@ return {
     colors = {
         primary = primary,
         surface = surface,
+        on_surface = on_surface,
         secondary = secondary,
+        on_secondary = on_secondary,
         error = error,
+        on_error = on_error,
+        shadow = shadow,
     },
     apply_theme = apply_theme
 }

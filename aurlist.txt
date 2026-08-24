@@ -1,4 +1,5 @@
 anytype-bin
+aseprite
 bibata-cursor-theme-bin
 claude-code-stable-bin
 euphonica
@@ -9,6 +10,7 @@ ldtk
 localsend-bin
 moonlight-qt-axi-appimage
 noctalia-git
+noctalia-greeter
 noctalia-qs
 noctalia-shell
 ox-bin

@@ -1,3 +1,4 @@
+accountsservice
 acpi
 adw-gtk-theme
 alacritty
@@ -6,6 +7,7 @@ amd-ucode
 android-tools
 android-udev
 anytype-bin
+aseprite
 base
 base-devel
 bat
@@ -43,6 +45,7 @@ gnome-themes-extra
 go
 gptfdisk
 gpu-screen-recorder-gtk
+greetd
 grim
 grimblast-git
 gst-plugin-pipewire
@@ -66,6 +69,7 @@ less
 lib32-giflib
 libgsf
 libpulse
+libreoffice-fresh
 libva-utils
 linux
 linux-firmware
@@ -81,6 +85,7 @@ mpv
 nautilus
 networkmanager
 noctalia-git
+noctalia-greeter
 noctalia-shell
 noto-fonts-emoji
 ntfs-3g
