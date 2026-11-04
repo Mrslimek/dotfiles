@@ -4,7 +4,8 @@
 
 local APPS = {
     mod          = "SUPER",
-    terminal     = "alacritty",
+    -- terminal     = "alacritty",
+    terminal     = "ghostty",
     explorer     = "nautilus",
     editor       = "codium",
     browser      = "zen-browser",
@@ -14,6 +15,7 @@ local APPS = {
 
 -- Launchers
 hl.bind(APPS.mod .. " + T", hl.dsp.exec_cmd("uwsm app -- " .. APPS.terminal))
+hl.bind(APPS.mod .. " + GRAVE", hl.dsp.exec_cmd("ghostty +toggle-quick-terminal"))
 hl.bind(APPS.mod .. " + F", hl.dsp.exec_cmd("uwsm app -- " .. APPS.explorer))
 hl.bind(APPS.mod .. " + B", hl.dsp.exec_cmd("uwsm app -- " .. APPS.browser))
 -- hl.bind(APPS.mod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))
