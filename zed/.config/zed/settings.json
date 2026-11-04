@@ -113,7 +113,7 @@
     "default_model": {
       "enable_thinking": false,
       "provider": "Z.AI",
-      "model": "glm-5.3",
+      "model": "glm-5.3-flash",
     },
     "model_parameters": [],
   },
@@ -136,6 +136,7 @@
     "button": true,
   },
   "terminal": {
+    "font_family": "Hack Nerd Font",
     "button": false,
   },
   "status_bar": {
@@ -185,6 +186,16 @@
           },
           {
             "name": "glm-5.3",
+            "max_tokens": 200000,
+            "max_output_tokens": 32000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "prompt_caching": true
+            }
+          },
+          {
+            "name": "glm-5.3-flash",
             "max_tokens": 200000,
             "max_output_tokens": 32000,
             "capabilities": {

@@ -10,8 +10,17 @@
 
 {
    "$schema": "https://vicinae.com/schemas/config.json",
+   "pop_to_root_on_close": true,
+   "escape_key_behavior": "close_window",
    "favicon_service": "google",
+   "tray": {
+      "enabled": false
+   },
+   "global_shortcuts": {
+      "toggle": "super+A"
+   },
    "font": {
+      "rendering": "native",
       "normal": {
          "family": "Open Sans"
       }
@@ -23,19 +32,14 @@
       }
    },
    "launcher_window": {
-      "opacity": 1
+      "opacity": 1,
+      "material": "none"
    },
    "favorites": [
       "@Mrslimek/system-info-dashboard:check",
       "clipboard:history"
    ],
    "providers": {
-      "@Gimblet/store.vicinae.noctalia-shell-wallpaper-selector": {
-         "preferences": {
-            "display_name": "eDP-1",
-            "wallpaper_directory": "/home/viktor/Pictures/Wallpapers"
-         }
-      },
       "@Mrslimek/status-check": {
          "enabled": false
       },
@@ -204,6 +208,9 @@
             },
             "report-bug": {
                "enabled": false
+            },
+            "search-tray": {
+               "enabled": true
             },
             "settings": {
                "enabled": false

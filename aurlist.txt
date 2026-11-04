@@ -1,7 +1,7 @@
-anytype-bin
 aseprite
 bibata-cursor-theme-bin
 claude-code-stable-bin
+codegraph-bin
 euphonica
 gpu-screen-recorder-gtk
 grimblast-git
@@ -10,7 +10,6 @@ ldtk
 localsend-bin
 moonlight-qt-axi-appimage
 noctalia-git
-noctalia-greeter
 noctalia-qs
 noctalia-shell
 ox-bin
@@ -18,6 +17,7 @@ paru
 postman-bin
 tableplus
 vicinae-bin
+vscodium-bin
 wl-color-picker
 xray
 zen-browser-bin

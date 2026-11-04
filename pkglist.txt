@@ -6,7 +6,6 @@ amberol
 amd-ucode
 android-tools
 android-udev
-anytype-bin
 aseprite
 base
 base-devel
@@ -19,6 +18,7 @@ btop
 chromium
 claude-code-stable-bin
 cmatrix
+codegraph-bin
 cpu-x
 dconf-editor
 ddcutil
@@ -57,16 +57,17 @@ htop
 hyprland
 hyprlock
 hyprpicker
+hyprpm
 hyprpolkitagent
 hyprpwcenter
 hyprsunset
 imv
 inotify-tools
 iwd
+keepassxc
 keyd
 ldtk
 less
-lib32-giflib
 libgsf
 libpulse
 libreoffice-fresh
@@ -87,11 +88,13 @@ networkmanager
 noctalia-git
 noctalia-greeter
 noctalia-shell
+nodejs
 noto-fonts-emoji
 ntfs-3g
 nvme-cli
 nwg-displays
 nwg-look
+obsidian
 openvpn
 ox-bin
 pacman-contrib
@@ -126,6 +129,7 @@ starship
 steam
 stow
 sudo
+syncthing
 sysstat
 tableplus
 telegram-desktop
@@ -141,6 +145,7 @@ uv
 uwsm
 vicinae-bin
 vim
+vscodium-bin
 vulkan-intel
 vulkan-nouveau
 vulkan-radeon

@@ -22,7 +22,8 @@ hl.bind(APPS.mod .. " + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
 -- Vicinae
 hl.bind(APPS.mod .. " + A", hl.dsp.exec_cmd("vicinae toggle"))
 hl.bind(APPS.mod .. " + V", hl.dsp.exec_cmd("vicinae vicinae://launch/clipboard/history"))
-hl.bind(APPS.mod .. " + comma", hl.dsp.exec_cmd("vicinae vicinae://launch/core/search-emojis"))
+-- hl.bind(APPS.mod .. " + comma", hl.dsp.exec_cmd("vicinae vicinae://launch/core/search-emojis"))
+hl.bind("CTRL + ALT + SPACE", hl.dsp.exec_cmd("vicinae vicinae://launch/core/search-emojis"))
 
 -- Window Management
 hl.bind(APPS.mod .. " + Q", hl.dsp.window.close())
@@ -52,6 +53,7 @@ hl.bind("XF86Assistant", hl.dsp.exec_cmd(APPS.noctalia_msg .. " session lock-and
 hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd(APPS.noctalia_msg .. " panel-toggle session"))
 -- hl.bind("SUPER + c", hl.dsp.exec_cmd(APPS.noctalia_msg .. " panel-toggle control-center calendar"))
 hl.bind("SUPER + m", hl.dsp.exec_cmd(APPS.noctalia_msg .. " panel-toggle control-center media"))
+hl.bind("ALT + TAB", hl.dsp.exec_cmd(APPS.noctalia_msg .. " window-switcher"))
 hl.bind("SUPER + p", hl.dsp.exec_cmd(APPS.noctalia_msg .. " media toggle"))
 hl.bind("SUPER + bracketleft", hl.dsp.exec_cmd(APPS.noctalia_msg .. " media previous"))
 hl.bind("SUPER + bracketright", hl.dsp.exec_cmd(APPS.noctalia_msg .. " media next"))
@@ -75,9 +77,9 @@ hl.bind(APPS.mod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special" }
 hl.bind(APPS.mod .. " + SHIFT + W", hl.dsp.window.move({ workspace = "+0" }))
 
 -- hl.bind("ALT + TAB", hl.plugin.hymission.toggle)
-hl.bind("ALT + TAB", function()
-    hl.plugin.hymission.toggle("onlycurrentworkspace")
-end)
+-- hl.bind("ALT + TAB", function()
+--     hl.plugin.hymission.toggle("onlycurrentworkspace")
+-- end)
 -- hl.bind("SUPER + A", function()
 --     hl.plugin.hymission.toggle("forceall")
 -- end)
