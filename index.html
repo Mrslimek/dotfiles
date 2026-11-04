@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,15 +33,15 @@ body { background: var(--background); color: var(--foreground); }
 </style>
 </head>
 <body>
-<div id="arch-overview" aria-label="Архитектурный граф системы Arch Linux">
+<div id="arch-overview" aria-label="Arch Linux system architecture graph">
   <h2>Arch Linux · System Overview</h2>
   <div class="legend">
-    <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-boot"/></svg>цепочка загрузки</span>
-    <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-start"/></svg>запуск службы</span>
-    <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-data"/></svg>данные / API / UI</span>
-    <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-dbus"/></svg>D-Bus-активация</span>
-    <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-build"/></svg>сборка / запуск вручную</span>
-    <span class="lg-hint text-muted text-small">клик по узлу — выделить связи · повторный клик или клик по фону — снять · тяните мышью — перемещение · колесо — масштаб</span>
+    <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-boot"/></svg>boot chain</span>
+    <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-start"/></svg>service start</span>
+    <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-data"/></svg>data / API / UI</span>
+    <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-dbus"/></svg>D-Bus activation</span>
+    <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-build"/></svg>build / manual start</span>
+    <span class="lg-hint text-muted text-small">click a node to highlight its connections · click again or on the background to clear · drag to pan · scroll to zoom</span>
   </div>
 
   <div class="zview" id="arch-viewport">
@@ -49,56 +49,56 @@ body { background: var(--background); color: var(--foreground); }
       <svg id="arch-edges" aria-hidden="true"></svg>
       <svg id="arch-labels" aria-hidden="true"></svg>
 
-      <div class="gl gl-boot" style="left:60px;top:30px"><span class="dot"></span>Загрузка</div>
-      <div class="gl gl-system" style="left:60px;top:212px"><span class="dot"></span>Системные службы</div>
-      <div class="gl gl-session" style="left:60px;top:660px"><span class="dot"></span>Пользовательская сессия</div>
-      <div class="gl gl-media" style="left:870px;top:1080px"><span class="dot"></span>Аудио и медиа</div>
+      <div class="gl gl-boot" style="left:60px;top:30px"><span class="dot"></span>Boot</div>
+      <div class="gl gl-system" style="left:60px;top:212px"><span class="dot"></span>System services</div>
+      <div class="gl gl-session" style="left:60px;top:660px"><span class="dot"></span>User session</div>
+      <div class="gl gl-media" style="left:870px;top:1080px"><span class="dot"></span>Audio &amp; media</div>
 
-      <div class="node" data-node="uefi" style="left:60px;top:70px"><div class="nname">UEFI</div><div class="nrole">Прошивка платформы; Secure Boot включён</div></div>
-      <div class="node" data-node="sdboot" style="left:330px;top:70px"><div class="nname">systemd-boot</div><div class="nrole">EFI-загрузчик; запускает UKI-образ</div></div>
-      <div class="node" data-node="kernel" style="left:600px;top:70px"><div class="nname">Linux Kernel</div><div class="nrole">Ядро ОС; загружается как UKI arch-linux.efi</div></div>
-      <div class="node" data-node="luks" style="left:870px;top:70px"><div class="nname">LUKS2</div><div class="nrole">Шифрование корневого раздела; ключ в TPM2</div></div>
-      <div class="node hub" data-node="systemd" style="left:1140px;top:70px"><div class="nname">systemd</div><div class="nrole">PID 1: инициализация и менеджер системных служб</div></div>
-      <div class="node" data-node="mkinitcpio" style="left:600px;top:280px"><div class="nname">mkinitcpio</div><div class="nrole">Собирает UKI: ядро + initramfs + cmdline</div></div>
+      <div class="node" data-node="uefi" style="left:60px;top:70px"><div class="nname">UEFI</div><div class="nrole">Platform firmware; Secure Boot enabled</div></div>
+      <div class="node" data-node="sdboot" style="left:330px;top:70px"><div class="nname">systemd-boot</div><div class="nrole">EFI bootloader; launches the UKI image</div></div>
+      <div class="node" data-node="kernel" style="left:600px;top:70px"><div class="nname">Linux Kernel</div><div class="nrole">OS kernel; boots as the arch-linux.efi UKI</div></div>
+      <div class="node" data-node="luks" style="left:870px;top:70px"><div class="nname">LUKS2</div><div class="nrole">Root partition encryption; key in TPM2</div></div>
+      <div class="node hub" data-node="systemd" style="left:1140px;top:70px"><div class="nname">systemd</div><div class="nrole">PID 1: init and system service manager</div></div>
+      <div class="node" data-node="mkinitcpio" style="left:600px;top:280px"><div class="nname">mkinitcpio</div><div class="nrole">Builds the UKI: kernel + initramfs + cmdline</div></div>
 
-      <div class="node" data-node="timesyncd" style="left:60px;top:250px"><div class="nname">systemd-timesyncd</div><div class="nrole">Синхронизация системного времени</div></div>
-      <div class="node node-ondemand" data-node="docker" style="left:60px;top:400px"><div class="nname">Docker</div><div class="nrole">Контейнеры для разработки; запуск вручную</div></div>
-      <div class="node" data-node="keyd" style="left:330px;top:570px"><div class="nname">keyd</div><div class="nrole">Переназначение клавиш (виртуальная клавиатура)</div></div>
-      <div class="node" data-node="greetd" style="left:600px;top:430px"><div class="nname">greetd</div><div class="nrole">Менеджер входа (VT1)</div></div>
-      <div class="node" data-node="zram" style="left:870px;top:250px"><div class="nname">zram-generator</div><div class="nrole">Создаёт zram-подкачку при загрузке</div></div>
-      <div class="node hub" data-node="dbus" style="left:1410px;top:250px"><div class="nname">dbus-broker</div><div class="nrole">Шина сообщений D-Bus (системная и пользовательская)</div></div>
-      <div class="node" data-node="polkit" style="left:1680px;top:250px"><div class="nname">Polkit</div><div class="nrole">Проверка привилегий (polkitd)</div></div>
-      <div class="node" data-node="bluez" style="left:1950px;top:250px"><div class="nname">BlueZ</div><div class="nrole">Стек Bluetooth (bluetooth.service)</div></div>
-      <div class="node" data-node="nm" style="left:1680px;top:430px"><div class="nname">NetworkManager</div><div class="nrole">Управление сетевыми интерфейсами и соединениями</div></div>
-      <div class="node" data-node="iwd" style="left:1950px;top:430px"><div class="nname">iwd</div><div class="nrole">Wi-Fi-бэкенд для NetworkManager</div></div>
-      <div class="node" data-node="tuned" style="left:870px;top:570px"><div class="nname">tuned</div><div class="nrole">Системные профили питания и производительности</div></div>
-      <div class="node" data-node="tunedppd" style="left:1140px;top:570px"><div class="nname">tuned-ppd</div><div class="nrole">API power-profiles-daemon поверх tuned</div></div>
+      <div class="node" data-node="timesyncd" style="left:60px;top:250px"><div class="nname">systemd-timesyncd</div><div class="nrole">System time synchronization</div></div>
+      <div class="node node-ondemand" data-node="docker" style="left:60px;top:400px"><div class="nname">Docker</div><div class="nrole">Dev containers; started manually</div></div>
+      <div class="node" data-node="keyd" style="left:330px;top:570px"><div class="nname">keyd</div><div class="nrole">Key remapping (virtual keyboard)</div></div>
+      <div class="node" data-node="greetd" style="left:600px;top:430px"><div class="nname">greetd</div><div class="nrole">Login manager (VT1)</div></div>
+      <div class="node" data-node="zram" style="left:870px;top:250px"><div class="nname">zram-generator</div><div class="nrole">Creates zram swap at boot</div></div>
+      <div class="node hub" data-node="dbus" style="left:1410px;top:250px"><div class="nname">dbus-broker</div><div class="nrole">D-Bus message bus (system and user)</div></div>
+      <div class="node" data-node="polkit" style="left:1680px;top:250px"><div class="nname">Polkit</div><div class="nrole">Privilege authorization (polkitd)</div></div>
+      <div class="node" data-node="bluez" style="left:1950px;top:250px"><div class="nname">BlueZ</div><div class="nrole">Bluetooth stack (bluetooth.service)</div></div>
+      <div class="node" data-node="nm" style="left:1680px;top:430px"><div class="nname">NetworkManager</div><div class="nrole">Network interface and connection management</div></div>
+      <div class="node" data-node="iwd" style="left:1950px;top:430px"><div class="nname">iwd</div><div class="nrole">Wi-Fi backend for NetworkManager</div></div>
+      <div class="node" data-node="tuned" style="left:870px;top:570px"><div class="nname">tuned</div><div class="nrole">System power and performance profiles</div></div>
+      <div class="node" data-node="tunedppd" style="left:1140px;top:570px"><div class="nname">tuned-ppd</div><div class="nrole">power-profiles-daemon API on top of tuned</div></div>
 
-      <div class="node" data-node="greeter" style="left:600px;top:700px"><div class="nname">Noctalia Greeter</div><div class="nrole">Экран входа; собственный композитор на wlroots</div></div>
-      <div class="node" data-node="uwsm" style="left:870px;top:700px"><div class="nname">uwsm</div><div class="nrole">Управление Wayland-сессией как user-юнитами</div></div>
-      <div class="node hub" data-node="hyprland" style="left:1140px;top:700px"><div class="nname">Hyprland</div><div class="nrole">Wayland-композитор</div></div>
-      <div class="node" data-node="noctalia" style="left:1410px;top:700px"><div class="nname">Noctalia Shell</div><div class="nrole">Оболочка: панель, центр управления, уведомления, экран блокировки, обои</div></div>
+      <div class="node" data-node="greeter" style="left:600px;top:700px"><div class="nname">Noctalia Greeter</div><div class="nrole">Login screen; own wlroots-based compositor</div></div>
+      <div class="node" data-node="uwsm" style="left:870px;top:700px"><div class="nname">uwsm</div><div class="nrole">Manages the Wayland session as user units</div></div>
+      <div class="node hub" data-node="hyprland" style="left:1140px;top:700px"><div class="nname">Hyprland</div><div class="nrole">Wayland compositor</div></div>
+      <div class="node" data-node="noctalia" style="left:1410px;top:700px"><div class="nname">Noctalia Shell</div><div class="nrole">Shell: top bar, control center, notifications, lock screen, wallpaper</div></div>
 
-      <div class="node hub" data-node="suser" style="left:330px;top:920px"><div class="nname">systemd --user</div><div class="nrole">Пользовательский менеджер служб (сессия)</div></div>
-      <div class="node" data-node="portal" style="left:600px;top:920px"><div class="nname">xdg-desktop-portal</div><div class="nrole">D-Bus API для приложений (порталы)</div></div>
-      <div class="node" data-node="portalh" style="left:870px;top:920px"><div class="nname">xdg-desktop-portal-hyprland</div><div class="nrole">Бэкенд порталов: скринкаст, скриншоты</div></div>
-      <div class="node" data-node="portalg" style="left:1140px;top:920px"><div class="nname">xdg-desktop-portal-gtk</div><div class="nrole">Бэкенд порталов: файловые диалоги</div></div>
-      <div class="node" data-node="vicinae" style="left:60px;top:1120px"><div class="nname">Vicinae</div><div class="nrole">Лаунчер приложений (демон)</div></div>
-      <div class="node" data-node="keyring" style="left:330px;top:1120px"><div class="nname">gnome-keyring</div><div class="nrole">Хранение секретов сессии</div></div>
-      <div class="node" data-node="syncthing" style="left:600px;top:1120px"><div class="nname">Syncthing</div><div class="nrole">Непрерывная синхронизация файлов</div></div>
+      <div class="node hub" data-node="suser" style="left:330px;top:920px"><div class="nname">systemd --user</div><div class="nrole">User service manager (session)</div></div>
+      <div class="node" data-node="portal" style="left:600px;top:920px"><div class="nname">xdg-desktop-portal</div><div class="nrole">D-Bus portal API for apps</div></div>
+      <div class="node" data-node="portalh" style="left:870px;top:920px"><div class="nname">xdg-desktop-portal-hyprland</div><div class="nrole">Portal backend: screencast, screenshots</div></div>
+      <div class="node" data-node="portalg" style="left:1140px;top:920px"><div class="nname">xdg-desktop-portal-gtk</div><div class="nrole">Portal backend: file dialogs</div></div>
+      <div class="node" data-node="vicinae" style="left:60px;top:1120px"><div class="nname">Vicinae</div><div class="nrole">App launcher daemon</div></div>
+      <div class="node" data-node="keyring" style="left:330px;top:1120px"><div class="nname">gnome-keyring</div><div class="nrole">Session secret storage</div></div>
+      <div class="node" data-node="syncthing" style="left:600px;top:1120px"><div class="nname">Syncthing</div><div class="nrole">Continuous file synchronization</div></div>
 
-      <div class="node" data-node="euphonica" style="left:870px;top:1120px"><div class="nname">Euphonica</div><div class="nrole">Графический клиент MPD</div></div>
-      <div class="node" data-node="mpd" style="left:1140px;top:1120px"><div class="nname">MPD</div><div class="nrole">Музыкальный сервер (user-служба)</div></div>
-      <div class="node" data-node="pipewire" style="left:1700px;top:1120px"><div class="nname">PipeWire</div><div class="nrole">Мультимедиа-сервер (PulseAudio/JACK-совместимость)</div></div>
-      <div class="node" data-node="wireplumber" style="left:1970px;top:1120px"><div class="nname">WirePlumber</div><div class="nrole">Менеджер сессии PipeWire</div></div>
-      <div class="node" data-node="mpdmpris" style="left:1140px;top:1320px"><div class="nname">mpd-mpris</div><div class="nrole">MPRIS-интерфейс для MPD</div></div>
-      <div class="node" data-node="playerctld" style="left:1410px;top:1320px"><div class="nname">playerctld</div><div class="nrole">Агрегатор MPRIS-плееров</div></div>
-      <div class="node" data-node="mprisproxy" style="left:2220px;top:1320px"><div class="nname">mpris-proxy</div><div class="nrole">Мост MPRIS → Bluetooth (AVRCP)</div></div>
+      <div class="node" data-node="euphonica" style="left:870px;top:1120px"><div class="nname">Euphonica</div><div class="nrole">Graphical MPD client</div></div>
+      <div class="node" data-node="mpd" style="left:1140px;top:1120px"><div class="nname">MPD</div><div class="nrole">Music player server (user service)</div></div>
+      <div class="node" data-node="pipewire" style="left:1700px;top:1120px"><div class="nname">PipeWire</div><div class="nrole">Multimedia server (PulseAudio/JACK compat)</div></div>
+      <div class="node" data-node="wireplumber" style="left:1970px;top:1120px"><div class="nname">WirePlumber</div><div class="nrole">PipeWire session manager</div></div>
+      <div class="node" data-node="mpdmpris" style="left:1140px;top:1320px"><div class="nname">mpd-mpris</div><div class="nrole">MPRIS interface for MPD</div></div>
+      <div class="node" data-node="playerctld" style="left:1410px;top:1320px"><div class="nname">playerctld</div><div class="nrole">MPRIS player aggregator</div></div>
+      <div class="node" data-node="mprisproxy" style="left:2220px;top:1320px"><div class="nname">mpris-proxy</div><div class="nrole">MPRIS → Bluetooth bridge (AVRCP)</div></div>
     </div>
     <div class="zctrl">
-      <button type="button" class="zbtn" id="arch-zin" aria-label="Приблизить">+</button>
-      <button type="button" class="zbtn" id="arch-zout" aria-label="Отдалить">−</button>
-      <button type="button" class="zbtn" id="arch-zfit" aria-label="Вписать в экран">⤢</button>
+      <button type="button" class="zbtn" id="arch-zin" aria-label="Zoom in">+</button>
+      <button type="button" class="zbtn" id="arch-zout" aria-label="Zoom out">−</button>
+      <button type="button" class="zbtn" id="arch-zfit" aria-label="Fit to screen">⤢</button>
     </div>
   </div>
 </div>
@@ -116,8 +116,8 @@ body { background: var(--background); color: var(--foreground); }
 #arch-overview .zview.dragging { cursor: grabbing; }
 #arch-overview .zcanvas { position: absolute; top: 0; left: 0; width: 2530px; height: 1470px; transform-origin: 0 0; will-change: transform;
   background-image: radial-gradient(color-mix(in srgb, var(--border) 60%, transparent) 1px, transparent 1px); background-size: 24px 24px; }
-/* во время жеста зума transform интерполируется на композиторе:
-   растр кэшируется и масштабируется GPU, без перекраски содержимого */
+/* during the wheel gesture the transform is interpolated on the compositor:
+   the cached raster is scaled by the GPU, with no content repaint */
 #arch-overview .zcanvas.zooming { transition: transform 130ms cubic-bezier(0.25, 0.6, 0.3, 1); }
 #arch-overview #arch-edges { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; z-index: 0; }
 #arch-overview #arch-labels { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; z-index: 2; }
@@ -183,10 +183,10 @@ body { background: var(--background); color: var(--foreground); }
 
   var EDGES = [
     { f: 'uefi', t: 'sdboot', k: 'boot' },
-    { f: 'sdboot', t: 'kernel', k: 'boot', l: 'загружает UKI' },
-    { f: 'mkinitcpio', t: 'kernel', k: 'build', l: 'собирает UKI' },
-    { f: 'kernel', t: 'luks', k: 'boot', l: 'ключ TPM2' },
-    { f: 'luks', t: 'systemd', k: 'boot', l: 'корневая ФС' },
+    { f: 'sdboot', t: 'kernel', k: 'boot', l: 'loads UKI' },
+    { f: 'mkinitcpio', t: 'kernel', k: 'build', l: 'builds UKI' },
+    { f: 'kernel', t: 'luks', k: 'boot', l: 'TPM2 key' },
+    { f: 'luks', t: 'systemd', k: 'boot', l: 'root fs' },
     { f: 'systemd', t: 'dbus', k: 'start' },
     { f: 'systemd', t: 'zram', k: 'start' },
     { f: 'systemd', t: 'timesyncd', k: 'start' },
@@ -197,14 +197,14 @@ body { background: var(--background); color: var(--foreground); }
     { f: 'systemd', t: 'tuned', k: 'start' },
     { f: 'systemd', t: 'tunedppd', k: 'start' },
     { f: 'systemd', t: 'docker', k: 'build', l: 'on-demand' },
-    { f: 'nm', t: 'iwd', k: 'data', l: 'Wi-Fi-бэкенд' },
+    { f: 'nm', t: 'iwd', k: 'data', l: 'Wi-Fi backend' },
     { f: 'dbus', t: 'polkit', k: 'dbus' },
-    { f: 'systemd', t: 'suser', k: 'boot', l: 'менеджер сессии' },
-    { f: 'greetd', t: 'greeter', k: 'start', l: 'экран входа' },
-    { f: 'greeter', t: 'uwsm', k: 'data', l: 'запуск сессии' },
+    { f: 'systemd', t: 'suser', k: 'boot', l: 'session manager' },
+    { f: 'greetd', t: 'greeter', k: 'start', l: 'login screen' },
+    { f: 'greeter', t: 'uwsm', k: 'data', l: 'starts session' },
     { f: 'uwsm', t: 'hyprland', k: 'boot', l: 'wayland-wm@hyprland' },
     { f: 'hyprland', t: 'noctalia', k: 'start', l: 'uwsm app' },
-    { f: 'keyd', t: 'hyprland', k: 'data', l: 'ввод' },
+    { f: 'keyd', t: 'hyprland', k: 'data', l: 'input' },
     { f: 'hyprland', t: 'vicinae', k: 'data', l: 'Super+A' },
     { f: 'dbus', t: 'portal', k: 'dbus' },
     { f: 'suser', t: 'pipewire', k: 'start' },
@@ -216,24 +216,24 @@ body { background: var(--background); color: var(--foreground); }
     { f: 'suser', t: 'syncthing', k: 'start' },
     { f: 'suser', t: 'vicinae', k: 'start' },
     { f: 'suser', t: 'keyring', k: 'start' },
-    { f: 'wireplumber', t: 'pipewire', k: 'data', l: 'сессия/устройства' },
-    { f: 'bluez', t: 'pipewire', k: 'data', l: 'аудио Bluetooth' },
+    { f: 'wireplumber', t: 'pipewire', k: 'data', l: 'session/devices' },
+    { f: 'bluez', t: 'pipewire', k: 'data', l: 'Bluetooth audio' },
     { f: 'mpd', t: 'pipewire', k: 'data', l: 'PulseAudio API' },
-    { f: 'euphonica', t: 'mpd', k: 'data', l: 'MPD-протокол' },
+    { f: 'euphonica', t: 'mpd', k: 'data', l: 'MPD protocol' },
     { f: 'mpdmpris', t: 'mpd', k: 'data', l: 'MPRIS' },
-    { f: 'playerctld', t: 'mpdmpris', k: 'data', l: 'агрегация' },
+    { f: 'playerctld', t: 'mpdmpris', k: 'data', l: 'aggregation' },
     { f: 'mprisproxy', t: 'bluez', k: 'data', l: 'AVRCP' },
-    { f: 'noctalia', t: 'pipewire', k: 'data', l: 'аудио' },
-    { f: 'noctalia', t: 'polkit', k: 'data', l: 'агент Polkit' },
-    { f: 'noctalia', t: 'nm', k: 'data', l: 'сеть' },
+    { f: 'noctalia', t: 'pipewire', k: 'data', l: 'audio' },
+    { f: 'noctalia', t: 'polkit', k: 'data', l: 'Polkit agent' },
+    { f: 'noctalia', t: 'nm', k: 'data', l: 'network' },
     { f: 'noctalia', t: 'bluez', k: 'data', l: 'Bluetooth' },
-    { f: 'noctalia', t: 'tunedppd', k: 'data', l: 'профили питания' },
-    { f: 'portalh', t: 'hyprland', k: 'data', l: 'скринкаст' },
-    { f: 'portalh', t: 'portal', k: 'start', l: 'бэкенд' },
-    { f: 'portalg', t: 'portal', k: 'start', l: 'бэкенд' }
+    { f: 'noctalia', t: 'tunedppd', k: 'data', l: 'power profiles' },
+    { f: 'portalh', t: 'hyprland', k: 'data', l: 'screencast' },
+    { f: 'portalh', t: 'portal', k: 'start', l: 'backend' },
+    { f: 'portalg', t: 'portal', k: 'start', l: 'backend' }
   ];
 
-  /* прямоугольники групповых заголовков — тоже участвуют в проверке перекрытий */
+  /* group header rects also take part in overlap checks */
   var GL_RECTS = [
     { x: 60, y: 30, w: 140, h: 22 },
     { x: 60, y: 212, w: 180, h: 22 },
@@ -321,7 +321,7 @@ body { background: var(--background); color: var(--foreground); }
       if (e.l) labelSpecs.push({ e: e, d: d, mode: mode, a: a, b: b });
     });
 
-    /* подписи: ищем свободное место вдоль кривой; если не нашли — не рисуем */
+    /* labels: look for a free spot along the curve; if none — skip the label */
     labelSpecs.forEach(function (s) {
       var e = s.e;
       var tmp = document.createElementNS(NS, 'path');
@@ -443,7 +443,7 @@ body { background: var(--background); color: var(--foreground); }
   document.getElementById('arch-zout').addEventListener('click', function () { zoomAt(viewport.clientWidth / 2, viewport.clientHeight / 2, 1 / 1.25); });
   document.getElementById('arch-zfit').addEventListener('click', function () { fit(); });
 
-  /* колесо: коалесцируем тики до одного обновления transform на кадр */
+  /* wheel: coalesce ticks into a single transform update per frame */
   var wheelDy = 0, wheelX = 0, wheelY = 0, wheelRaf = 0;
   viewport.addEventListener('wheel', function (e) {
     e.preventDefault();
