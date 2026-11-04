@@ -6,27 +6,9 @@
 <title>Arch Linux · System Overview</title>
 <style>
 :root { color-scheme: light dark; }
-body {
-  margin: 0; padding: 28px;
-  font-family: -apple-system, "Segoe UI", Roboto, "Inter", sans-serif;
-  font-size: 14px;
-}
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #f7f7f9; --foreground: #23252d; --card: #ffffff;
-    --muted: #ececef; --muted-foreground: #62666f; --border: #d8dae0;
-    --primary: #3b6fe0; --primary-foreground: #ffffff;
-    --viz-series-1: #3b6fe0; --blue: #3b6fe0; --purple: #7048c8; --green: #2f9e44; --orange: #d97706;
-  }
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #16171d; --foreground: #e6e6eb; --card: #1e1f27;
-    --muted: #262833; --muted-foreground: #9a9daa; --border: #34374a;
-    --primary: #7aa2f7; --primary-foreground: #10131c;
-    --viz-series-1: #7aa2f7; --blue: #7aa2f7; --purple: #bb9af7; --green: #9ece6a; --orange: #e0af68;
-  }
-}
+body { margin: 0; padding: 28px; font-family: -apple-system, "Segoe UI", Roboto, "Inter", sans-serif; font-size: 14px; }
+@media (prefers-color-scheme: light) { :root { --background: #f7f7f9; --foreground: #23252d; --card: #ffffff; --muted: #ececef; --muted-foreground: #62666f; --border: #d8dae0; --primary: #3b6fe0; --primary-foreground: #ffffff; --viz-series-1: #3b6fe0; --blue: #3b6fe0; --purple: #7048c8; --green: #2f9e44; --orange: #d97706; } }
+@media (prefers-color-scheme: dark) { :root { --background: #16171d; --foreground: #e6e6eb; --card: #1e1f27; --muted: #262833; --muted-foreground: #9a9daa; --border: #34374a; --primary: #7aa2f7; --primary-foreground: #10131c; --viz-series-1: #7aa2f7; --blue: #7aa2f7; --purple: #bb9af7; --green: #9ece6a; --orange: #e0af68; } }
 body { background: var(--background); color: var(--foreground); }
 .text-muted { color: var(--muted-foreground); }
 .text-small { font-size: 12px; }
@@ -41,6 +23,11 @@ body { background: var(--background); color: var(--foreground); }
     <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-data"/></svg>data / API / UI</span>
     <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-dbus"/></svg>D-Bus activation</span>
     <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-build"/></svg>build / manual start</span>
+    <span class="lg-sep"></span>
+    <span class="lg"><span class="dot" style="background:var(--blue)"></span>Boot</span>
+    <span class="lg"><span class="dot" style="background:var(--purple)"></span>System services</span>
+    <span class="lg"><span class="dot" style="background:var(--green)"></span>User session</span>
+    <span class="lg"><span class="dot" style="background:var(--orange)"></span>Audio &amp; media</span>
     <span class="lg-hint text-muted text-small">click a node to highlight its connections · click again or on the background to clear · drag to pan · scroll to zoom</span>
   </div>
 
@@ -48,52 +35,42 @@ body { background: var(--background); color: var(--foreground); }
     <div class="zcanvas" id="arch-stage">
       <svg id="arch-edges" aria-hidden="true"></svg>
       <svg id="arch-labels" aria-hidden="true"></svg>
-
-      <div class="gl gl-boot" style="left:60px;top:30px"><span class="dot"></span>Boot</div>
-      <div class="gl gl-system" style="left:60px;top:212px"><span class="dot"></span>System services</div>
-      <div class="gl gl-session" style="left:60px;top:660px"><span class="dot"></span>User session</div>
-      <div class="gl gl-media" style="left:870px;top:1080px"><span class="dot"></span>Audio &amp; media</div>
-
-      <div class="node" data-node="uefi" style="left:60px;top:70px"><div class="nname">UEFI</div><div class="nrole">Platform firmware; Secure Boot enabled</div></div>
-      <div class="node" data-node="sdboot" style="left:330px;top:70px"><div class="nname">systemd-boot</div><div class="nrole">EFI bootloader; launches the UKI image</div></div>
-      <div class="node" data-node="kernel" style="left:600px;top:70px"><div class="nname">Linux Kernel</div><div class="nrole">OS kernel; boots as the arch-linux.efi UKI</div></div>
-      <div class="node" data-node="luks" style="left:870px;top:70px"><div class="nname">LUKS2</div><div class="nrole">Root partition encryption; key in TPM2</div></div>
-      <div class="node hub" data-node="systemd" style="left:1140px;top:70px"><div class="nname">systemd</div><div class="nrole">PID 1: init and system service manager</div></div>
-      <div class="node" data-node="mkinitcpio" style="left:600px;top:280px"><div class="nname">mkinitcpio</div><div class="nrole">Builds the UKI: kernel + initramfs + cmdline</div></div>
-
-      <div class="node" data-node="timesyncd" style="left:60px;top:250px"><div class="nname">systemd-timesyncd</div><div class="nrole">System time synchronization</div></div>
-      <div class="node node-ondemand" data-node="docker" style="left:60px;top:400px"><div class="nname">Docker</div><div class="nrole">Dev containers; started manually</div></div>
-      <div class="node" data-node="keyd" style="left:330px;top:570px"><div class="nname">keyd</div><div class="nrole">Key remapping (virtual keyboard)</div></div>
-      <div class="node" data-node="greetd" style="left:600px;top:430px"><div class="nname">greetd</div><div class="nrole">Login manager (VT1)</div></div>
-      <div class="node" data-node="zram" style="left:870px;top:250px"><div class="nname">zram-generator</div><div class="nrole">Creates zram swap at boot</div></div>
-      <div class="node hub" data-node="dbus" style="left:1410px;top:250px"><div class="nname">dbus-broker</div><div class="nrole">D-Bus message bus (system and user)</div></div>
-      <div class="node" data-node="polkit" style="left:1680px;top:250px"><div class="nname">Polkit</div><div class="nrole">Privilege authorization (polkitd)</div></div>
-      <div class="node" data-node="bluez" style="left:1950px;top:250px"><div class="nname">BlueZ</div><div class="nrole">Bluetooth stack (bluetooth.service)</div></div>
-      <div class="node" data-node="nm" style="left:1680px;top:430px"><div class="nname">NetworkManager</div><div class="nrole">Network interface and connection management</div></div>
-      <div class="node" data-node="iwd" style="left:1950px;top:430px"><div class="nname">iwd</div><div class="nrole">Wi-Fi backend for NetworkManager</div></div>
-      <div class="node" data-node="tuned" style="left:870px;top:570px"><div class="nname">tuned</div><div class="nrole">System power and performance profiles</div></div>
-      <div class="node" data-node="tunedppd" style="left:1140px;top:570px"><div class="nname">tuned-ppd</div><div class="nrole">power-profiles-daemon API on top of tuned</div></div>
-
-      <div class="node" data-node="greeter" style="left:600px;top:700px"><div class="nname">Noctalia Greeter</div><div class="nrole">Login screen; own wlroots-based compositor</div></div>
-      <div class="node" data-node="uwsm" style="left:870px;top:700px"><div class="nname">uwsm</div><div class="nrole">Manages the Wayland session as user units</div></div>
-      <div class="node hub" data-node="hyprland" style="left:1140px;top:700px"><div class="nname">Hyprland</div><div class="nrole">Wayland compositor</div></div>
-      <div class="node" data-node="noctalia" style="left:1410px;top:700px"><div class="nname">Noctalia Shell</div><div class="nrole">Shell: top bar, control center, notifications, lock screen, wallpaper</div></div>
-
-      <div class="node hub" data-node="suser" style="left:330px;top:920px"><div class="nname">systemd --user</div><div class="nrole">User service manager (session)</div></div>
-      <div class="node" data-node="portal" style="left:600px;top:920px"><div class="nname">xdg-desktop-portal</div><div class="nrole">D-Bus portal API for apps</div></div>
-      <div class="node" data-node="portalh" style="left:870px;top:920px"><div class="nname">xdg-desktop-portal-hyprland</div><div class="nrole">Portal backend: screencast, screenshots</div></div>
-      <div class="node" data-node="portalg" style="left:1140px;top:920px"><div class="nname">xdg-desktop-portal-gtk</div><div class="nrole">Portal backend: file dialogs</div></div>
-      <div class="node" data-node="vicinae" style="left:60px;top:1120px"><div class="nname">Vicinae</div><div class="nrole">App launcher daemon</div></div>
-      <div class="node" data-node="keyring" style="left:330px;top:1120px"><div class="nname">gnome-keyring</div><div class="nrole">Session secret storage</div></div>
-      <div class="node" data-node="syncthing" style="left:600px;top:1120px"><div class="nname">Syncthing</div><div class="nrole">Continuous file synchronization</div></div>
-
-      <div class="node" data-node="euphonica" style="left:870px;top:1120px"><div class="nname">Euphonica</div><div class="nrole">Graphical MPD client</div></div>
-      <div class="node" data-node="mpd" style="left:1140px;top:1120px"><div class="nname">MPD</div><div class="nrole">Music player server (user service)</div></div>
-      <div class="node" data-node="pipewire" style="left:1700px;top:1120px"><div class="nname">PipeWire</div><div class="nrole">Multimedia server (PulseAudio/JACK compat)</div></div>
-      <div class="node" data-node="wireplumber" style="left:1970px;top:1120px"><div class="nname">WirePlumber</div><div class="nrole">PipeWire session manager</div></div>
-      <div class="node" data-node="mpdmpris" style="left:1140px;top:1320px"><div class="nname">mpd-mpris</div><div class="nrole">MPRIS interface for MPD</div></div>
-      <div class="node" data-node="playerctld" style="left:1410px;top:1320px"><div class="nname">playerctld</div><div class="nrole">MPRIS player aggregator</div></div>
-      <div class="node" data-node="mprisproxy" style="left:2220px;top:1320px"><div class="nname">mpris-proxy</div><div class="nrole">MPRIS → Bluetooth bridge (AVRCP)</div></div>
+      <div class="node" data-node="uefi"><div class="nname">UEFI</div><div class="nrole">Platform firmware; Secure Boot enabled</div></div>
+      <div class="node" data-node="sdboot"><div class="nname">systemd-boot</div><div class="nrole">EFI bootloader; launches the UKI image</div></div>
+      <div class="node" data-node="kernel"><div class="nname">Linux Kernel</div><div class="nrole">OS kernel; boots as the arch-linux.efi UKI</div></div>
+      <div class="node" data-node="mkinitcpio"><div class="nname">mkinitcpio</div><div class="nrole">Builds the UKI: kernel + initramfs + cmdline</div></div>
+      <div class="node" data-node="luks"><div class="nname">LUKS2</div><div class="nrole">Root partition encryption; key in TPM2</div></div>
+      <div class="node hub" data-node="systemd"><div class="nname">systemd</div><div class="nrole">PID 1: init and system service manager</div></div>
+      <div class="node" data-node="docker"><div class="nname">Docker</div><div class="nrole">Dev containers; started manually</div></div>
+      <div class="node" data-node="greetd"><div class="nname">greetd</div><div class="nrole">Login manager (VT1)</div></div>
+      <div class="node" data-node="greeter"><div class="nname">Noctalia Greeter</div><div class="nrole">Login screen; own wlroots-based compositor</div></div>
+      <div class="node" data-node="uwsm"><div class="nname">uwsm</div><div class="nrole">Manages the Wayland session as user units</div></div>
+      <div class="node hub" data-node="hyprland"><div class="nname">Hyprland</div><div class="nrole">Wayland compositor</div></div>
+      <div class="node" data-node="noctalia"><div class="nname">Noctalia Shell</div><div class="nrole">Shell: top bar, control center, notifications, lock screen, wallpaper</div></div>
+      <div class="node" data-node="keyd"><div class="nname">keyd</div><div class="nrole">Key remapping (virtual keyboard)</div></div>
+      <div class="node hub" data-node="dbus"><div class="nname">dbus-broker</div><div class="nrole">D-Bus message bus (system and user)</div></div>
+      <div class="node" data-node="polkit"><div class="nname">Polkit</div><div class="nrole">Privilege authorization (polkitd)</div></div>
+      <div class="node" data-node="portal"><div class="nname">xdg-desktop-portal</div><div class="nrole">D-Bus portal API for apps</div></div>
+      <div class="node" data-node="portalh"><div class="nname">xdg-desktop-portal-hyprland</div><div class="nrole">Portal backend: screencast, screenshots</div></div>
+      <div class="node" data-node="portalg"><div class="nname">xdg-desktop-portal-gtk</div><div class="nrole">Portal backend: file dialogs</div></div>
+      <div class="node" data-node="nm"><div class="nname">NetworkManager</div><div class="nrole">Network interface and connection management</div></div>
+      <div class="node" data-node="iwd"><div class="nname">iwd</div><div class="nrole">Wi-Fi backend for NetworkManager</div></div>
+      <div class="node" data-node="bluez"><div class="nname">BlueZ</div><div class="nrole">Bluetooth stack (bluetooth.service)</div></div>
+      <div class="node" data-node="tuned"><div class="nname">tuned</div><div class="nrole">System power and performance profiles</div></div>
+      <div class="node" data-node="tunedppd"><div class="nname">tuned-ppd</div><div class="nrole">power-profiles-daemon API on top of tuned</div></div>
+      <div class="node" data-node="zram"><div class="nname">zram-generator</div><div class="nrole">Creates zram swap at boot</div></div>
+      <div class="node" data-node="timesyncd"><div class="nname">systemd-timesyncd</div><div class="nrole">System time synchronization</div></div>
+      <div class="node hub" data-node="suser"><div class="nname">systemd --user</div><div class="nrole">User service manager (session)</div></div>
+      <div class="node" data-node="pipewire"><div class="nname">PipeWire</div><div class="nrole">Multimedia server (PulseAudio/JACK compat)</div></div>
+      <div class="node" data-node="wireplumber"><div class="nname">WirePlumber</div><div class="nrole">PipeWire session manager</div></div>
+      <div class="node" data-node="mpd"><div class="nname">MPD</div><div class="nrole">Music player server (user service)</div></div>
+      <div class="node" data-node="euphonica"><div class="nname">Euphonica</div><div class="nrole">Graphical MPD client</div></div>
+      <div class="node" data-node="syncthing"><div class="nname">Syncthing</div><div class="nrole">Continuous file synchronization</div></div>
+      <div class="node" data-node="vicinae"><div class="nname">Vicinae</div><div class="nrole">App launcher daemon</div></div>
+      <div class="node" data-node="keyring"><div class="nname">gnome-keyring</div><div class="nrole">Session secret storage</div></div>
+      <div class="node" data-node="mpdmpris"><div class="nname">mpd-mpris</div><div class="nrole">MPRIS interface for MPD</div></div>
+      <div class="node" data-node="playerctld"><div class="nname">playerctld</div><div class="nrole">MPRIS player aggregator</div></div>
+      <div class="node" data-node="mprisproxy"><div class="nname">mpris-proxy</div><div class="nrole">MPRIS → Bluetooth bridge (AVRCP)</div></div>
     </div>
     <div class="zctrl">
       <button type="button" class="zbtn" id="arch-zin" aria-label="Zoom in">+</button>
@@ -106,42 +83,42 @@ body { background: var(--background); color: var(--foreground); }
 <style>
 #arch-overview { --sec-boot: var(--blue); --sec-system: var(--purple); --sec-session: var(--green); --sec-media: var(--orange); }
 #arch-overview h2 { margin: 0 0 10px; }
-#arch-overview .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center; margin: 0 0 12px; }
+#arch-overview .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; margin: 0 0 12px; }
 #arch-overview .lg { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted-foreground); }
 #arch-overview .lg-line { stroke-width: 2; fill: none; }
+#arch-overview .lg .dot { width: 9px; height: 9px; border-radius: 50%; }
+#arch-overview .lg-sep { width: 1px; height: 16px; background: var(--border); margin: 0 4px; }
 #arch-overview .lg-hint { margin-left: auto; }
 
 #arch-overview .zview { position: relative; height: 720px; overflow: hidden; border: 1px solid var(--border); border-radius: 12px;
   background: color-mix(in srgb, var(--card) 45%, var(--background)); touch-action: none; cursor: grab; user-select: none; -webkit-user-select: none; }
 #arch-overview .zview.dragging { cursor: grabbing; }
-#arch-overview .zcanvas { position: absolute; top: 0; left: 0; width: 2530px; height: 1470px; transform-origin: 0 0; will-change: transform;
+#arch-overview .zcanvas { position: absolute; top: 0; left: 0; transform-origin: 0 0; will-change: transform;
   background-image: radial-gradient(color-mix(in srgb, var(--border) 60%, transparent) 1px, transparent 1px); background-size: 24px 24px; }
 /* during the wheel gesture the transform is interpolated on the compositor:
    the cached raster is scaled by the GPU, with no content repaint */
 #arch-overview .zcanvas.zooming { transition: transform 130ms cubic-bezier(0.25, 0.6, 0.3, 1); }
 #arch-overview #arch-edges { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; z-index: 0; }
 #arch-overview #arch-labels { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; z-index: 2; }
-#arch-overview .gl { position: absolute; z-index: 1; display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--muted-foreground); }
-#arch-overview .gl .dot { width: 10px; height: 10px; border-radius: 50%; }
-#arch-overview .gl-boot .dot { background: var(--sec-boot); }
-#arch-overview .gl-system .dot { background: var(--sec-system); }
-#arch-overview .gl-session .dot { background: var(--sec-session); }
-#arch-overview .gl-media .dot { background: var(--sec-media); }
 
-#arch-overview .node { --sec: var(--muted-foreground); position: absolute; z-index: 1; box-sizing: border-box; width: 250px; padding: 9px 12px; border-radius: 12px;
+#arch-overview .node { --sec: var(--muted-foreground); position: absolute; z-index: 1; box-sizing: border-box; width: 240px; padding: 9px 12px; border-radius: 12px;
   background: color-mix(in srgb, var(--sec) 10%, var(--card));
   border: 1px solid color-mix(in srgb, var(--sec) 30%, transparent);
   transition: opacity .15s, border-color .15s; }
-#arch-overview .sec-boot .node, #arch-overview .node[data-node="uefi"], #arch-overview .node[data-node="sdboot"], #arch-overview .node[data-node="kernel"],
-#arch-overview .node[data-node="luks"], #arch-overview .node[data-node="systemd"], #arch-overview .node[data-node="mkinitcpio"] { --sec: var(--sec-boot); }
-#arch-overview .node[data-node="timesyncd"], #arch-overview .node[data-node="docker"], #arch-overview .node[data-node="keyd"], #arch-overview .node[data-node="greetd"],
-#arch-overview .node[data-node="zram"], #arch-overview .node[data-node="dbus"], #arch-overview .node[data-node="polkit"], #arch-overview .node[data-node="bluez"],
-#arch-overview .node[data-node="nm"], #arch-overview .node[data-node="iwd"], #arch-overview .node[data-node="tuned"], #arch-overview .node[data-node="tunedppd"] { --sec: var(--sec-system); }
-#arch-overview .node[data-node="greeter"], #arch-overview .node[data-node="uwsm"], #arch-overview .node[data-node="hyprland"], #arch-overview .node[data-node="noctalia"],
-#arch-overview .node[data-node="suser"], #arch-overview .node[data-node="portal"], #arch-overview .node[data-node="portalh"], #arch-overview .node[data-node="portalg"],
-#arch-overview .node[data-node="vicinae"], #arch-overview .node[data-node="keyring"], #arch-overview .node[data-node="syncthing"] { --sec: var(--sec-session); }
-#arch-overview .node[data-node="euphonica"], #arch-overview .node[data-node="mpd"], #arch-overview .node[data-node="pipewire"], #arch-overview .node[data-node="wireplumber"],
-#arch-overview .node[data-node="mpdmpris"], #arch-overview .node[data-node="playerctld"], #arch-overview .node[data-node="mprisproxy"] { --sec: var(--sec-media); }
+#arch-overview .node[data-node="uefi"], #arch-overview .node[data-node="sdboot"], #arch-overview .node[data-node="kernel"],
+#arch-overview .node[data-node="mkinitcpio"], #arch-overview .node[data-node="luks"], #arch-overview .node[data-node="systemd"] { --sec: var(--sec-boot); }
+#arch-overview .node[data-node="greetd"], #arch-overview .node[data-node="greeter"], #arch-overview .node[data-node="uwsm"],
+#arch-overview .node[data-node="hyprland"], #arch-overview .node[data-node="noctalia"], #arch-overview .node[data-node="keyd"],
+#arch-overview .node[data-node="dbus"], #arch-overview .node[data-node="polkit"], #arch-overview .node[data-node="portal"],
+#arch-overview .node[data-node="portalh"], #arch-overview .node[data-node="portalg"], #arch-overview .node[data-node="nm"],
+#arch-overview .node[data-node="iwd"], #arch-overview .node[data-node="bluez"], #arch-overview .node[data-node="tuned"],
+#arch-overview .node[data-node="tunedppd"], #arch-overview .node[data-node="zram"], #arch-overview .node[data-node="timesyncd"],
+#arch-overview .node[data-node="docker"] { --sec: var(--sec-system); }
+#arch-overview .node[data-node="suser"], #arch-overview .node[data-node="vicinae"], #arch-overview .node[data-node="keyring"],
+#arch-overview .node[data-node="syncthing"] { --sec: var(--sec-session); }
+#arch-overview .node[data-node="pipewire"], #arch-overview .node[data-node="wireplumber"], #arch-overview .node[data-node="mpd"],
+#arch-overview .node[data-node="euphonica"], #arch-overview .node[data-node="mpdmpris"], #arch-overview .node[data-node="playerctld"],
+#arch-overview .node[data-node="mprisproxy"] { --sec: var(--sec-media); }
 
 #arch-overview .node .nname { font-weight: 500; font-size: 20px; line-height: 1.25; color: var(--foreground); }
 #arch-overview .node .nrole { font-size: 15px; line-height: 1.32; color: color-mix(in srgb, var(--foreground) 62%, transparent); margin-top: 3px; }
@@ -152,11 +129,10 @@ body { background: var(--background); color: var(--foreground); }
 @media (prefers-reduced-motion: reduce) { #arch-overview .node, #arch-overview .e, #arch-overview .elabel { transition: none; } }
 
 #arch-overview .e { fill: none; stroke: var(--muted-foreground); stroke-width: 2.4; opacity: .45; transition: opacity .15s; }
-#arch-overview .e.e-boot { stroke: var(--sec-boot); stroke-width: 3.4; opacity: .85; marker-end: url(#arr-boot); }
-#arch-overview .e.e-start { marker-end: url(#arr-mut); }
-#arch-overview .e.e-data { stroke: var(--viz-series-1); opacity: .75; marker-end: url(#arr-data); }
-#arch-overview .e.e-dbus { stroke-dasharray: 3.5 7; marker-end: url(#arr-mut); }
-#arch-overview .e.e-build { stroke-dasharray: 10 8; marker-end: url(#arr-mut); }
+#arch-overview .e.e-boot { stroke: var(--sec-boot); stroke-width: 3.4; opacity: .85; }
+#arch-overview .e.e-data { stroke: var(--viz-series-1); opacity: .75; }
+#arch-overview .e.e-dbus { stroke-dasharray: 3.5 7; }
+#arch-overview .e.e-build { stroke-dasharray: 10 8; }
 #arch-overview .e.hl { opacity: 1; stroke-width: 4; }
 #arch-overview .e.dim { opacity: .05; }
 #arch-overview .elabel { font-size: 15px; fill: var(--foreground); paint-order: stroke; stroke: var(--background); stroke-width: 6px; stroke-linejoin: round; transition: opacity .15s; }
@@ -173,49 +149,262 @@ body { background: var(--background); color: var(--foreground); }
 </style>
 
 <script>
+/* orgLayout.js — dependency-free layered org-chart layout.
+   Validated: 22 invariant checks + 1500-tree fuzz (see /tmp/layout-ref/). */
+var OrgLayout = (function () {
+  'use strict';
+  var DEFAULTS = {
+    cardWidth: 240, cardHeight: 104, gapX: 45, levelStep: 160,
+    marginTop: 60, marginLeft: 50, defaultMaxPerRow: 5, riserMargin: 22
+  };
+  function fail(msg) { throw new Error('orgLayout: ' + msg); }
+  function isNum(v) { return typeof v === 'number' && isFinite(v); }
+  function mergeIntervals(list) {
+    if (!list || !list.length) return [];
+    var s = list.slice().sort(function (a, b) { return a[0] - b[0] || a[1] - b[1]; });
+    var out = [[s[0][0], s[0][1]]];
+    for (var i = 1; i < s.length; i++) {
+      var last = out[out.length - 1];
+      if (s[i][0] <= last[1]) { if (s[i][1] > last[1]) last[1] = s[i][1]; }
+      else out.push([s[i][0], s[i][1]]);
+    }
+    return out;
+  }
+  function computeOrgLayout(spec) {
+    if (!spec || !spec.children) fail('spec.children (ordered children map) is required');
+    var o = {}, k;
+    for (k in DEFAULTS) if (DEFAULTS.hasOwnProperty(k)) o[k] = DEFAULTS[k];
+    for (k in DEFAULTS) if (DEFAULTS.hasOwnProperty(k) && spec[k] !== undefined) o[k] = spec[k];
+    var childrenMap = spec.children;
+    var capsMap = spec.maxChildrenPerRow || {};
+    var heightsMap = spec.nodeHeights || {};
+    var MIN_LEVEL_GAP = 8;
+    function heightOf(id) {
+      var h = heightsMap.hasOwnProperty(id) ? heightsMap[id] : o.cardHeight;
+      if (!isNum(h) || h < 1) fail('invalid height for node ' + id);
+      if (h > o.levelStep - MIN_LEVEL_GAP)
+        fail('height of ' + id + ' must be <= levelStep - ' + MIN_LEVEL_GAP);
+      return h;
+    }
+    var ids = [], seen = {}, parentOf = {}, multiParent = [];
+    Object.keys(childrenMap).forEach(function (p) {
+      if (!seen[p]) { seen[p] = 1; ids.push(p); }
+      var kids = childrenMap[p];
+      if (!kids) fail('children[' + p + '] is not an array');
+      kids.forEach(function (c) {
+        if (!seen[c]) { seen[c] = 1; ids.push(c); }
+        if (parentOf.hasOwnProperty(c)) multiParent.push(c);
+        else parentOf[c] = p;
+      });
+    });
+    if (multiParent.length) fail('these nodes have more than one parent: ' + multiParent.join(', '));
+    var roots = ids.filter(function (id) { return !parentOf.hasOwnProperty(id); });
+    if (roots.length !== 1) fail('expected exactly one root, found ' + roots.length);
+    var root = roots[0];
+    var info = {}, order = [];
+    (function visit(id, level, parent, childIndex) {
+      if (info[id]) fail('cycle detected at ' + id);
+      var kids = childrenMap[id] || [];
+      var cap = capsMap.hasOwnProperty(id) ? capsMap[id] : o.defaultMaxPerRow;
+      if (!isNum(cap) || cap < 1) fail('invalid maxChildrenPerRow for ' + id);
+      var rows = [];
+      for (var i = 0; i < kids.length; i += cap) rows.push(kids.slice(i, i + cap));
+      info[id] = { id: id, parent: parent, level: level, rows: rows, childIndex: childIndex };
+      order.push(id);
+      for (var r = 0; r < rows.length; r++)
+        for (var j = 0; j < rows[r].length; j++)
+          visit(rows[r][j], level + 1 + r, id, r * cap + j);
+    })(root, 0, null, 0);
+    var nl = {};
+    function resolveBandX(startX, w, base, childDepth, reserved) {
+      var x = startX, moved = true, guard = 0;
+      while (moved) {
+        moved = false;
+        if (++guard > 10000) fail('resolveBandX did not converge');
+        for (var j = 0; j <= childDepth; j++) {
+          var theirs = reserved[base + j];
+          if (!theirs || !theirs.length) continue;
+          for (var b = 0; b < theirs.length; b++) {
+            var kv = theirs[b];
+            var clearLeft = x + w + o.gapX <= kv[0];
+            var clearRight = x >= kv[1] + o.gapX;
+            if (!(clearLeft || clearRight)) {
+              var nx = kv[1] + o.gapX;
+              if (nx > x) { x = nx; moved = true; }
+            }
+          }
+        }
+      }
+      return x;
+    }
+    (function build(id) {
+      var me = info[id], r, i, j;
+      for (r = 0; r < me.rows.length; r++)
+        for (i = 0; i < me.rows[r].length; i++) build(me.rows[r][i]);
+      var reserved = [[]];
+      var slotRel = {};
+      var maxRight = 0, maxOff = 0;
+      for (r = 0; r < me.rows.length; r++) {
+        var base = 1 + r, cursor = 0, span = 0;
+        var row = me.rows[r];
+        for (i = 0; i < row.length; i++) {
+          var cid = row[i], c = nl[cid], w = c.bandW;
+          var x = resolveBandX(cursor, w, base, c.maxOff, reserved);
+          slotRel[cid] = x;
+          cursor = x + w + o.gapX;
+          if (x + w > span) span = x + w;
+          for (j = 0; j <= c.maxOff; j++) {
+            var tgt = base + j;
+            while (reserved.length <= tgt) reserved.push([]);
+            reserved[tgt].push([x, x + w]);
+          }
+          if (base + c.maxOff > maxOff) maxOff = base + c.maxOff;
+        }
+        if (span > maxRight) maxRight = span;
+      }
+      for (var d = 0; d < reserved.length; d++) reserved[d] = mergeIntervals(reserved[d]);
+      while (reserved.length <= maxOff) reserved.push([]);
+      var bandW = Math.max(o.cardWidth, maxRight);
+      var cardRel = Math.round((bandW - o.cardWidth) / 2);
+      if (cardRel < 0) cardRel = 0;
+      if (cardRel > bandW - o.cardWidth) cardRel = bandW - o.cardWidth;
+      nl[id] = { id: id, info: me, occ: reserved, bandW: bandW, cardRel: cardRel,
+                 slotRel: slotRel, maxOff: maxOff };
+    })(root);
+    (function place(id, bandX) {
+      var n = nl[id];
+      n.bandX = bandX;
+      n.x = bandX + n.cardRel;
+      n.level = n.info.level;
+      n.parent = n.info.parent;
+      n.rows = n.info.rows;
+      n.h = heightOf(id);
+      n.y = o.marginTop + n.level * o.levelStep;
+      for (var r = 0; r < n.rows.length; r++)
+        for (var i = 0; i < n.rows[r].length; i++)
+          place(n.rows[r][i], bandX + n.slotRel[n.rows[r][i]]);
+    })(root, o.marginLeft);
+    var levels = [];
+    order.forEach(function (id) {
+      var L = nl[id].level;
+      if (!levels[L]) levels[L] = [];
+      levels[L].push(id);
+    });
+    var levelBottom = [];
+    levels.forEach(function (rowIds, L) {
+      var m = -Infinity;
+      rowIds.forEach(function (id) { var b = nl[id].y + nl[id].h; if (b > m) m = b; });
+      levelBottom[L] = m;
+    });
+    var connectors = [];
+    order.forEach(function (id) {
+      var n = nl[id];
+      if (!n.rows.length) return;
+      for (var r = 0; r < n.rows.length; r++) {
+        var row = n.rows[r];
+        var rowLevel = n.level + 1 + r;
+        var rowTop = o.marginTop + rowLevel * o.levelStep;
+        var prevBottom = (r === 0) ? (n.y + n.h) : levelBottom[rowLevel - 1];
+        if (!isNum(prevBottom)) fail('no cards above row ' + r + ' of ' + id);
+        var busY = (prevBottom + rowTop) / 2;
+        var centers = row.map(function (cid) { return nl[cid].x + o.cardWidth / 2; });
+        var minC = Math.min.apply(null, centers);
+        var maxC = Math.max.apply(null, centers);
+        var segs = [], drops = [], riserX = null;
+        if (r === 0 && row.length === 1 &&
+            Math.abs(n.x + o.cardWidth / 2 - centers[0]) < 1e-9) {
+          segs.push({ kind: 'stem', x1: centers[0], y1: n.y + n.h, x2: centers[0], y2: rowTop, owners: [id, row[0]] });
+          drops.push({ childId: row[0], x: centers[0] });
+        } else if (r === 0) {
+          var px = n.x + o.cardWidth / 2;
+          segs.push({ kind: 'stem', x1: px, y1: n.y + n.h, x2: px, y2: busY, owners: [id] });
+          segs.push({ kind: 'bus', x1: Math.min(minC, px), y1: busY, x2: Math.max(maxC, px), y2: busY, owners: [] });
+          for (var ci = 0; ci < row.length; ci++) {
+            segs.push({ kind: 'drop', x1: centers[ci], y1: busY, x2: centers[ci], y2: rowTop, owners: [row[ci]] });
+            drops.push({ childId: row[ci], x: centers[ci] });
+          }
+        } else {
+          riserX = Math.max(n.bandX + n.bandW, n.x + o.cardWidth) + o.riserMargin;
+          var midY = n.y + n.h / 2;
+          segs.push({ kind: 'exit', x1: n.x + o.cardWidth, y1: midY, x2: riserX, y2: midY, owners: [id] });
+          segs.push({ kind: 'riser', x1: riserX, y1: midY, x2: riserX, y2: busY, owners: [] });
+          segs.push({ kind: 'bus', x1: Math.min(minC, riserX), y1: busY, x2: Math.max(maxC, riserX), y2: busY, owners: [] });
+          for (var ci2 = 0; ci2 < row.length; ci2++) {
+            segs.push({ kind: 'drop', x1: centers[ci2], y1: busY, x2: centers[ci2], y2: rowTop, owners: [row[ci2]] });
+            drops.push({ childId: row[ci2], x: centers[ci2] });
+          }
+        }
+        connectors.push({ parentId: id, row: r, level: rowLevel, busY: busY,
+                          riserX: riserX, drops: drops, childIds: row.slice(), segments: segs });
+      }
+    });
+    var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    order.forEach(function (id) {
+      var n = nl[id];
+      if (n.x < minX) minX = n.x;
+      if (n.y < minY) minY = n.y;
+      if (n.x + o.cardWidth > maxX) maxX = n.x + o.cardWidth;
+      if (n.y + n.h > maxY) maxY = n.y + n.h;
+    });
+    var fMinX = minX, fMinY = minY, fMaxX = maxX, fMaxY = maxY;
+    connectors.forEach(function (cn) {
+      cn.segments.forEach(function (s) {
+        var sx1 = Math.min(s.x1, s.x2), sx2 = Math.max(s.x1, s.x2);
+        var sy1 = Math.min(s.y1, s.y2), sy2 = Math.max(s.y1, s.y2);
+        if (sx1 < fMinX) fMinX = sx1;
+        if (sy1 < fMinY) fMinY = sy1;
+        if (sx2 > fMaxX) fMaxX = sx2;
+        if (sy2 > fMaxY) fMaxY = sy2;
+      });
+    });
+    return {
+      rootId: root,
+      order: order.slice(),
+      nodes: nl,
+      levels: levels,
+      connectors: connectors,
+      bounds: { minX: minX, minY: minY, maxX: maxX, maxY: maxY,
+                width: maxX - minX, height: maxY - minY },
+      fullBounds: { minX: fMinX, minY: fMinY, maxX: fMaxX, maxY: fMaxY }
+    };
+  }
+  return { computeOrgLayout: computeOrgLayout };
+})();
+
 (function () {
   var viewport = document.getElementById('arch-viewport');
   var stage = document.getElementById('arch-stage');
   var svg = document.getElementById('arch-edges');
   var lsvg = document.getElementById('arch-labels');
   var NS = 'http://www.w3.org/2000/svg';
-  var W = 2530, H = 1470;
 
-  var EDGES = [
-    { f: 'uefi', t: 'sdboot', k: 'boot' },
-    { f: 'sdboot', t: 'kernel', k: 'boot', l: 'loads UKI' },
-    { f: 'mkinitcpio', t: 'kernel', k: 'build', l: 'builds UKI' },
-    { f: 'kernel', t: 'luks', k: 'boot', l: 'TPM2 key' },
-    { f: 'luks', t: 'systemd', k: 'boot', l: 'root fs' },
-    { f: 'systemd', t: 'dbus', k: 'start' },
-    { f: 'systemd', t: 'zram', k: 'start' },
-    { f: 'systemd', t: 'timesyncd', k: 'start' },
-    { f: 'systemd', t: 'nm', k: 'start' },
-    { f: 'systemd', t: 'bluez', k: 'start' },
-    { f: 'systemd', t: 'keyd', k: 'start' },
-    { f: 'systemd', t: 'greetd', k: 'start' },
-    { f: 'systemd', t: 'tuned', k: 'start' },
-    { f: 'systemd', t: 'tunedppd', k: 'start' },
-    { f: 'systemd', t: 'docker', k: 'build', l: 'on-demand' },
-    { f: 'nm', t: 'iwd', k: 'data', l: 'Wi-Fi backend' },
-    { f: 'dbus', t: 'polkit', k: 'dbus' },
-    { f: 'systemd', t: 'suser', k: 'boot', l: 'session manager' },
-    { f: 'greetd', t: 'greeter', k: 'start', l: 'login screen' },
-    { f: 'greeter', t: 'uwsm', k: 'data', l: 'starts session' },
-    { f: 'uwsm', t: 'hyprland', k: 'boot', l: 'wayland-wm@hyprland' },
-    { f: 'hyprland', t: 'noctalia', k: 'start', l: 'uwsm app' },
+  /* ---- tree definition: inheritance flows top-down ---- */
+  var CHILDREN = {
+    uefi: ['sdboot'], sdboot: ['kernel'], kernel: ['luks'], luks: ['systemd'],
+    systemd: ['greetd', 'dbus', 'nm', 'bluez', 'keyd', 'tuned', 'tunedppd', 'zram', 'timesyncd', 'suser'],
+    dbus: ['polkit', 'portal'], portal: ['portalh', 'portalg'], nm: ['iwd'],
+    greetd: ['greeter'], greeter: ['uwsm'], uwsm: ['hyprland'], hyprland: ['noctalia'],
+    suser: ['pipewire', 'wireplumber', 'mpd', 'syncthing', 'vicinae', 'keyring', 'mpdmpris', 'playerctld', 'mprisproxy'],
+    mpd: ['euphonica']
+  };
+  var MAXROW = { systemd: 10, suser: 3 };
+  var ETYPES = {
+    'uefi:sdboot': 'boot', 'sdboot:kernel': 'boot', 'kernel:luks': 'boot', 'luks:systemd': 'boot',
+    'systemd:suser': 'boot', 'uwsm:hyprland': 'boot', 'dbus:polkit': 'dbus', 'dbus:portal': 'dbus',
+    'mpd:euphonica': 'data'
+  };
+  var ELABELS = {
+    'sdboot:kernel': 'loads UKI', 'mkinitcpio:kernel': 'builds UKI', 'kernel:luks': 'TPM2 key',
+    'luks:systemd': 'root fs', 'systemd:docker': 'on-demand', 'systemd:suser': 'session manager',
+    'nm:iwd': 'Wi-Fi backend', 'greetd:greeter': 'login screen', 'greeter:uwsm': 'starts session',
+    'uwsm:hyprland': 'wayland-wm@hyprland', 'hyprland:noctalia': 'uwsm app',
+    'portal:portalh': 'backend', 'portal:portalg': 'backend'
+  };
+  var SIDES = [{ id: 'mkinitcpio', parent: 'kernel' }, { id: 'docker', parent: 'systemd' }];
+  var CROSS = [
     { f: 'keyd', t: 'hyprland', k: 'data', l: 'input' },
     { f: 'hyprland', t: 'vicinae', k: 'data', l: 'Super+A' },
-    { f: 'dbus', t: 'portal', k: 'dbus' },
-    { f: 'suser', t: 'pipewire', k: 'start' },
-    { f: 'suser', t: 'wireplumber', k: 'start' },
-    { f: 'suser', t: 'mpd', k: 'start' },
-    { f: 'suser', t: 'mpdmpris', k: 'start' },
-    { f: 'suser', t: 'playerctld', k: 'start' },
-    { f: 'suser', t: 'mprisproxy', k: 'start' },
-    { f: 'suser', t: 'syncthing', k: 'start' },
-    { f: 'suser', t: 'vicinae', k: 'start' },
-    { f: 'suser', t: 'keyring', k: 'start' },
+    { f: 'portalh', t: 'hyprland', k: 'data', l: 'screencast' },
     { f: 'wireplumber', t: 'pipewire', k: 'data', l: 'session/devices' },
     { f: 'bluez', t: 'pipewire', k: 'data', l: 'Bluetooth audio' },
     { f: 'mpd', t: 'pipewire', k: 'data', l: 'PulseAudio API' },
@@ -227,41 +416,51 @@ body { background: var(--background); color: var(--foreground); }
     { f: 'noctalia', t: 'polkit', k: 'data', l: 'Polkit agent' },
     { f: 'noctalia', t: 'nm', k: 'data', l: 'network' },
     { f: 'noctalia', t: 'bluez', k: 'data', l: 'Bluetooth' },
-    { f: 'noctalia', t: 'tunedppd', k: 'data', l: 'power profiles' },
-    { f: 'portalh', t: 'hyprland', k: 'data', l: 'screencast' },
-    { f: 'portalh', t: 'portal', k: 'start', l: 'backend' },
-    { f: 'portalg', t: 'portal', k: 'start', l: 'backend' }
+    { f: 'noctalia', t: 'tunedppd', k: 'data', l: 'power profiles' }
   ];
+  var EDGES = [];
+  Object.keys(CHILDREN).forEach(function (p) {
+    CHILDREN[p].forEach(function (c) { EDGES.push({ f: p, t: c, k: ETYPES[p + ':' + c] || 'start' }); });
+  });
+  CROSS.forEach(function (e) { EDGES.push(e); });
+  var SIDE_IDS = {};
+  SIDES.forEach(function (s) { SIDE_IDS[s.id] = true; });
 
-  /* group header rects also take part in overlap checks */
-  var GL_RECTS = [
-    { x: 60, y: 30, w: 140, h: 22 },
-    { x: 60, y: 212, w: 180, h: 22 },
-    { x: 60, y: 660, w: 250, h: 22 },
-    { x: 870, y: 1080, w: 160, h: 22 }
-  ];
+  /* ---- layout + rendering ---- */
+  var LO = null, SIDEB = {};
+  var SPEC = {
+    children: CHILDREN, maxChildrenPerRow: MAXROW,
+    cardWidth: 240, cardHeight: 106, gapX: 45, levelStep: 160,
+    marginTop: 60, marginLeft: 50
+  };
 
-  var R = {};
-  function measure() {
-    R = {};
-    var nodes = stage.querySelectorAll('.node');
-    for (var i = 0; i < nodes.length; i++) {
-      var n = nodes[i];
-      var x = n.offsetLeft, y = n.offsetTop, w = n.offsetWidth, h = n.offsetHeight;
-      R[n.dataset.node] = { x: x, y: y, w: w, h: h, cx: x + w / 2, cy: y + h / 2 };
+  function applyPositions() {
+    for (var id in LO.nodes) {
+      var el = stage.querySelector('[data-node="' + id + '"]');
+      if (el) { el.style.left = LO.nodes[id].x + 'px'; el.style.top = LO.nodes[id].y + 'px'; }
     }
+    SIDES.forEach(function (s) {
+      var el = stage.querySelector('[data-node="' + s.id + '"]');
+      var b = SIDEB[s.id];
+      if (el && b) { el.style.left = b.x + 'px'; el.style.top = b.y + 'px'; }
+    });
+  }
+
+  function nodeBox(id) {
+    if (SIDEB[id]) {
+      var s = SIDEB[id];
+      return { x: s.x, y: s.y, w: 240, h: s.h, cx: s.x + 120, top: s.y, bottom: s.y + s.h };
+    }
+    var n = LO.nodes[id];
+    return { x: n.x, y: n.y, w: 240, h: n.h, cx: n.x + 120, top: n.y, bottom: n.y + n.h };
   }
 
   var placed = [];
   function areaFree(b) {
     var pad = 3;
-    for (var id in R) {
-      var n = R[id];
+    for (var id in LO.nodes) {
+      var n = nodeBox(id);
       if (b.x < n.x + n.w + pad && b.x + b.w > n.x - pad && b.y < n.y + n.h + pad && b.y + b.h > n.y - pad) return false;
-    }
-    for (var g = 0; g < GL_RECTS.length; g++) {
-      var gr = GL_RECTS[g];
-      if (b.x < gr.x + gr.w + pad && b.x + b.w > gr.x - pad && b.y < gr.y + gr.h + pad && b.y + b.h > gr.y - pad) return false;
     }
     for (var i = 0; i < placed.length; i++) {
       var p = placed[i];
@@ -270,9 +469,45 @@ body { background: var(--background); color: var(--foreground); }
     return true;
   }
 
+  function mkPath(d, cls, f, t) {
+    var p = document.createElementNS(NS, 'path');
+    p.setAttribute('d', d);
+    p.setAttribute('class', cls);
+    if (f !== undefined) { p.dataset.f = f; p.dataset.t = t || ''; }
+    svg.appendChild(p);
+    return p;
+  }
+
   function draw() {
-    measure();
-    placed = [];
+    try { drawInner(); } catch (e) { window.__drawError = (e && e.stack) ? e.stack : String(e); }
+  }
+  function drawInner() {
+    labelSpecs = []; placed = [];
+    /* two passes: default heights for placement, then real DOM heights for
+       connector anchoring */
+    LO = OrgLayout.computeOrgLayout(SPEC);
+    applyPositions();
+    var heights = {};
+    for (var id in LO.nodes) {
+      heights[id] = stage.querySelector('[data-node="' + id + '"]').offsetHeight;
+    }
+    SPEC.nodeHeights = heights;
+    LO = OrgLayout.computeOrgLayout(SPEC);
+    applyPositions();
+    SIDEB = {};
+    SIDES.forEach(function (s) {
+      var p = LO.nodes[s.parent];
+      var el = stage.querySelector('[data-node="' + s.id + '"]');
+      SIDEB[s.id] = { x: p.x + 240 + 45, y: p.y, h: el.offsetHeight };
+    });
+    applyPositions();
+    var W = LO.fullBounds.maxX + 40, H = LO.fullBounds.maxY + 40;
+    SIDES.forEach(function (s) {
+      W = Math.max(W, SIDEB[s.id].x + 240 + 40);
+      H = Math.max(H, SIDEB[s.id].y + SIDEB[s.id].h + 40);
+    });
+    stage.style.width = W + 'px';
+    stage.style.height = H + 'px';
     svg.setAttribute('width', W); svg.setAttribute('height', H);
     lsvg.setAttribute('width', W); lsvg.setAttribute('height', H);
     while (svg.firstChild) svg.removeChild(svg.firstChild);
@@ -280,85 +515,88 @@ body { background: var(--background); color: var(--foreground); }
     var defs = document.createElementNS(NS, 'defs');
     defs.innerHTML =
       '<marker id="arr-mut" viewBox="0 0 10 10" refX="8.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--muted-foreground)"/></marker>' +
-      '<marker id="arr-boot" viewBox="0 0 10 10" refX="8.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--sec-boot)"/></marker>' +
       '<marker id="arr-data" viewBox="0 0 10 10" refX="8.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--viz-series-1)"/></marker>';
     svg.appendChild(defs);
-    var labelSpecs = [];
-    EDGES.forEach(function (e) {
-      var a = R[e.f], b = R[e.t];
-      if (!a || !b) return;
-      var dy = b.cy - a.cy, dx = b.cx - a.cx;
-      var p1, p2, c1, c2, mode;
-      if (dy > 60) { mode = 'vdown'; }
-      else if (dy < -60) { mode = 'vup'; }
-      else if (hasBlocker(a, b)) { mode = 'dip'; }
-      else { mode = 'h'; }
-      if (mode === 'vdown' || mode === 'vup') {
-        var dir = mode === 'vdown' ? 1 : -1;
-        var sv = Math.max(26, Math.min(170, Math.abs(dy) * 0.42));
-        if (dir > 0) { p1 = [a.cx, a.y + a.h]; p2 = [b.cx, b.y]; }
-        else { p1 = [a.cx, a.y]; p2 = [b.cx, b.y + b.h]; }
-        c1 = [p1[0], p1[1] + dir * sv];
-        c2 = [p2[0], p2[1] - dir * sv];
-      } else if (mode === 'dip') {
-        var sd = Math.max(40, Math.min(110, Math.abs(dx) * 0.22));
-        p1 = [a.cx, a.y + a.h]; p2 = [b.cx, b.y + b.h];
-        c1 = [p1[0], p1[1] + sd]; c2 = [p2[0], p2[1] + sd];
-      } else {
-        var dirx = dx >= 0 ? 1 : -1;
-        var sh = Math.max(26, Math.min(170, Math.abs(dx) * 0.42));
-        if (dirx > 0) { p1 = [a.x + a.w, a.cy]; p2 = [b.x, b.cy]; }
-        else { p1 = [a.x, a.cy]; p2 = [b.x + b.w, b.cy]; }
-        c1 = [p1[0] + dirx * sh, p1[1]];
-        c2 = [p2[0] - dirx * sh, p2[1]];
-      }
-      var d = 'M' + p1[0] + ' ' + p1[1] + ' C' + c1[0] + ' ' + c1[1] + ' ' + c2[0] + ' ' + c2[1] + ' ' + p2[0] + ' ' + p2[1];
-      var path = document.createElementNS(NS, 'path');
-      path.setAttribute('d', d);
-      path.setAttribute('class', 'e e-' + e.k);
-      path.dataset.f = e.f; path.dataset.t = e.t;
-      svg.appendChild(path);
-      if (e.l) labelSpecs.push({ e: e, d: d, mode: mode, a: a, b: b });
+
+    /* inheritance connectors: stem -> bus -> drops (org-chart) */
+    LO.connectors.forEach(function (cn) {
+      var ptype = ETYPES[cn.parentId + ':' + cn.childIds[0]] || 'start';
+      cn.segments.forEach(function (s) {
+        var d = 'M' + s.x1 + ' ' + s.y1 + ' H' + s.x2 + ' V' + s.y2;
+        var type = (s.kind === 'drop')
+          ? (ETYPES[cn.parentId + ':' + s.owners[0]] || 'start')
+          : ptype;
+        var kids = cn.childIds.join(' ');
+        mkPath(d, 'e e-' + type, cn.parentId, s.kind === 'drop' ? s.owners[0] : kids);
+      });
+      cn.childIds.forEach(function (cid) {
+        var lbl = ELABELS[cn.parentId + ':' + cid];
+        if (lbl) {
+          var cb = nodeBox(cid);
+          labelSpecs.push({ d: 'M' + cb.cx + ' ' + cn.busY + ' V' + cb.top, f: cn.parentId, t: cid });
+        }
+      });
     });
 
-    /* labels: look for a free spot along the curve; if none — skip the label */
+    /* side attachments: horizontal, direction-aware */
+    SIDES.forEach(function (s) {
+      var a = nodeBox(s.parent), b = nodeBox(s.id);
+      var t = ETYPES[s.parent + ':' + s.id] || 'build';
+      var lbl = ELABELS[s.parent + ':' + s.id];
+      var d, fx, tx;
+      if (a.x < b.x) { fx = a.x + a.w; tx = b.x; } else { fx = a.x; tx = b.x + b.w; }
+      var d = 'M' + fx + ' ' + (a.y + a.h / 2) + ' H' + tx;
+      mkPath(d, 'e e-' + t, s.parent, s.id);
+      if (lbl) labelSpecs.push({ d: d, f: s.parent, t: s.id });
+    });
+
+    /* cross-links: smooth curves (data / API / UI) */
+    CROSS.forEach(function (e) {
+      var a = nodeBox(e.f), b = nodeBox(e.t);
+      var acy = a.top + a.h / 2, bcy = b.top + b.h / 2;
+      var dy = bcy - acy, dx = b.cx - a.cx;
+      var p1, p2, c1, c2;
+      if (dy > 60) { p1 = [a.cx, a.bottom]; p2 = [b.cx, b.top]; }
+      else if (dy < -60) { p1 = [a.cx, a.top]; p2 = [b.cx, b.bottom]; }
+      else if (dx >= 0) { p1 = [a.x + a.w, acy]; p2 = [b.x, bcy]; }
+      else { p1 = [a.x, acy]; p2 = [b.x + b.w, bcy]; }
+      var sv = Math.max(30, Math.min(180, Math.abs(dy || dx) * 0.4));
+      if (dy > 60 || dy < -60) {
+        var dir = dy > 0 ? 1 : -1;
+        c1 = [p1[0], p1[1] + dir * sv]; c2 = [p2[0], p2[1] - dir * sv];
+      } else {
+        var dirx = dx >= 0 ? 1 : -1;
+        c1 = [p1[0] + dirx * sv, p1[1]]; c2 = [p2[0] - dirx * sv, p2[1]];
+      }
+      var d = 'M' + p1[0] + ' ' + p1[1] + ' C' + c1[0] + ' ' + c1[1] + ' ' + c2[0] + ' ' + c2[1] + ' ' + p2[0] + ' ' + p2[1];
+      mkPath(d, 'e e-' + e.k, e.f, e.t).setAttribute('marker-end', 'url(#arr-data)');
+      if (e.l) labelSpecs.push({ d: d, f: e.f, t: e.t });
+    });
+
+    /* labels: look for a free spot along the edge; if none — skip the label */
     labelSpecs.forEach(function (s) {
-      var e = s.e;
       var tmp = document.createElementNS(NS, 'path');
       tmp.setAttribute('d', s.d);
       svg.appendChild(tmp);
       var len = tmp.getTotalLength();
+      var lbl = null;
+      EDGES.forEach(function (e) { if (e.f === s.f && e.t === s.t && e.l) lbl = e.l; });
       var tx = document.createElementNS(NS, 'text');
       tx.setAttribute('class', 'elabel');
-      tx.textContent = e.l;
+      tx.textContent = lbl;
       lsvg.appendChild(tx);
-      var rowTop = Math.min(s.a.y, s.b.y);
-      var rowBottom = Math.max(s.a.y + s.a.h, s.b.y + s.b.h);
       var ts = [0.5, 0.4, 0.6, 0.32, 0.68, 0.25, 0.75, 0.18, 0.82, 0.12, 0.88];
       var done = false;
       for (var ci = 0; ci < ts.length && !done; ci++) {
         var pt = tmp.getPointAtLength(len * ts[ci]);
-        var cands = [];
-        if (s.mode === 'vdown' || s.mode === 'vup') {
-          cands.push([pt.x + 14, pt.y + 4, 'start']);
-        } else if (s.mode === 'dip') {
-          cands.push([pt.x + 10, pt.y + 26, 'start']);
-        } else {
-          cands.push([pt.x, pt.y - 14, 'middle']);
-          cands.push([pt.x, rowTop - 12, 'middle']);
-          cands.push([pt.x, rowBottom + 30, 'middle']);
-        }
+        var cands = [[pt.x + 13, pt.y + 4, 'start'], [pt.x, pt.y - 13, 'middle'], [pt.x, pt.y + 24, 'middle']];
         for (var ki = 0; ki < cands.length && !done; ki++) {
           tx.setAttribute('x', cands[ki][0]);
           tx.setAttribute('y', cands[ki][1]);
           tx.setAttribute('text-anchor', cands[ki][2]);
           var bb = tx.getBBox();
           var box = { x: bb.x - 5, y: bb.y - 4, w: bb.width + 10, h: bb.height + 8 };
-          if (areaFree(box)) {
-            placed.push(box);
-            tx.dataset.f = e.f; tx.dataset.t = e.t;
-            done = true;
-          }
+          if (areaFree(box)) { placed.push(box); tx.dataset.f = s.f; tx.dataset.t = s.t; done = true; }
         }
       }
       if (!done) lsvg.removeChild(tx);
@@ -366,28 +604,19 @@ body { background: var(--background); color: var(--foreground); }
     });
   }
 
-  function hasBlocker(a, b) {
-    var x1 = Math.min(a.cx, b.cx), x2 = Math.max(a.cx, b.cx);
-    var lo = Math.min(a.cy, b.cy) - 14, hi = Math.max(a.cy, b.cy) + 14;
-    for (var id in R) {
-      if (id === a.id || id === b.id) continue;
-      var n = R[id];
-      if (n.x + n.w > x1 + 12 && n.x < x2 - 12 && n.y + n.h > lo && n.y < hi) return true;
-    }
-    return false;
-  }
-
   var selectedId = null;
+  window.__redraw = function () { try { draw(); } catch (e) { window.__drawError = (e && e.stack) ? e.stack : String(e); } };
   function applySelect(id) {
     selectedId = id;
-    var paths = svg.querySelectorAll('.e, .elabel');
+    var paths = svg.querySelectorAll('.e');
     var texts = lsvg.querySelectorAll('.elabel');
     var all = [];
     for (var i = 0; i < paths.length; i++) all.push(paths[i]);
     for (var q = 0; q < texts.length; q++) all.push(texts[q]);
     for (var m = 0; m < all.length; m++) {
       var p = all[m];
-      var hit = id && (p.dataset.f === id || p.dataset.t === id);
+      var ts = (p.dataset.t || '').split(' ');
+      var hit = id && (p.dataset.f === id || ts.indexOf(id) >= 0);
       p.classList.toggle('hl', !!hit);
       p.classList.toggle('dim', !!id && !hit);
     }
@@ -419,7 +648,7 @@ body { background: var(--background); color: var(--foreground); }
       stage.classList.remove('zooming');
     }, 150);
   }
-  function clampScale(s) { return Math.max(0.22, Math.min(2.5, s)); }
+  function clampScale(s) { return Math.max(0.15, Math.min(2.5, s)); }
   function zoomAt(cx, cy, factor) {
     var ns = clampScale(scale * factor);
     var k = ns / scale;
@@ -433,9 +662,9 @@ body { background: var(--background); color: var(--foreground); }
   }
   function fit() {
     var vw = viewport.clientWidth, vh = viewport.clientHeight;
-    scale = clampScale(Math.min(vw / W, vh / H));
-    tx = (vw - W * scale) / 2;
-    ty = (vh - H * scale) / 2;
+    scale = clampScale(Math.min(vw / stage.offsetWidth, vh / stage.offsetHeight));
+    tx = (vw - stage.offsetWidth * scale) / 2;
+    ty = (vh - stage.offsetHeight * scale) / 2;
     stage.classList.remove('zooming');
     applyT();
   }
