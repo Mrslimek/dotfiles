@@ -70,10 +70,16 @@
             "bssh": {
                "enabled": false
             },
+            "btop": {
+               "enabled": false
+            },
             "btrfs-assistant": {
                "enabled": true
             },
             "bvnc": {
+               "enabled": false
+            },
+            "ca.desrt.dconf-editor": {
                "enabled": false
             },
             "cmake-gui": {
@@ -91,10 +97,22 @@
             "hyprpwcenter": {
                "enabled": false
             },
+            "jconsole-java-openjdk": {
+               "enabled": false
+            },
+            "jshell-java-openjdk": {
+               "enabled": false
+            },
             "kvantummanager": {
                "enabled": false
             },
             "lstopo": {
+               "enabled": false
+            },
+            "micro": {
+               "enabled": false
+            },
+            "moonlight-qt": {
                "enabled": false
             },
             "mpv": {
@@ -104,6 +122,12 @@
                "enabled": false
             },
             "nwg-look": {
+               "enabled": false
+            },
+            "org.gnome.FileRoller": {
+               "enabled": false
+            },
+            "protontricks": {
                "enabled": false
             },
             "qt5ct": {
@@ -133,6 +157,9 @@
             "thunar-volman-settings": {
                "enabled": false
             },
+            "tuned-gui": {
+               "enabled": false
+            },
             "uuctl": {
                "enabled": false
             },
@@ -140,6 +167,9 @@
                "enabled": false
             },
             "vim": {
+               "enabled": false
+            },
+            "winetricks": {
                "enabled": false
             },
             "wl-color-picker": {
