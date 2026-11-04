@@ -7,9 +7,12 @@ hl.config({
         kb_layout   = "us,ru",
         kb_options  = "grp:win_space_toggle",
         sensitivity = 0.2,
+        accel_profile = "adaptive",
         touchpad    = {
-            natural_scroll       = true,
+        	scroll_factor  = 0.2,
+            natural_scroll = true,
             tap_to_click   = true,
+            -- clickfinger_behavior = true,
             -- NOTE: Commented, because i use keyd to remap some keyboard buttons and it conflicts with hyprland
             -- Configuration for this keyd virtual keyboard lives in /etc/libinput and /etc/keyd
             -- NOTE: Try to configure everything, related to keyboard on low level, using keyd and use hyprland only for compositor-level configs
