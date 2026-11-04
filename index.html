@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arch Linux · System Overview</title>
+<style>
+:root { color-scheme: light dark; }
+body {
+  margin: 0; padding: 28px;
+  font-family: -apple-system, "Segoe UI", Roboto, "Inter", sans-serif;
+  font-size: 14px;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #f7f7f9; --foreground: #23252d; --card: #ffffff;
+    --muted: #ececef; --muted-foreground: #62666f; --border: #d8dae0;
+    --primary: #3b6fe0; --primary-foreground: #ffffff;
+    --viz-series-1: #3b6fe0; --blue: #3b6fe0; --purple: #7048c8; --green: #2f9e44; --orange: #d97706;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #16171d; --foreground: #e6e6eb; --card: #1e1f27;
+    --muted: #262833; --muted-foreground: #9a9daa; --border: #34374a;
+    --primary: #7aa2f7; --primary-foreground: #10131c;
+    --viz-series-1: #7aa2f7; --blue: #7aa2f7; --purple: #bb9af7; --green: #9ece6a; --orange: #e0af68;
+  }
+}
+body { background: var(--background); color: var(--foreground); }
+.text-muted { color: var(--muted-foreground); }
+.text-small { font-size: 12px; }
+</style>
+</head>
+<body>
+<div id="arch-overview" aria-label="Архитектурный граф системы Arch Linux">
+  <h2>Arch Linux · System Overview</h2>
+  <div class="legend">
+    <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-boot"/></svg>цепочка загрузки</span>
+    <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-start"/></svg>запуск службы</span>
+    <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-data"/></svg>данные / API / UI</span>
+    <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-dbus"/></svg>D-Bus-активация</span>
+    <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-build"/></svg>сборка / запуск вручную</span>
+    <span class="lg-hint text-muted text-small">тяните мышью — перемещение · колесо — масштаб · наведите на узел, чтобы выделить связи</span>
+  </div>
+
+  <div class="zview" id="arch-viewport">
+    <div class="zcanvas" id="arch-stage">
+      <svg id="arch-edges" aria-hidden="true"></svg>
+      <svg id="arch-labels" aria-hidden="true"></svg>
+
+      <div class="gl gl-boot" style="left:60px;top:42px"><span class="dot"></span>Загрузка</div>
+      <div class="gl gl-system" style="left:60px;top:232px"><span class="dot"></span>Системные службы</div>
+      <div class="gl gl-session" style="left:60px;top:694px"><span class="dot"></span>Пользовательская сессия</div>
+      <div class="gl gl-media" style="left:870px;top:1112px"><span class="dot"></span>Аудио и медиа</div>
+
+      <div class="node" data-node="uefi" style="left:60px;top:80px"><div class="nname">UEFI</div><div class="nrole">Прошивка платформы; Secure Boot включён</div></div>
+      <div class="node" data-node="sdboot" style="left:330px;top:80px"><div class="nname">systemd-boot</div><div class="nrole">EFI-загрузчик; запускает UKI-образ</div></div>
+      <div class="node" data-node="kernel" style="left:600px;top:80px"><div class="nname">Linux Kernel</div><div class="nrole">Ядро ОС; загружается как UKI arch-linux.efi</div></div>
+      <div class="node" data-node="luks" style="left:870px;top:80px"><div class="nname">LUKS2</div><div class="nrole">Шифрование корневого раздела; ключ в TPM2</div></div>
+      <div class="node hub" data-node="systemd" style="left:1140px;top:80px"><div class="nname">systemd</div><div class="nrole">PID 1: инициализация и менеджер системных служб</div></div>
+      <div class="node" data-node="mkinitcpio" style="left:600px;top:300px"><div class="nname">mkinitcpio</div><div class="nrole">Собирает UKI: ядро + initramfs + cmdline</div></div>
+
+      <div class="node" data-node="timesyncd" style="left:60px;top:270px"><div class="nname">systemd-timesyncd</div><div class="nrole">Синхронизация системного времени</div></div>
+      <div class="node node-ondemand" data-node="docker" style="left:60px;top:440px"><div class="nname">Docker</div><div class="nrole">Контейнеры для разработки; запуск вручную</div></div>
+      <div class="node" data-node="keyd" style="left:330px;top:610px"><div class="nname">keyd</div><div class="nrole">Переназначение клавиш (виртуальная клавиатура)</div></div>
+      <div class="node" data-node="greetd" style="left:600px;top:440px"><div class="nname">greetd</div><div class="nrole">Менеджер входа (VT1)</div></div>
+      <div class="node" data-node="zram" style="left:870px;top:270px"><div class="nname">zram-generator</div><div class="nrole">Создаёт zram-подкачку при загрузке</div></div>
+      <div class="node hub" data-node="dbus" style="left:1410px;top:270px"><div class="nname">dbus-broker</div><div class="nrole">Шина сообщений D-Bus (системная и пользовательская)</div></div>
+      <div class="node" data-node="polkit" style="left:1680px;top:270px"><div class="nname">Polkit</div><div class="nrole">Проверка привилегий (polkitd)</div></div>
+      <div class="node" data-node="bluez" style="left:1950px;top:270px"><div class="nname">BlueZ</div><div class="nrole">Стек Bluetooth (bluetooth.service)</div></div>
+      <div class="node" data-node="nm" style="left:1680px;top:440px"><div class="nname">NetworkManager</div><div class="nrole">Управление сетевыми интерфейсами и соединениями</div></div>
+      <div class="node" data-node="iwd" style="left:1950px;top:440px"><div class="nname">iwd</div><div class="nrole">Wi-Fi-бэкенд для NetworkManager</div></div>
+      <div class="node" data-node="tuned" style="left:870px;top:610px"><div class="nname">tuned</div><div class="nrole">Системные профили питания и производительности</div></div>
+      <div class="node" data-node="tunedppd" style="left:1140px;top:610px"><div class="nname">tuned-ppd</div><div class="nrole">API power-profiles-daemon поверх tuned</div></div>
+
+      <div class="node" data-node="greeter" style="left:600px;top:730px"><div class="nname">Noctalia Greeter</div><div class="nrole">Экран входа; собственный композитор на wlroots</div></div>
+      <div class="node" data-node="uwsm" style="left:870px;top:730px"><div class="nname">uwsm</div><div class="nrole">Управление Wayland-сессией как user-юнитами</div></div>
+      <div class="node hub" data-node="hyprland" style="left:1140px;top:730px"><div class="nname">Hyprland</div><div class="nrole">Wayland-композитор</div></div>
+      <div class="node" data-node="noctalia" style="left:1410px;top:730px"><div class="nname">Noctalia Shell</div><div class="nrole">Оболочка: панель, центр управления, уведомления, экран блокировки, обои</div></div>
+
+      <div class="node hub" data-node="suser" style="left:330px;top:950px"><div class="nname">systemd --user</div><div class="nrole">Пользовательский менеджер служб (сессия)</div></div>
+      <div class="node" data-node="portal" style="left:600px;top:950px"><div class="nname">xdg-desktop-portal</div><div class="nrole">D-Bus API для приложений (порталы)</div></div>
+      <div class="node" data-node="portalh" style="left:870px;top:950px"><div class="nname">xdg-desktop-portal-hyprland</div><div class="nrole">Бэкенд порталов: скринкаст, скриншоты</div></div>
+      <div class="node" data-node="portalg" style="left:1140px;top:950px"><div class="nname">xdg-desktop-portal-gtk</div><div class="nrole">Бэкенд порталов: файловые диалоги</div></div>
+      <div class="node" data-node="vicinae" style="left:60px;top:1150px"><div class="nname">Vicinae</div><div class="nrole">Лаунчер приложений (демон)</div></div>
+      <div class="node" data-node="keyring" style="left:330px;top:1150px"><div class="nname">gnome-keyring</div><div class="nrole">Хранение секретов сессии</div></div>
+      <div class="node" data-node="syncthing" style="left:600px;top:1150px"><div class="nname">Syncthing</div><div class="nrole">Непрерывная синхронизация файлов</div></div>
+
+      <div class="node" data-node="euphonica" style="left:870px;top:1150px"><div class="nname">Euphonica</div><div class="nrole">Графический клиент MPD</div></div>
+      <div class="node" data-node="mpd" style="left:1140px;top:1150px"><div class="nname">MPD</div><div class="nrole">Музыкальный сервер (user-служба)</div></div>
+      <div class="node" data-node="pipewire" style="left:1700px;top:1150px"><div class="nname">PipeWire</div><div class="nrole">Мультимедиа-сервер (PulseAudio/JACK-совместимость)</div></div>
+      <div class="node" data-node="wireplumber" style="left:1970px;top:1150px"><div class="nname">WirePlumber</div><div class="nrole">Менеджер сессии PipeWire</div></div>
+      <div class="node" data-node="mpdmpris" style="left:1140px;top:1350px"><div class="nname">mpd-mpris</div><div class="nrole">MPRIS-интерфейс для MPD</div></div>
+      <div class="node" data-node="playerctld" style="left:1410px;top:1350px"><div class="nname">playerctld</div><div class="nrole">Агрегатор MPRIS-плееров</div></div>
+      <div class="node" data-node="mprisproxy" style="left:2220px;top:1350px"><div class="nname">mpris-proxy</div><div class="nrole">Мост MPRIS → Bluetooth (AVRCP)</div></div>
+    </div>
+    <div class="zctrl">
+      <button type="button" class="zbtn" id="arch-zin" aria-label="Приблизить">+</button>
+      <button type="button" class="zbtn" id="arch-zout" aria-label="Отдалить">−</button>
+      <button type="button" class="zbtn" id="arch-zfit" aria-label="Вписать в экран">⤢</button>
+    </div>
+  </div>
+</div>
+
+<style>
+#arch-overview { --sec-boot: var(--blue); --sec-system: var(--purple); --sec-session: var(--green); --sec-media: var(--orange); }
+#arch-overview h2 { margin: 0 0 10px; }
+#arch-overview .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center; margin: 0 0 12px; }
+#arch-overview .lg { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted-foreground); }
+#arch-overview .lg-line { stroke-width: 2; fill: none; }
+#arch-overview .lg-hint { margin-left: auto; }
+
+#arch-overview .zview { position: relative; height: 720px; overflow: hidden; border: 1px solid var(--border); border-radius: 12px;
+  background: color-mix(in srgb, var(--card) 45%, var(--background)); touch-action: none; cursor: grab; user-select: none; -webkit-user-select: none; }
+#arch-overview .zview.dragging { cursor: grabbing; }
+#arch-overview .zcanvas { position: absolute; top: 0; left: 0; width: 2530px; height: 1500px; transform-origin: 0 0;
+  background-image: radial-gradient(color-mix(in srgb, var(--border) 60%, transparent) 1px, transparent 1px); background-size: 24px 24px; }
+#arch-overview #arch-edges { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; z-index: 0; }
+#arch-overview #arch-labels { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; z-index: 2; }
+#arch-overview .gl { position: absolute; z-index: 1; display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--muted-foreground); }
+#arch-overview .gl .dot { width: 8px; height: 8px; border-radius: 50%; }
+#arch-overview .gl-boot .dot { background: var(--sec-boot); }
+#arch-overview .gl-system .dot { background: var(--sec-system); }
+#arch-overview .gl-session .dot { background: var(--sec-session); }
+#arch-overview .gl-media .dot { background: var(--sec-media); }
+
+#arch-overview .node { --sec: var(--muted-foreground); position: absolute; z-index: 1; box-sizing: border-box; width: 250px; padding: 8px 11px; border-radius: 10px;
+  background: color-mix(in srgb, var(--sec) 10%, var(--card));
+  border: 1px solid color-mix(in srgb, var(--sec) 30%, transparent);
+  transition: opacity .15s, border-color .15s; }
+#arch-overview .sec-boot .node, #arch-overview .node[data-node="uefi"], #arch-overview .node[data-node="sdboot"], #arch-overview .node[data-node="kernel"],
+#arch-overview .node[data-node="luks"], #arch-overview .node[data-node="systemd"], #arch-overview .node[data-node="mkinitcpio"] { --sec: var(--sec-boot); }
+#arch-overview .node[data-node="timesyncd"], #arch-overview .node[data-node="docker"], #arch-overview .node[data-node="keyd"], #arch-overview .node[data-node="greetd"],
+#arch-overview .node[data-node="zram"], #arch-overview .node[data-node="dbus"], #arch-overview .node[data-node="polkit"], #arch-overview .node[data-node="bluez"],
+#arch-overview .node[data-node="nm"], #arch-overview .node[data-node="iwd"], #arch-overview .node[data-node="tuned"], #arch-overview .node[data-node="tunedppd"] { --sec: var(--sec-system); }
+#arch-overview .node[data-node="greeter"], #arch-overview .node[data-node="uwsm"], #arch-overview .node[data-node="hyprland"], #arch-overview .node[data-node="noctalia"],
+#arch-overview .node[data-node="suser"], #arch-overview .node[data-node="portal"], #arch-overview .node[data-node="portalh"], #arch-overview .node[data-node="portalg"],
+#arch-overview .node[data-node="vicinae"], #arch-overview .node[data-node="keyring"], #arch-overview .node[data-node="syncthing"] { --sec: var(--sec-session); }
+#arch-overview .node[data-node="euphonica"], #arch-overview .node[data-node="mpd"], #arch-overview .node[data-node="pipewire"], #arch-overview .node[data-node="wireplumber"],
+#arch-overview .node[data-node="mpdmpris"], #arch-overview .node[data-node="playerctld"], #arch-overview .node[data-node="mprisproxy"] { --sec: var(--sec-media); }
+
+#arch-overview .node .nname { font-weight: 500; font-size: 13px; color: var(--foreground); }
+#arch-overview .node .nrole { font-size: 11px; line-height: 1.45; color: color-mix(in srgb, var(--foreground) 62%, transparent); margin-top: 2px; }
+#arch-overview .node.hub { border-width: 2px; }
+#arch-overview .node.node-ondemand { border-style: dashed; }
+#arch-overview .node.hl { border-color: var(--sec); background: color-mix(in srgb, var(--sec) 18%, var(--card)); }
+#arch-overview .node.dim { opacity: .25; }
+@media (prefers-reduced-motion: reduce) { #arch-overview .node, #arch-overview .e, #arch-overview .elabel { transition: none; } }
+
+#arch-overview .e { fill: none; stroke: var(--muted-foreground); stroke-width: calc(1.4px * var(--zw, 1)); opacity: .45; transition: opacity .15s; }
+#arch-overview .e.e-boot { stroke: var(--sec-boot); stroke-width: calc(2px * var(--zw, 1)); opacity: .85; marker-end: url(#arr-boot); }
+#arch-overview .e.e-start { marker-end: url(#arr-mut); }
+#arch-overview .e.e-data { stroke: var(--viz-series-1); opacity: .75; marker-end: url(#arr-data); }
+#arch-overview .e.e-dbus { stroke-dasharray: 2 4; marker-end: url(#arr-mut); }
+#arch-overview .e.e-build { stroke-dasharray: 6 5; marker-end: url(#arr-mut); }
+#arch-overview .e.hl { opacity: 1; stroke-width: calc(2.2px * var(--zw, 1)); }
+#arch-overview .e.dim { opacity: .05; }
+#arch-overview .elabel { font-size: calc(11px * var(--zw, 1)); fill: var(--foreground); paint-order: stroke; stroke: var(--background); stroke-width: 4px; stroke-linejoin: round; transition: opacity .15s; }
+#arch-overview .elabel.dim { opacity: .08; }
+#arch-overview .lg .e-boot { stroke: var(--sec-boot); opacity: .85; }
+#arch-overview .lg .e-start { stroke: var(--muted-foreground); opacity: .45; }
+#arch-overview .lg .e-data { stroke: var(--viz-series-1); opacity: .75; }
+#arch-overview .lg .e-dbus { stroke-dasharray: 2 4; }
+#arch-overview .lg .e-build { stroke-dasharray: 6 5; }
+
+#arch-overview .zctrl { position: absolute; top: 10px; right: 10px; display: flex; gap: 6px; z-index: 3; }
+#arch-overview .zbtn { width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--foreground); font-size: 15px; line-height: 1; cursor: pointer; padding: 0; }
+#arch-overview .zbtn:hover { border-color: var(--muted-foreground); }
+</style>
+
+<script>
+(function () {
+  var viewport = document.getElementById('arch-viewport');
+  var stage = document.getElementById('arch-stage');
+  var svg = document.getElementById('arch-edges');
+  var lsvg = document.getElementById('arch-labels');
+  var NS = 'http://www.w3.org/2000/svg';
+  var W = 2530, H = 1500;
+
+  var EDGES = [
+    { f: 'uefi', t: 'sdboot', k: 'boot' },
+    { f: 'sdboot', t: 'kernel', k: 'boot', l: 'загружает UKI' },
+    { f: 'mkinitcpio', t: 'kernel', k: 'build', l: 'собирает UKI' },
+    { f: 'kernel', t: 'luks', k: 'boot', l: 'ключ TPM2' },
+    { f: 'luks', t: 'systemd', k: 'boot', l: 'корневая ФС' },
+    { f: 'systemd', t: 'dbus', k: 'start' },
+    { f: 'systemd', t: 'zram', k: 'start' },
+    { f: 'systemd', t: 'timesyncd', k: 'start' },
+    { f: 'systemd', t: 'nm', k: 'start' },
+    { f: 'systemd', t: 'bluez', k: 'start' },
+    { f: 'systemd', t: 'keyd', k: 'start' },
+    { f: 'systemd', t: 'greetd', k: 'start' },
+    { f: 'systemd', t: 'tuned', k: 'start' },
+    { f: 'systemd', t: 'tunedppd', k: 'start' },
+    { f: 'systemd', t: 'docker', k: 'build', l: 'on-demand' },
+    { f: 'nm', t: 'iwd', k: 'data', l: 'Wi-Fi-бэкенд' },
+    { f: 'dbus', t: 'polkit', k: 'dbus' },
+    { f: 'systemd', t: 'suser', k: 'boot', l: 'менеджер сессии' },
+    { f: 'greetd', t: 'greeter', k: 'start', l: 'экран входа' },
+    { f: 'greeter', t: 'uwsm', k: 'data', l: 'запуск сессии' },
+    { f: 'uwsm', t: 'hyprland', k: 'boot', l: 'wayland-wm@hyprland' },
+    { f: 'hyprland', t: 'noctalia', k: 'start', l: 'uwsm app' },
+    { f: 'keyd', t: 'hyprland', k: 'data', l: 'ввод' },
+    { f: 'hyprland', t: 'vicinae', k: 'data', l: 'Super+A' },
+    { f: 'dbus', t: 'portal', k: 'dbus' },
+    { f: 'suser', t: 'pipewire', k: 'start' },
+    { f: 'suser', t: 'wireplumber', k: 'start' },
+    { f: 'suser', t: 'mpd', k: 'start' },
+    { f: 'suser', t: 'mpdmpris', k: 'start' },
+    { f: 'suser', t: 'playerctld', k: 'start' },
+    { f: 'suser', t: 'mprisproxy', k: 'start' },
+    { f: 'suser', t: 'syncthing', k: 'start' },
+    { f: 'suser', t: 'vicinae', k: 'start' },
+    { f: 'suser', t: 'keyring', k: 'start' },
+    { f: 'wireplumber', t: 'pipewire', k: 'data', l: 'сессия/устройства' },
+    { f: 'bluez', t: 'pipewire', k: 'data', l: 'аудио Bluetooth' },
+    { f: 'mpd', t: 'pipewire', k: 'data', l: 'PulseAudio API' },
+    { f: 'euphonica', t: 'mpd', k: 'data', l: 'MPD-протокол' },
+    { f: 'mpdmpris', t: 'mpd', k: 'data', l: 'MPRIS' },
+    { f: 'playerctld', t: 'mpdmpris', k: 'data', l: 'агрегация' },
+    { f: 'mprisproxy', t: 'bluez', k: 'data', l: 'AVRCP' },
+    { f: 'noctalia', t: 'pipewire', k: 'data', l: 'аудио' },
+    { f: 'noctalia', t: 'polkit', k: 'data', l: 'агент Polkit' },
+    { f: 'noctalia', t: 'nm', k: 'data', l: 'сеть' },
+    { f: 'noctalia', t: 'bluez', k: 'data', l: 'Bluetooth' },
+    { f: 'noctalia', t: 'tunedppd', k: 'data', l: 'профили питания' },
+    { f: 'portalh', t: 'hyprland', k: 'data', l: 'скринкаст' },
+    { f: 'portalh', t: 'portal', k: 'start', l: 'бэкенд' },
+    { f: 'portalg', t: 'portal', k: 'start', l: 'бэкенд' }
+  ];
+
+  var R = {};
+  function measure() {
+    R = {};
+    var nodes = stage.querySelectorAll('.node');
+    for (var i = 0; i < nodes.length; i++) {
+      var n = nodes[i];
+      var x = n.offsetLeft, y = n.offsetTop, w = n.offsetWidth, h = n.offsetHeight;
+      R[n.dataset.node] = { x: x, y: y, w: w, h: h, cx: x + w / 2, cy: y + h / 2 };
+    }
+  }
+  function hasBlocker(a, b) {
+    var x1 = Math.min(a.cx, b.cx), x2 = Math.max(a.cx, b.cx);
+    var lo = Math.min(a.cy, b.cy) - 14, hi = Math.max(a.cy, b.cy) + 14;
+    for (var id in R) {
+      if (id === a.id || id === b.id) continue;
+      var n = R[id];
+      if (n.x + n.w > x1 + 12 && n.x < x2 - 12 && n.y + n.h > lo && n.y < hi) return true;
+    }
+    return false;
+  }
+
+  function draw() {
+    measure();
+    svg.setAttribute('width', W); svg.setAttribute('height', H);
+    lsvg.setAttribute('width', W); lsvg.setAttribute('height', H);
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    while (lsvg.firstChild) lsvg.removeChild(lsvg.firstChild);
+    var defs = document.createElementNS(NS, 'defs');
+    defs.innerHTML =
+      '<marker id="arr-mut" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--muted-foreground)"/></marker>' +
+      '<marker id="arr-boot" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--sec-boot)"/></marker>' +
+      '<marker id="arr-data" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--viz-series-1)"/></marker>';
+    svg.appendChild(defs);
+    var labels = [];
+    EDGES.forEach(function (e) {
+      var a = R[e.f], b = R[e.t];
+      if (!a || !b) return;
+      a.id = e.f; b.id = e.t;
+      var dy = b.cy - a.cy, dx = b.cx - a.cx;
+      var p1, p2, c1, c2, mode;
+      if (dy > 60) { mode = 'vdown'; }
+      else if (dy < -60) { mode = 'vup'; }
+      else if (hasBlocker(a, b)) { mode = 'dip'; }
+      else { mode = 'h'; }
+      if (mode === 'vdown' || mode === 'vup') {
+        var dir = mode === 'vdown' ? 1 : -1;
+        var sv = Math.max(26, Math.min(170, Math.abs(dy) * 0.42));
+        if (dir > 0) { p1 = [a.cx, a.y + a.h]; p2 = [b.cx, b.y]; }
+        else { p1 = [a.cx, a.y]; p2 = [b.cx, b.y + b.h]; }
+        c1 = [p1[0], p1[1] + dir * sv];
+        c2 = [p2[0], p2[1] - dir * sv];
+      } else if (mode === 'dip') {
+        var sd = Math.max(34, Math.min(90, Math.abs(dx) * 0.22));
+        p1 = [a.cx, a.y + a.h]; p2 = [b.cx, b.y + b.h];
+        c1 = [p1[0], p1[1] + sd]; c2 = [p2[0], p2[1] + sd];
+      } else {
+        var dirx = dx >= 0 ? 1 : -1;
+        var sh = Math.max(26, Math.min(170, Math.abs(dx) * 0.42));
+        if (dirx > 0) { p1 = [a.x + a.w, a.cy]; p2 = [b.x, b.cy]; }
+        else { p1 = [a.x, a.cy]; p2 = [b.x + b.w, b.cy]; }
+        c1 = [p1[0] + dirx * sh, p1[1]];
+        c2 = [p2[0] - dirx * sh, p2[1]];
+      }
+      var d = 'M' + p1[0] + ' ' + p1[1] + ' C' + c1[0] + ' ' + c1[1] + ' ' + c2[0] + ' ' + c2[1] + ' ' + p2[0] + ' ' + p2[1];
+      var path = document.createElementNS(NS, 'path');
+      path.setAttribute('d', d);
+      path.setAttribute('class', 'e e-' + e.k);
+      path.dataset.f = e.f; path.dataset.t = e.t;
+      svg.appendChild(path);
+      if (e.l) {
+        var tmp = document.createElementNS(NS, 'path');
+        tmp.setAttribute('d', d);
+        svg.appendChild(tmp);
+        var len = tmp.getTotalLength();
+        var pt = tmp.getPointAtLength(len / 2);
+        svg.removeChild(tmp);
+        labels.push({ x: pt.x, y: pt.y, mode: mode, topY: Math.min(a.y, b.y) - 8, t: e.l, f: e.f, t2: e.t });
+      }
+    });
+    labels.forEach(function (L) {
+      var tx = document.createElementNS(NS, 'text');
+      if (L.mode === 'vdown' || L.mode === 'vup') { tx.setAttribute('x', L.x + 12); tx.setAttribute('y', L.y + 3); tx.setAttribute('text-anchor', 'start'); }
+      else if (L.mode === 'dip') { tx.setAttribute('x', L.x + 10); tx.setAttribute('y', L.y + 16); tx.setAttribute('text-anchor', 'start'); }
+      else { tx.setAttribute('x', L.x); tx.setAttribute('y', L.topY); tx.setAttribute('text-anchor', 'middle'); }
+      tx.setAttribute('class', 'elabel');
+      tx.textContent = L.t;
+      tx.dataset.f = L.f; tx.dataset.t = L.t2;
+      lsvg.appendChild(tx);
+    });
+  }
+
+  var hoverId = null;
+  function applyHover(id) {
+    hoverId = id;
+    var paths = svg.querySelectorAll('.e, .elabel');
+    var texts = lsvg.querySelectorAll('.elabel');
+    var all = [];
+    for (var i = 0; i < paths.length; i++) all.push(paths[i]);
+    for (var q = 0; q < texts.length; q++) all.push(texts[q]);
+    for (var m = 0; m < all.length; m++) {
+      var p = all[m];
+      var hit = id && (p.dataset.f === id || p.dataset.t === id);
+      p.classList.toggle('hl', !!hit);
+      p.classList.toggle('dim', !!id && !hit);
+    }
+    var nodes = stage.querySelectorAll('.node');
+    for (var j = 0; j < nodes.length; j++) {
+      var n = nodes[j];
+      var nid = n.dataset.node;
+      var neigh = false;
+      if (id) {
+        for (var k = 0; k < EDGES.length; k++) {
+          if ((EDGES[k].f === id && EDGES[k].t === nid) || (EDGES[k].t === id && EDGES[k].f === nid)) { neigh = true; break; }
+        }
+      }
+      n.classList.toggle('hl', !!id && (nid === id || neigh));
+      n.classList.toggle('dim', !!id && nid !== id && !neigh);
+    }
+  }
+
+  stage.addEventListener('mouseover', function (ev) {
+    var n = ev.target.closest('.node');
+    if (n && n.dataset.node !== hoverId) applyHover(n.dataset.node);
+  });
+  viewport.addEventListener('mouseleave', function () { applyHover(null); });
+
+  /* ---- pan & zoom ---- */
+  var tx = 0, ty = 0, scale = 1, interacted = false;
+  function applyT() {
+    stage.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
+    svg.style.setProperty('--zw', (1 / scale).toFixed(4));
+    lsvg.style.setProperty('--zw', (1 / scale).toFixed(4));
+  }
+  function clampScale(s) { return Math.max(0.22, Math.min(2.5, s)); }
+  function zoomAt(cx, cy, factor) {
+    var ns = clampScale(scale * factor);
+    var k = ns / scale;
+    tx = cx - (cx - tx) * k;
+    ty = cy - (cy - ty) * k;
+    scale = ns;
+    interacted = true;
+    applyT();
+  }
+  function fit() {
+    var vw = viewport.clientWidth, vh = viewport.clientHeight;
+    scale = clampScale(Math.min(vw / W, vh / H));
+    tx = (vw - W * scale) / 2;
+    ty = (vh - H * scale) / 2;
+    applyT();
+  }
+  document.getElementById('arch-zin').addEventListener('click', function () { zoomAt(viewport.clientWidth / 2, viewport.clientHeight / 2, 1.25); });
+  document.getElementById('arch-zout').addEventListener('click', function () { zoomAt(viewport.clientWidth / 2, viewport.clientHeight / 2, 1 / 1.25); });
+  document.getElementById('arch-zfit').addEventListener('click', function () { fit(); });
+
+  viewport.addEventListener('wheel', function (e) {
+    e.preventDefault();
+    var r = viewport.getBoundingClientRect();
+    var f = Math.exp(-e.deltaY * 0.0016);
+    zoomAt(e.clientX - r.left, e.clientY - r.top, f);
+  }, { passive: false });
+
+  var drag = null;
+  viewport.addEventListener('pointerdown', function (e) {
+    if (e.target.closest('.zctrl')) return;
+    drag = { x: e.clientX, y: e.clientY, tx: tx, ty: ty };
+    viewport.classList.add('dragging');
+    viewport.setPointerCapture(e.pointerId);
+  });
+  viewport.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    tx = drag.tx + (e.clientX - drag.x);
+    ty = drag.ty + (e.clientY - drag.y);
+    interacted = true;
+    applyT();
+  });
+  viewport.addEventListener('pointerup', function () { drag = null; viewport.classList.remove('dragging'); });
+  viewport.addEventListener('pointercancel', function () { drag = null; viewport.classList.remove('dragging'); });
+
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(function () { if (!interacted) fit(); else applyT(); }).observe(viewport);
+  } else {
+    window.addEventListener('resize', function () { if (!interacted) fit(); });
+  }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { draw(); fit(); });
+  window.addEventListener('load', function () { draw(); fit(); });
+  draw();
+  fit();
+})();
+</script>
+</body></html>
