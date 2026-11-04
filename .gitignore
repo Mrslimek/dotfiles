@@ -11,3 +11,8 @@
 .config/.config/Element/
 
 hyprland/.config/hypr/*.conf
+
+# stow symlinks to system theme paths (dangling outside this machine)
+gtk4.0/.config/gtk-4.0/assets
+gtk4.0/.config/gtk-4.0/gtk-dark.css
+gtk4.0/.config/gtk-4.0/gtk.css
