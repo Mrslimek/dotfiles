@@ -114,7 +114,7 @@ body { background: var(--background); color: var(--foreground); }
 #arch-overview .zview { position: relative; height: 720px; overflow: hidden; border: 1px solid var(--border); border-radius: 12px;
   background: color-mix(in srgb, var(--card) 45%, var(--background)); touch-action: none; cursor: grab; user-select: none; -webkit-user-select: none; }
 #arch-overview .zview.dragging { cursor: grabbing; }
-#arch-overview .zcanvas { position: absolute; top: 0; left: 0; width: 2530px; height: 1500px; transform-origin: 0 0;
+#arch-overview .zcanvas { position: absolute; top: 0; left: 0; width: 2530px; height: 1500px; transform-origin: 0 0; will-change: transform;
   background-image: radial-gradient(color-mix(in srgb, var(--border) 60%, transparent) 1px, transparent 1px); background-size: 24px 24px; }
 #arch-overview #arch-edges { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; z-index: 0; }
 #arch-overview #arch-labels { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; z-index: 2; }
@@ -148,15 +148,15 @@ body { background: var(--background); color: var(--foreground); }
 #arch-overview .node.dim { opacity: .25; }
 @media (prefers-reduced-motion: reduce) { #arch-overview .node, #arch-overview .e, #arch-overview .elabel { transition: none; } }
 
-#arch-overview .e { fill: none; stroke: var(--muted-foreground); stroke-width: calc(1.4px * var(--zw, 1)); opacity: .45; transition: opacity .15s; }
-#arch-overview .e.e-boot { stroke: var(--sec-boot); stroke-width: calc(2px * var(--zw, 1)); opacity: .85; marker-end: url(#arr-boot); }
+#arch-overview .e { fill: none; stroke: var(--muted-foreground); stroke-width: 1.4; opacity: .45; transition: opacity .15s; }
+#arch-overview .e.e-boot { stroke: var(--sec-boot); stroke-width: 2; opacity: .85; marker-end: url(#arr-boot); }
 #arch-overview .e.e-start { marker-end: url(#arr-mut); }
 #arch-overview .e.e-data { stroke: var(--viz-series-1); opacity: .75; marker-end: url(#arr-data); }
-#arch-overview .e.e-dbus { stroke-dasharray: 2 4; marker-end: url(#arr-mut); }
-#arch-overview .e.e-build { stroke-dasharray: 6 5; marker-end: url(#arr-mut); }
-#arch-overview .e.hl { opacity: 1; stroke-width: calc(2.2px * var(--zw, 1)); }
+#arch-overview .e.e-dbus { stroke-dasharray: calc(2px * var(--zw, 1)) calc(4px * var(--zw, 1)); marker-end: url(#arr-mut); }
+#arch-overview .e.e-build { stroke-dasharray: calc(6px * var(--zw, 1)) calc(5px * var(--zw, 1)); marker-end: url(#arr-mut); }
+#arch-overview .e.hl { opacity: 1; stroke-width: 2.2; }
 #arch-overview .e.dim { opacity: .05; }
-#arch-overview .elabel { font-size: calc(11px * var(--zw, 1)); fill: var(--foreground); paint-order: stroke; stroke: var(--background); stroke-width: 4px; stroke-linejoin: round; transition: opacity .15s; }
+#arch-overview .elabel { font-size: calc(11px * var(--zw, 1)); fill: var(--foreground); paint-order: stroke; stroke: var(--background); stroke-width: calc(4px * var(--zw, 1)); stroke-linejoin: round; transition: opacity .15s; }
 #arch-overview .elabel.dim { opacity: .08; }
 #arch-overview .lg .e-boot { stroke: var(--sec-boot); opacity: .85; }
 #arch-overview .lg .e-start { stroke: var(--muted-foreground); opacity: .45; }
@@ -258,10 +258,11 @@ body { background: var(--background); color: var(--foreground); }
     while (svg.firstChild) svg.removeChild(svg.firstChild);
     while (lsvg.firstChild) lsvg.removeChild(lsvg.firstChild);
     var defs = document.createElementNS(NS, 'defs');
+    var ms = (6.5 / scale).toFixed(3);
     defs.innerHTML =
-      '<marker id="arr-mut" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--muted-foreground)"/></marker>' +
-      '<marker id="arr-boot" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--sec-boot)"/></marker>' +
-      '<marker id="arr-data" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--viz-series-1)"/></marker>';
+      '<marker id="arr-mut" viewBox="0 0 10 10" refX="8.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="' + ms + '" markerHeight="' + ms + '" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--muted-foreground)"/></marker>' +
+      '<marker id="arr-boot" viewBox="0 0 10 10" refX="8.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="' + ms + '" markerHeight="' + ms + '" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--sec-boot)"/></marker>' +
+      '<marker id="arr-data" viewBox="0 0 10 10" refX="8.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="' + ms + '" markerHeight="' + ms + '" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--viz-series-1)"/></marker>';
     svg.appendChild(defs);
     var labels = [];
     EDGES.forEach(function (e) {
@@ -297,6 +298,7 @@ body { background: var(--background); color: var(--foreground); }
       var path = document.createElementNS(NS, 'path');
       path.setAttribute('d', d);
       path.setAttribute('class', 'e e-' + e.k);
+      path.setAttribute('vector-effect', 'non-scaling-stroke');
       path.dataset.f = e.f; path.dataset.t = e.t;
       svg.appendChild(path);
       if (e.l) {
@@ -355,8 +357,24 @@ body { background: var(--background); color: var(--foreground); }
   var tx = 0, ty = 0, scale = 1, interacted = false;
   function applyT() {
     stage.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
-    svg.style.setProperty('--zw', (1 / scale).toFixed(4));
-    lsvg.style.setProperty('--zw', (1 / scale).toFixed(4));
+  }
+  /* масштаб-зависимые стили (подписи, пунктиры, стрелки) обновляются
+     один раз после окончания жеста зума, а не на каждый тик колеса */
+  var scaleTimer = 0;
+  function refreshScaleDeps() {
+    var zw = (1 / scale).toFixed(4);
+    svg.style.setProperty('--zw', zw);
+    lsvg.style.setProperty('--zw', zw);
+    var ms = (6.5 / scale).toFixed(3);
+    var markers = svg.querySelectorAll('marker');
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setAttribute('markerWidth', ms);
+      markers[i].setAttribute('markerHeight', ms);
+    }
+  }
+  function scheduleScaleDeps() {
+    if (scaleTimer) return;
+    scaleTimer = setTimeout(function () { scaleTimer = 0; refreshScaleDeps(); }, 140);
   }
   function clampScale(s) { return Math.max(0.22, Math.min(2.5, s)); }
   function zoomAt(cx, cy, factor) {
@@ -367,6 +385,7 @@ body { background: var(--background); color: var(--foreground); }
     scale = ns;
     interacted = true;
     applyT();
+    scheduleScaleDeps();
   }
   function fit() {
     var vw = viewport.clientWidth, vh = viewport.clientHeight;
@@ -374,16 +393,29 @@ body { background: var(--background); color: var(--foreground); }
     tx = (vw - W * scale) / 2;
     ty = (vh - H * scale) / 2;
     applyT();
+    refreshScaleDeps();
   }
   document.getElementById('arch-zin').addEventListener('click', function () { zoomAt(viewport.clientWidth / 2, viewport.clientHeight / 2, 1.25); });
   document.getElementById('arch-zout').addEventListener('click', function () { zoomAt(viewport.clientWidth / 2, viewport.clientHeight / 2, 1 / 1.25); });
   document.getElementById('arch-zfit').addEventListener('click', function () { fit(); });
 
+  /* колесо: коалесцируем тики до одного обновления transform на кадр */
+  var wheelDy = 0, wheelX = 0, wheelY = 0, wheelRaf = 0;
   viewport.addEventListener('wheel', function (e) {
     e.preventDefault();
-    var r = viewport.getBoundingClientRect();
-    var f = Math.exp(-e.deltaY * 0.0016);
-    zoomAt(e.clientX - r.left, e.clientY - r.top, f);
+    if (!wheelRaf) {
+      wheelDy = 0;
+      var r = viewport.getBoundingClientRect();
+      wheelX = e.clientX - r.left;
+      wheelY = e.clientY - r.top;
+    }
+    wheelDy += e.deltaY;
+    if (!wheelRaf) {
+      wheelRaf = requestAnimationFrame(function () {
+        wheelRaf = 0;
+        zoomAt(wheelX, wheelY, Math.exp(-wheelDy * 0.0016));
+      });
+    }
   }, { passive: false });
 
   var drag = null;
