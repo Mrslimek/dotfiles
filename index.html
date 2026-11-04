@@ -116,6 +116,9 @@ body { background: var(--background); color: var(--foreground); }
 #arch-overview .zview.dragging { cursor: grabbing; }
 #arch-overview .zcanvas { position: absolute; top: 0; left: 0; width: 2530px; height: 1500px; transform-origin: 0 0; will-change: transform;
   background-image: radial-gradient(color-mix(in srgb, var(--border) 60%, transparent) 1px, transparent 1px); background-size: 24px 24px; }
+/* во время жеста зума transform интерполируется на композиторе:
+   растр кэшируется и масштабируется GPU, без перекраски содержимого */
+#arch-overview .zcanvas.zooming { transition: transform 130ms cubic-bezier(0.25, 0.6, 0.3, 1); }
 #arch-overview #arch-edges { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; z-index: 0; }
 #arch-overview #arch-labels { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; z-index: 2; }
 #arch-overview .gl { position: absolute; z-index: 1; display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--muted-foreground); }
@@ -374,7 +377,11 @@ body { background: var(--background); color: var(--foreground); }
   }
   function scheduleScaleDeps() {
     if (scaleTimer) return;
-    scaleTimer = setTimeout(function () { scaleTimer = 0; refreshScaleDeps(); }, 140);
+    scaleTimer = setTimeout(function () {
+      scaleTimer = 0;
+      stage.classList.remove('zooming');
+      refreshScaleDeps();
+    }, 140);
   }
   function clampScale(s) { return Math.max(0.22, Math.min(2.5, s)); }
   function zoomAt(cx, cy, factor) {
@@ -384,6 +391,7 @@ body { background: var(--background); color: var(--foreground); }
     ty = cy - (cy - ty) * k;
     scale = ns;
     interacted = true;
+    stage.classList.add('zooming');
     applyT();
     scheduleScaleDeps();
   }
@@ -392,6 +400,7 @@ body { background: var(--background); color: var(--foreground); }
     scale = clampScale(Math.min(vw / W, vh / H));
     tx = (vw - W * scale) / 2;
     ty = (vh - H * scale) / 2;
+    stage.classList.remove('zooming');
     applyT();
     refreshScaleDeps();
   }
