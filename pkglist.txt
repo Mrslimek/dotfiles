@@ -55,6 +55,7 @@ gvfs
 gvfs-gphoto2
 gvfs-mtp
 handlr-regex
+hid-tools
 htop
 hyprland
 hyprlock
@@ -71,6 +72,7 @@ keyd
 ldtk
 less
 libgsf
+libinput-tools
 libpulse
 libreoffice-fresh
 libva-utils
