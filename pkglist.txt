@@ -5,6 +5,7 @@ amberol
 amd-ucode
 android-tools
 android-udev
+arch-audit
 aseprite
 base
 base-devel
