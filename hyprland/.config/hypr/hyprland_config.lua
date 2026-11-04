@@ -6,7 +6,7 @@ hl.config({
     input = {
         kb_layout   = "us,ru",
         kb_options  = "grp:win_space_toggle",
-        sensitivity = 0.2,
+        sensitivity = 0.1,
         accel_profile = "adaptive",
         touchpad    = {
         	scroll_factor  = 0.2,

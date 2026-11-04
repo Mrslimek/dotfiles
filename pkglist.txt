@@ -1,7 +1,6 @@
 accountsservice
 acpi
 adw-gtk-theme
-alacritty
 amberol
 amd-ucode
 android-tools
@@ -40,6 +39,7 @@ ffmpegthumbnailer
 file-roller
 fwupd
 gamescope
+ghostty
 git
 git-delta
 git-filter-repo
