@@ -41,7 +41,7 @@ body { background: var(--background); color: var(--foreground); }
     <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-data"/></svg>данные / API / UI</span>
     <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-dbus"/></svg>D-Bus-активация</span>
     <span class="lg"><svg width="24" height="8" aria-hidden="true"><line x1="0" y1="4" x2="22" y2="4" class="lg-line e-build"/></svg>сборка / запуск вручную</span>
-    <span class="lg-hint text-muted text-small">тяните мышью — перемещение · колесо — масштаб · наведите на узел, чтобы выделить связи</span>
+    <span class="lg-hint text-muted text-small">клик по узлу — выделить связи · повторный клик или клик по фону — снять · тяните мышью — перемещение · колесо — масштаб</span>
   </div>
 
   <div class="zview" id="arch-viewport">
@@ -321,9 +321,10 @@ body { background: var(--background); color: var(--foreground); }
     });
   }
 
-  var hoverId = null;
-  function applyHover(id) {
-    hoverId = id;
+  /* ---- выбор узла по клику (hover не используется) ---- */
+  var selectedId = null;
+  function applySelect(id) {
+    selectedId = id;
     var paths = svg.querySelectorAll('.e, .elabel');
     var texts = lsvg.querySelectorAll('.elabel');
     var all = [];
@@ -349,12 +350,6 @@ body { background: var(--background); color: var(--foreground); }
       n.classList.toggle('dim', !!id && nid !== id && !neigh);
     }
   }
-
-  stage.addEventListener('mouseover', function (ev) {
-    var n = ev.target.closest('.node');
-    if (n && n.dataset.node !== hoverId) applyHover(n.dataset.node);
-  });
-  viewport.addEventListener('mouseleave', function () { applyHover(null); });
 
   /* ---- pan & zoom ---- */
   var tx = 0, ty = 0, scale = 1, interacted = false;
@@ -394,18 +389,27 @@ body { background: var(--background); color: var(--foreground); }
   var drag = null;
   viewport.addEventListener('pointerdown', function (e) {
     if (e.target.closest('.zctrl')) return;
-    drag = { x: e.clientX, y: e.clientY, tx: tx, ty: ty };
-    viewport.classList.add('dragging');
+    drag = { x: e.clientX, y: e.clientY, tx: tx, ty: ty, moved: false, node: e.target.closest('.node') };
     viewport.setPointerCapture(e.pointerId);
   });
   viewport.addEventListener('pointermove', function (e) {
     if (!drag) return;
-    tx = drag.tx + (e.clientX - drag.x);
-    ty = drag.ty + (e.clientY - drag.y);
+    var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (!drag.moved && (Math.abs(dx) > 4 || Math.abs(dy) > 4)) { drag.moved = true; viewport.classList.add('dragging'); }
+    if (!drag.moved) return;
+    tx = drag.tx + dx;
+    ty = drag.ty + dy;
     interacted = true;
     applyT();
   });
-  viewport.addEventListener('pointerup', function () { drag = null; viewport.classList.remove('dragging'); });
+  viewport.addEventListener('pointerup', function (e) {
+    if (drag && !drag.moved) {
+      var id = drag.node ? drag.node.dataset.node : null;
+      applySelect(selectedId === id ? null : id);
+    }
+    drag = null;
+    viewport.classList.remove('dragging');
+  });
   viewport.addEventListener('pointercancel', function () { drag = null; viewport.classList.remove('dragging'); });
 
   if ('ResizeObserver' in window) {
