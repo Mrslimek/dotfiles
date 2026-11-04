@@ -151,13 +151,13 @@ body { background: var(--background); color: var(--foreground); }
 #arch-overview .node.dim { opacity: .25; }
 @media (prefers-reduced-motion: reduce) { #arch-overview .node, #arch-overview .e, #arch-overview .elabel { transition: none; } }
 
-#arch-overview .e { fill: none; stroke: var(--muted-foreground); stroke-width: 1.4; opacity: .45; transition: opacity .15s; }
-#arch-overview .e.e-boot { stroke: var(--sec-boot); stroke-width: 2; opacity: .85; marker-end: url(#arr-boot); }
+#arch-overview .e { fill: none; stroke: var(--muted-foreground); stroke-width: calc(1.4px * var(--zw, 1)); opacity: .45; transition: opacity .15s; }
+#arch-overview .e.e-boot { stroke: var(--sec-boot); stroke-width: calc(2px * var(--zw, 1)); opacity: .85; marker-end: url(#arr-boot); }
 #arch-overview .e.e-start { marker-end: url(#arr-mut); }
 #arch-overview .e.e-data { stroke: var(--viz-series-1); opacity: .75; marker-end: url(#arr-data); }
 #arch-overview .e.e-dbus { stroke-dasharray: calc(2px * var(--zw, 1)) calc(4px * var(--zw, 1)); marker-end: url(#arr-mut); }
 #arch-overview .e.e-build { stroke-dasharray: calc(6px * var(--zw, 1)) calc(5px * var(--zw, 1)); marker-end: url(#arr-mut); }
-#arch-overview .e.hl { opacity: 1; stroke-width: 2.2; }
+#arch-overview .e.hl { opacity: 1; stroke-width: calc(2.2px * var(--zw, 1)); }
 #arch-overview .e.dim { opacity: .05; }
 #arch-overview .elabel { font-size: calc(11px * var(--zw, 1)); fill: var(--foreground); paint-order: stroke; stroke: var(--background); stroke-width: calc(4px * var(--zw, 1)); stroke-linejoin: round; transition: opacity .15s; }
 #arch-overview .elabel.dim { opacity: .08; }
@@ -301,7 +301,6 @@ body { background: var(--background); color: var(--foreground); }
       var path = document.createElementNS(NS, 'path');
       path.setAttribute('d', d);
       path.setAttribute('class', 'e e-' + e.k);
-      path.setAttribute('vector-effect', 'non-scaling-stroke');
       path.dataset.f = e.f; path.dataset.t = e.t;
       svg.appendChild(path);
       if (e.l) {
