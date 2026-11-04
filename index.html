@@ -72,6 +72,17 @@ body { background: var(--background); color: var(--foreground); }
       <div class="node" data-node="playerctld"><div class="nname">playerctld</div><div class="nrole">MPRIS player aggregator</div></div>
       <div class="node" data-node="mprisproxy"><div class="nname">mpris-proxy</div><div class="nrole">MPRIS → Bluetooth bridge (AVRCP)</div></div>
     </div>
+    <div class="doc-panel" id="arch-docpanel" hidden aria-label="Node documentation">
+      <div class="doc-head">
+        <div class="doc-titles">
+          <div class="doc-title"></div>
+          <div class="doc-role"></div>
+        </div>
+        <button type="button" class="zbtn doc-close" aria-label="Close documentation">×</button>
+      </div>
+      <div class="doc-badge" hidden>not written yet</div>
+      <div class="doc-body"></div>
+    </div>
     <div class="zctrl">
       <button type="button" class="zbtn" id="arch-zin" aria-label="Zoom in">+</button>
       <button type="button" class="zbtn" id="arch-zout" aria-label="Zoom out">−</button>
@@ -146,8 +157,42 @@ body { background: var(--background); color: var(--foreground); }
 #arch-overview .zctrl { position: absolute; top: 10px; right: 10px; display: flex; gap: 6px; z-index: 3; }
 #arch-overview .zbtn { width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); color: var(--foreground); font-size: 15px; line-height: 1; cursor: pointer; padding: 0; }
 #arch-overview .zbtn:hover { border-color: var(--muted-foreground); }
+
+/* node documentation panel */
+#arch-overview .doc-panel { position: absolute; top: 12px; right: 12px; bottom: 12px; width: min(400px, 80%);
+  background: var(--card); border: 1px solid var(--border); border-radius: 12px; z-index: 4; overflow-y: auto;
+  box-shadow: 0 10px 28px color-mix(in srgb, black 18%, transparent);
+  box-sizing: border-box; padding: 14px 16px; cursor: auto; touch-action: pan-y;
+  user-select: text; -webkit-user-select: text; }
+#arch-overview .doc-panel[hidden] { display: none; }
+#arch-overview .doc-head { display: flex; align-items: flex-start; gap: 10px; margin: 0 0 10px; }
+#arch-overview .doc-titles { flex: 1 1 auto; min-width: 0; }
+#arch-overview .doc-title { font-weight: 700; font-size: 18px; line-height: 1.25; color: var(--foreground); }
+#arch-overview .doc-role { font-size: 12px; line-height: 1.35; color: var(--muted-foreground); margin-top: 2px; }
+#arch-overview .doc-close { flex: 0 0 auto; }
+#arch-overview .doc-badge { display: inline-block; font-size: 11px; letter-spacing: .02em; color: var(--muted-foreground);
+  border: 1px dashed var(--border); border-radius: 999px; padding: 2px 9px; margin: 0 0 10px; }
+#arch-overview .doc-badge[hidden] { display: none; }
+#arch-overview .doc-body { font-size: 14px; line-height: 1.55; color: var(--foreground); }
+#arch-overview .doc-body h1 { font-size: 18px; font-weight: 500; line-height: 1.3; margin: 14px 0 8px; }
+#arch-overview .doc-body h2 { font-size: 15px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; color: var(--muted-foreground); margin: 14px 0 6px; }
+#arch-overview .doc-body h3, #arch-overview .doc-body h4 { font-size: 14px; font-weight: 500; margin: 12px 0 6px; }
+#arch-overview .doc-body h1:first-child, #arch-overview .doc-body h2:first-child, #arch-overview .doc-body h3:first-child, #arch-overview .doc-body p:first-child { margin-top: 0; }
+#arch-overview .doc-body p { margin: 0 0 8px; }
+#arch-overview .doc-body ul, #arch-overview .doc-body ol { margin: 0 0 8px; padding-left: 20px; }
+#arch-overview .doc-body li { margin: 0 0 3px; }
+#arch-overview .doc-body code { font-size: 12.5px; background: var(--muted, color-mix(in srgb, var(--muted-foreground) 16%, transparent)); border-radius: 4px; padding: 1px 5px; }
+#arch-overview .doc-body pre { background: var(--muted, color-mix(in srgb, var(--muted-foreground) 16%, transparent)); border-radius: 8px; padding: 10px 12px; overflow-x: auto; margin: 0 0 8px; }
+#arch-overview .doc-body pre code { background: transparent; padding: 0; }
+#arch-overview .doc-body a { color: var(--primary); }
+#arch-overview .doc-body blockquote { margin: 0 0 8px; padding: 2px 12px; border-left: 3px solid var(--border); color: var(--muted-foreground); }
+#arch-overview .doc-body hr { border: 0; border-top: 1px solid var(--border); margin: 12px 0; }
+#arch-overview .doc-body table { border-collapse: collapse; margin: 0 0 8px; }
+#arch-overview .doc-body th, #arch-overview .doc-body td { border: 1px solid var(--border); padding: 4px 8px; }
+#arch-overview .doc-plain { white-space: pre-wrap; font-family: inherit; font-size: 14px; line-height: 1.55; margin: 0; color: var(--foreground); }
 </style>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
 <script>
 /* orgLayout.js — dependency-free layered org-chart layout.
    Validated: 22 invariant checks + 1500-tree fuzz (see /tmp/layout-ref/). */
@@ -675,6 +720,7 @@ var OrgLayout = (function () {
   /* wheel: coalesce ticks into a single transform update per frame */
   var wheelDy = 0, wheelX = 0, wheelY = 0, wheelRaf = 0;
   viewport.addEventListener('wheel', function (e) {
+    if (e.target.closest('.doc-panel')) return; /* let the doc panel scroll itself */
     e.preventDefault();
     if (!wheelRaf) {
       wheelDy = 0;
@@ -693,7 +739,7 @@ var OrgLayout = (function () {
 
   var drag = null;
   viewport.addEventListener('pointerdown', function (e) {
-    if (e.target.closest('.zctrl')) return;
+    if (e.target.closest('.zctrl') || e.target.closest('.doc-panel')) return;
     drag = { x: e.clientX, y: e.clientY, tx: tx, ty: ty, moved: false, node: e.target.closest('.node') };
     viewport.setPointerCapture(e.pointerId);
   });
@@ -708,14 +754,115 @@ var OrgLayout = (function () {
     applyT();
   });
   viewport.addEventListener('pointerup', function (e) {
+    if (e.target.closest('.doc-panel')) { drag = null; viewport.classList.remove('dragging'); return; }
     if (drag && !drag.moved) {
       var id = drag.node ? drag.node.dataset.node : null;
       applySelect(selectedId === id ? null : id);
+      if (selectedId) openDoc(selectedId); else hideDoc();
     }
     drag = null;
     viewport.classList.remove('dragging');
   });
   viewport.addEventListener('pointercancel', function () { drag = null; viewport.classList.remove('dragging'); });
+
+  /* ---- node documentation panel ---- */
+  var docPanel = document.getElementById('arch-docpanel');
+  var docTitle = docPanel.querySelector('.doc-title');
+  var docRole = docPanel.querySelector('.doc-role');
+  var docBadge = docPanel.querySelector('.doc-badge');
+  var docBody = docPanel.querySelector('.doc-body');
+  var docCache = {};
+  var docToken = 0;
+  var DOC_STUB = 'No doc for this node yet.\n\nCreate `docs/nodes/<id>.md` in the repo — it will show up here automatically.';
+
+  /* strip a leading YAML front-matter block delimited by '---' lines */
+  function stripFrontMatter(md) {
+    var s = (md == null) ? '' : String(md);
+    if (s.slice(0, 3) !== '---') return { fm: null, text: s };
+    var lines = s.split('\n');
+    for (var i = 1; i < lines.length; i++) {
+      if (lines[i].replace(/\r$/, '') === '---')
+        return { fm: lines.slice(1, i).join('\n'), text: lines.slice(i + 1).join('\n') };
+    }
+    return { fm: null, text: s }; /* no closing '---': not front-matter */
+  }
+  function frontStatus(fm) {
+    if (!fm) return null;
+    var m = fm.match(/^status:[ \t]*(.+?)[ \t]*$/m);
+    return m ? m[1].replace(/^["']|["']$/g, '') : null;
+  }
+
+  /* docs fetch cascade: repo-relative first, then GitHub raw; first 200 wins */
+  function fetchDoc(id) {
+    if (docCache.hasOwnProperty(id)) return Promise.resolve(docCache[id]);
+    var sources = [
+      'docs/nodes/' + id + '.md',
+      'https://raw.githubusercontent.com/Mrslimek/dotfiles/main/docs/nodes/' + id + '.md'
+    ];
+    var i = 0;
+    function attempt() {
+      if (i >= sources.length) {
+        var stub = { status: 'stub', text: DOC_STUB };
+        docCache[id] = stub;
+        return Promise.resolve(stub);
+      }
+      var url = sources[i++];
+      return fetch(url).then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.text();
+      }).then(function (raw) {
+        var pm = stripFrontMatter(raw);
+        var res = { status: frontStatus(pm.fm) || 'ok', text: pm.text };
+        docCache[id] = res;
+        return res;
+      }).catch(function () { return attempt(); });
+    }
+    return attempt();
+  }
+
+  function renderDoc(res) {
+    docBadge.hidden = res.status !== 'stub';
+    docBody.innerHTML = '';
+    var html = null;
+    if (window.marked && typeof window.marked.parse === 'function') {
+      try { html = window.marked.parse(res.text); } catch (err) { html = null; }
+    }
+    if (typeof html === 'string') {
+      docBody.innerHTML = html;
+      docBody.querySelectorAll('a').forEach(function (a) { a.target = '_blank'; a.rel = 'noopener'; });
+    } else {
+      /* marked unavailable (CDN unreachable) or parse failed: show raw markdown */
+      var pre = document.createElement('pre');
+      pre.className = 'doc-plain';
+      pre.textContent = res.text;
+      docBody.appendChild(pre);
+    }
+  }
+
+  function openDoc(id) {
+    var card = stage.querySelector('[data-node="' + id + '"]');
+    var nameEl = card ? card.querySelector('.nname') : null;
+    var roleEl = card ? card.querySelector('.nrole') : null;
+    docTitle.textContent = nameEl ? nameEl.textContent : id;
+    docRole.textContent = roleEl ? roleEl.textContent : '';
+    docBadge.hidden = true;
+    docBody.textContent = 'Loading…';
+    docPanel.hidden = false;
+    var tok = ++docToken;
+    fetchDoc(id).then(function (res) {
+      if (tok !== docToken || docPanel.hidden) return; /* stale response */
+      renderDoc(res);
+    }).catch(function () {
+      if (tok !== docToken || docPanel.hidden) return;
+      docBadge.hidden = true;
+      docBody.textContent = 'Failed to load documentation.';
+    });
+  }
+  function hideDoc() {
+    docToken++;
+    docPanel.hidden = true;
+  }
+  docPanel.querySelector('.doc-close').addEventListener('click', hideDoc);
 
   if ('ResizeObserver' in window) {
     new ResizeObserver(function () { if (!interacted) fit(); }).observe(viewport);
