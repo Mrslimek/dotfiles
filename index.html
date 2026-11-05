@@ -820,8 +820,11 @@ var OrgLayout = (function () {
     return attempt();
   }
 
+  var BADGES = { stub: 'not written yet', open: 'open questions', ok: '', done: '' };
   function renderDoc(res) {
-    docBadge.hidden = res.status !== 'stub';
+    var st = res.status || 'ok';
+    docBadge.textContent = BADGES[st] || '';
+    docBadge.hidden = !BADGES[st];
     docBody.innerHTML = '';
     var html = null;
     if (window.marked && typeof window.marked.parse === 'function') {
