@@ -7,9 +7,11 @@ hl.config({
         kb_layout   = "us,ru",
         kb_options  = "grp:win_space_toggle",
         sensitivity = 0.1,
+        
         accel_profile = "adaptive",
+        
         touchpad    = {
-        	scroll_factor  = 0.2,
+        	scroll_factor  = 1,
             natural_scroll = true,
             tap_to_click   = true,
             -- clickfinger_behavior = true,
@@ -24,7 +26,8 @@ hl.config({
         border_size = 2,
         gaps_in     = 5,
         gaps_out    = 10,
-        layout      = "dwindle",
+        -- layout      = "dwindle",
+        layout      = "monocle",
     },
 
     decoration = {
@@ -64,4 +67,51 @@ hl.config({
         enabled            = true,
         force_zero_scaling = true,
     },
+
+	hl.config({
+	    plugin = {
+	        hymission = {
+	            -- Layout
+	            layout_engine = "natural",
+	            outer_padding_top = 32,
+	            outer_padding_right = 32,
+	            outer_padding_bottom = 32,
+	            outer_padding_left = 32,
+
+	            row_spacing = 28,
+	            column_spacing = 28,
+
+	            min_window_length = 120,
+	            small_window_boost = 1.35,
+	            max_preview_scale = 0.95,
+
+	            -- Workspace scope
+	            only_active_workspace = 1,
+	            only_active_monitor = 0,
+	            show_special = 0,
+	            multi_workspace_sort_recent_first = 1,
+
+	            -- Window selection
+	            selected_expand_scale = 1.18,
+	            hover_expand_scale = 1.18,
+	            overview_focus_follows_mouse = 1,
+
+	            -- Workspace strip
+	            workspace_strip_anchor = "top",
+	            workspace_strip_thickness = 160,
+	            workspace_strip_gap = 24,
+
+	            -- Animations and behavior
+	            workspace_change_keeps_overview = 1,
+	            gesture_invert_vertical = 0,
+	        },
+	    },
+	}),
+
+	hl.plugin.hymission.gesture({
+	    fingers = 3,
+	    direction = "vertical",
+	    action = "toggle",
+	    scale = 0.5,
+	})
 })

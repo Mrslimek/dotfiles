@@ -6,3 +6,5 @@ hl.device({
     name   = "huion-huion-tablet_h420x-pen",
     output = "HDMI-A-1",
 })
+
+

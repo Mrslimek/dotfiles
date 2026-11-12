@@ -1,5 +1,7 @@
 accountsservice
 acpi
+acpica
+acpi_call-dkms
 adw-gtk-theme
 amberol
 amd-ucode
@@ -19,6 +21,7 @@ chromium
 claude-code-stable-bin
 cmatrix
 codegraph-bin
+cpupower
 cpu-x
 dconf-editor
 ddcutil
@@ -46,6 +49,7 @@ git-delta
 git-filter-repo
 gnome-themes-extra
 go
+goverlay
 gptfdisk
 gpu-screen-recorder-gtk
 greetd
@@ -70,8 +74,10 @@ inotify-tools
 iwd
 keepassxc
 keyd
+lact
 ldtk
 less
+lib32-mangohud
 libgsf
 libinput-tools
 libpulse
@@ -79,10 +85,12 @@ libreoffice-fresh
 libva-utils
 linux
 linux-firmware
+linux-headers
 localsend-bin
 lsof
 ly
 man-db
+mangohud
 micro
 moonlight-qt-axi-appimage
 mpc
@@ -92,7 +100,6 @@ nautilus
 networkmanager
 noctalia-git
 noctalia-greeter
-noctalia-shell
 nodejs
 noto-fonts-emoji
 ntfs-3g
@@ -113,6 +120,7 @@ pipewire-pulse
 playerctl
 poppler-glib
 postman-bin
+power-profiles-daemon
 powertop
 protontricks
 qbittorrent
@@ -123,6 +131,8 @@ qt6ct
 qt6-wayland
 rsync
 rustup
+ryzenadj
+ryzen_smu-dkms-git
 satty
 sbctl
 seahorse
@@ -143,8 +153,9 @@ ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-mono
 ttf-opensans
 tumbler
-tuned-ppd
+turbostat
 udiskie
+umbriel-git
 usbutils
 uv
 uwsm
