@@ -1,0 +1,68 @@
+
+# ==========================================
+# Ghostty configuration
+# Migrated from Alacritty
+# Ghostty 1.4.0
+# ==========================================
+
+# Theme
+theme = noctalia
+
+# Colors
+background = #000000
+foreground = #FFFFFF
+
+# ==========================================
+# Font
+# ==========================================
+
+font-family = Hack Nerd Font
+font-style = Regular
+font-style-bold = Bold
+font-style-italic = Italic
+
+font-size = 16
+
+# ==========================================
+# Window
+# ==========================================
+
+window-decoration = none
+
+window-padding-x = 5
+window-padding-y = 5
+
+# ==========================================
+# Cursor
+# ==========================================
+
+cursor-style = block
+cursor-style-blink = true
+
+# ==========================================
+# Scrollback
+# ==========================================
+
+scrollback-limit-lines = 10000
+
+# ==========================================
+# Links
+# ==========================================
+
+link-url = false
+
+# ==========================================
+# Keyboard
+# ==========================================
+
+# Shift + Enter sends ESC followed by CR
+keybind = shift+enter=text:\x1b\r
+
+
+# ==========================================
+# Quick Terminal
+# ==========================================
+
+quick-terminal-position = bottom
+quick-terminal-size = 40%,100%
+quick-terminal-screen = mouse

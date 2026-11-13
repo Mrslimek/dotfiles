@@ -1,0 +1,298 @@
+# Umbriel configuration translated from the supplied Hyprland dotfiles.
+# Target: current noctalia-dev/umbriel main branch (umbriel-git).
+#
+# Validate against the exact installed binary with:
+#   umbriel config validate
+#   umbriel config schema --json
+#
+# Umbriel uses per-output workspaces. Both outputs are configured with 10
+# workspaces so Mod+1..0 always have stable destinations on the focused output.
+
+[general]
+mod_key = "Super"
+autostart = ["noctalia"]
+xwayland = true
+# Closest counterpart to Hyprland's force_zero_scaling.
+xwayland_native_resolution = true
+xwayland_xsettings = true
+show_cheatsheet = false
+
+[environment]
+# Kept from the Hyprland setup. AQ_* is Aquamarine-specific; Umbriel is
+# wlroots-based, so this may have no effect on Umbriel itself.
+AQ_DRM_NO_MODIFIERS = "1"
+# Steam (CEF) has no native Wayland client: on a native-resolution XWayland it
+# renders at 1x and bitmap-stretches its UI (blurry). Force real 2x device
+# scale so it renders sharply at the size XSETTINGS already asks for.
+STEAM_FORCE_DESKTOPUI_SCALING = "2"
+
+# ---------------------------------------------------------------------------
+# Outputs (positions are logical coordinates, matching the Hyprland config)
+# ---------------------------------------------------------------------------
+
+[output.eDP-1]
+mode = "3200x2000@120"
+position = [1841, 1080]
+scale = 2.0
+vrr = "disabled"
+workspaces = 10
+
+# [output.HDMI-A-1]
+# mode = "1920x1080@74.97"
+# position = [1722, 0]
+# scale = 1.0
+# vrr = "disabled"
+# workspaces = 10
+
+# ---------------------------------------------------------------------------
+# Layout / window management
+# ---------------------------------------------------------------------------
+
+[layout]
+mode = "stacking"
+gap = 5
+client_maximize = "edges"
+
+[layout.stacking]
+drop_zones = true
+
+# Separate overview is built into Umbriel; Mod+O is bound below.
+[overview]
+zoom = 0.5
+background_blur = true
+workspace_wallpaper = true
+shortcuts = true
+shortcut_keys = "1234567890"
+
+# ---------------------------------------------------------------------------
+# Input
+# ---------------------------------------------------------------------------
+
+[input.keyboard]
+layout = "us,ru"
+options = "grp:win_space_toggle"
+track_layout = "global"
+
+[input.mouse]
+accel_profile = "adaptive"
+sensitivity = 0.1
+
+[input.touchpad]
+tap = true
+natural_scroll = true
+accel_profile = "adaptive"
+sensitivity = 0.1
+scroll_factor = 1.0
+
+# [input.tablet]
+# enabled = true
+# map_to_output = "HDMI-A-1"
+
+[input.focus]
+follows_mouse = true
+# Hovering focuses but does not raise: sweeping the pointer across a window
+# underneath can no longer bury the window above it. Clicks and keybinds raise.
+hover_raises = false
+
+# ---------------------------------------------------------------------------
+# Appearance
+# ---------------------------------------------------------------------------
+
+[appearance]
+prefer_no_csd = true
+border_width = 2
+outer_border_width = 0
+corner_radius = 8
+opaque_fullscreen = true
+
+[appearance.title_bar]
+mode = "forced"
+height = 28
+font = "Open Sans 10"
+button_position = "left"
+buttons = ["minimize", "maximize", "close"]
+# Symbols appear on hover instead of always, keeping the bar clean.
+button_glyph = "hover"
+
+[appearance.blur]
+enabled = false
+
+# Stacking layout: every window floats and overlaps, so shadows separate layers.
+[appearance.shadow]
+enabled = true
+softness = 12
+offset_x = 0
+offset_y = 3
+
+# Tab groups (a window dragged onto another). corner_radius defaults to -1 and
+# follows the window corner_radius; hide_when_single frees the strip otherwise.
+[appearance.tab_bar]
+hide_when_single = true
+
+# ---------------------------------------------------------------------------
+# Animations
+# Hyprland's custom "quick" bezier has no one-to-one translation here.
+# These use Umbriel's supported spring/ease curves and preserve the intent:
+# pop-in windows, sliding workspaces, smooth focus/overview transitions.
+# ---------------------------------------------------------------------------
+
+[animation]
+enabled = true
+duration_ms = 180
+curve = "easeout"
+
+[animation.windows_in]
+enabled = true
+curve = "spring:1,900"
+style = "popin"
+scale = 0.8
+
+[animation.windows_out]
+enabled = true
+curve = "spring:1,1400"
+style = "popin"
+scale = 0.8
+
+[animation.windows_move]
+enabled = true
+curve = "spring:1,800"
+
+[animation.windows_resize]
+enabled = true
+curve = "spring:1,900"
+
+[animation.windows_opacity]
+enabled = true
+curve = "spring:1,900"
+
+[animation.workspaces]
+enabled = true
+style = "slide"
+curve = "spring:1,800"
+
+[animation.overview]
+enabled = true
+curve = "spring:1,800"
+workspace_curve = "spring:1,1000"
+
+[animation.border]
+enabled = true
+curve = "spring:1,900"
+
+# ---------------------------------------------------------------------------
+# Scratchpad: closest equivalent to Hyprland's special workspace.
+# Unlike a normal workspace, Umbriel scratchpads are holding areas for windows.
+# ---------------------------------------------------------------------------
+
+[[scratchpad]]
+name = "special"
+
+# ---------------------------------------------------------------------------
+# Window rules
+# In stacking mode ordinary windows already float at their preferred size.
+# No global "float all" rule is necessary.
+# ---------------------------------------------------------------------------
+
+# Hyprland inactive_opacity = 0.90 / active_opacity = 1.0
+[[window_rule]]
+match.is_focused = false
+opacity = 0.90
+
+[[window_rule]]
+match.is_focused = true
+opacity = 1.0
+
+# Picture-in-picture: retain the 25% width intent and place near bottom-right.
+# Umbriel does not expose a keep_aspect_ratio rule; the client controls its ratio.
+[[window_rule]]
+match.title = "^[Pp]icture[-\\s]?[Ii]n[-\\s]?[Pp]icture.*$"
+default_floating = true
+default_floating_size = { width = 0.25 }
+default_position = { x = 24, y = 24, anchor = "bottom_right" }
+
+# Satty: Umbriel can set an initial size, but does not have Hyprland's max_size
+# equivalent. This is an initial 1280x720 size, not a hard maximum.
+[[window_rule]]
+match.app_id = "^com[.]gabm[.]satty$"
+default_floating = true
+default_floating_size_px = { width = 1280, height = 720 }
+
+# ---------------------------------------------------------------------------
+# Keybindings
+# ---------------------------------------------------------------------------
+
+[keybinds]
+# Launchers
+"Mod+T" = "spawn ghostty"
+"Mod+grave" = "spawn ghostty +toggle-quick-terminal"
+"Mod+F" = "spawn nautilus"
+"Mod+B" = "spawn zen-browser"
+
+# Vicinae
+"Mod+A" = "spawn vicinae toggle"
+"Mod+V" = "spawn vicinae vicinae://launch/clipboard/history"
+"Ctrl+Alt+Space" = "spawn vicinae vicinae://launch/core/search-emojis"
+
+# Window management
+"Mod+Q" = "window-close"
+# Hyprland's float toggle has no useful counterpart in stacking: windows are
+# already free-positioned. Reuse Mod+W for maximize-to-edges / restore.
+# "Mod+W" = "window-toggle-maximize-to-edges"
+# "Shift+F11" = "window-toggle-fullscreen"
+"Mod+O" = "overview-toggle"
+# Per-workspace layout toggle. Scrolling tiles windows in a strip, so nothing
+# overlaps and every window is visible in the overview preview (the strip pans).
+"Mod+L" = "workspace-set-layout toggle stacking scrolling"
+
+# The compositor has built-in Mod+left-drag to move and Mod+right-drag to resize
+# floating windows; no separate mouse dispatcher is required.
+
+# Noctalia shell
+"XF86AudioRaiseVolume" = { action = "spawn noctalia msg volume-up", allow_when_locked = true }
+"XF86AudioLowerVolume" = { action = "spawn noctalia msg volume-down", allow_when_locked = true }
+"XF86AudioMute" = { action = "spawn noctalia msg volume-mute", allow_when_locked = true, repeat = false }
+"XF86MonBrightnessUp" = { action = "spawn noctalia msg brightness-up", allow_when_locked = true }
+"XF86MonBrightnessDown" = { action = "spawn noctalia msg brightness-down", allow_when_locked = true }
+"Mod+slash" = "spawn noctalia msg settings-toggle"
+"XF86Assistant" = "spawn noctalia msg session lock-and-suspend"
+"Ctrl+Alt+Delete" = "spawn noctalia msg panel-toggle session"
+"Mod+M" = "spawn noctalia msg panel-toggle control-center media"
+"Alt+Tab" = "spawn noctalia msg window-switcher"
+"Mod+P" = "spawn noctalia msg media toggle"
+"Mod+bracketleft" = "spawn noctalia msg media previous"
+"Mod+bracketright" = "spawn noctalia msg media next"
+
+# Screenshots. grim + slurp are compositor-agnostic Wayland tools; unlike
+# grimblast / hyprcapture, these do not depend on Hyprland.
+"Alt+Shift+2" = 'spawn grim -g "$(slurp)" - | satty --filename -'
+
+# Workspaces: fixed 1..10 inventory on each output.
+"Mod+1" = "workspace-switch 1"
+"Mod+2" = "workspace-switch 2"
+"Mod+3" = "workspace-switch 3"
+"Mod+4" = "workspace-switch 4"
+"Mod+5" = "workspace-switch 5"
+"Mod+6" = "workspace-switch 6"
+"Mod+7" = "workspace-switch 7"
+"Mod+8" = "workspace-switch 8"
+"Mod+9" = "workspace-switch 9"
+"Mod+0" = "workspace-switch 10"
+
+"Mod+Shift+1" = "window-move-to-workspace-silent 1"
+"Mod+Shift+2" = "window-move-to-workspace-silent 2"
+"Mod+Shift+3" = "window-move-to-workspace-silent 3"
+"Mod+Shift+4" = "window-move-to-workspace-silent 4"
+"Mod+Shift+5" = "window-move-to-workspace-silent 5"
+"Mod+Shift+6" = "window-move-to-workspace-silent 6"
+"Mod+Shift+7" = "window-move-to-workspace-silent 7"
+"Mod+Shift+8" = "window-move-to-workspace-silent 8"
+"Mod+Shift+9" = "window-move-to-workspace-silent 9"
+"Mod+Shift+0" = "window-move-to-workspace-silent 10"
+
+# Special workspace -> named scratchpad
+"Mod+S" = "scratchpad-toggle special"
+"Mod+Shift+S" = "window-move-to-scratchpad special"
+"Mod+Shift+W" = "window-restore-from-scratchpad special"
+
+[include.optional]
+files = ["noctalia.toml"]

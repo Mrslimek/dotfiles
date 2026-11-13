@@ -1,6 +1,3 @@
 {
- 	"mkparents": true,
-	"clipboard": "external",
-	"colorscheme": "simple",
-	"mouse": false
+  "colorscheme": "noctalia"
 }
