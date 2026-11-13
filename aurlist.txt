@@ -4,7 +4,6 @@ claude-code-stable-bin
 codegraph-bin
 euphonica
 gpu-screen-recorder-gtk
-grimblast-git
 http-parser
 ldtk
 localsend-bin
