@@ -149,6 +149,7 @@ udiskie
 umbriel-git
 usbutils
 uv
+uwsm
 vicinae-bin
 vim
 vscodium-bin
