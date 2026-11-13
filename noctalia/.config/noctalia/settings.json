@@ -17,8 +17,7 @@
         "iconMode": "tabler",
         "ignoreMouseInput": true,
         "overviewLayer": false,
-        "pinnedApps": [
-        ],
+        "pinnedApps": [],
         "position": "follow_bar",
         "screenshotAnnotationTool": "",
         "showCategories": false,
@@ -28,8 +27,7 @@
         "viewMode": "list"
     },
     "audio": {
-        "mprisBlacklist": [
-        ],
+        "mprisBlacklist": [],
         "preferredPlayer": "amberol",
         "spectrumFrameRate": 30,
         "spectrumMirrored": true,
@@ -167,15 +165,13 @@
             ],
             "right": [
                 {
-                    "blacklist": [
-                    ],
+                    "blacklist": [],
                     "chevronColor": "none",
                     "colorizeIcons": false,
                     "drawerEnabled": true,
                     "hidePassive": false,
                     "id": "Tray",
-                    "pinned": [
-                    ]
+                    "pinned": []
                 },
                 {
                     "hideWhenZero": false,
@@ -208,8 +204,7 @@
         }
     },
     "brightness": {
-        "backlightDeviceMappings": [
-        ],
+        "backlightDeviceMappings": [],
         "brightnessStep": 5,
         "enableDdcSupport": false,
         "enforceMinimum": true
@@ -308,8 +303,7 @@
         "monitorWidgets": [
             {
                 "name": "eDP-1",
-                "widgets": [
-                ]
+                "widgets": []
             }
         ],
         "overviewEnabled": true
@@ -335,11 +329,9 @@
         "launcherIconColor": "none",
         "launcherPosition": "end",
         "launcherUseDistroLogo": false,
-        "monitors": [
-        ],
+        "monitors": [],
         "onlySameOutput": true,
-        "pinnedApps": [
-        ],
+        "pinnedApps": [],
         "pinnedStatic": false,
         "position": "bottom",
         "showDockIndicator": false,
@@ -490,8 +482,7 @@
         "enabled": true,
         "location": "top_right",
         "lowUrgencyDuration": 2,
-        "monitors": [
-        ],
+        "monitors": [],
         "normalUrgencyDuration": 3,
         "overlayLayer": true,
         "respectExpireTimeout": false,
@@ -520,8 +511,7 @@
             2
         ],
         "location": "top_right",
-        "monitors": [
-        ],
+        "monitors": [],
         "overlayLayer": true
     },
     "plugins": {
@@ -675,14 +665,12 @@
         "directory": "/home/viktor/Pictures/Wallpapers",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
-        "favorites": [
-        ],
+        "favorites": [],
         "fillColor": "#000000",
         "fillMode": "crop",
         "hideWallpaperFilenames": false,
         "linkLightAndDarkWallpapers": true,
-        "monitorDirectories": [
-        ],
+        "monitorDirectories": [],
         "overviewBlur": 0.4,
         "overviewEnabled": false,
         "overviewTint": 0.6,

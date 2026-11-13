@@ -11,7 +11,10 @@ export GOPATH="$XDG_DATA_HOME/go"
 
 # Wayland & Система
 export ELECTRON_OZONE_PLATFORM_HINT=wayland
-export STEAM_FORCE_DESKTOPUI_SCALING=1.5
+# DISABLED 2026-11-13: Hyprland-era hack; under umbriel XWayland it double-scales
+# (umbriel XSETTINGS already tells Steam the right scale). See
+# ~/.config/environment.d/steam.conf
+# export STEAM_FORCE_DESKTOPUI_SCALING=1.5
 export EDITOR="micro"
 export VISUAL="micro"
 
@@ -45,7 +48,7 @@ alias zed="zeditor"
 alias venv="source venv/bin/activate"
 alias btrfs-assistant="sudo -E btrfs-assistant-bin --platform wayland"
 alias cargo_run_without_wgpu_validation="WGPU_VALIDATION=0 cargo run"
-alias steam="env STEAM_FORCE_DESKTOPUI_SCALING=1.5 steam"
+alias steam="steam"
 
 # Системный Path (Pipx и локальные бинарники)
 export PATH="$PATH:/home/viktor/.local/bin"
