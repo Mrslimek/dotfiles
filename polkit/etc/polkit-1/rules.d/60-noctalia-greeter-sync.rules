@@ -1,0 +1,9 @@
+// Noctalia greeter appearance sync: passwordless for the owner.
+// Cosmetic files only; does not grant a root shell.
+polkit.addRule(function(action, subject) {
+  if (action.id === "org.freedesktop.policykit.exec" &&
+      action.lookup("program") === "/usr/bin/noctalia-greeter-apply-appearance" &&
+      subject.user === "viktor") {
+    return polkit.Result.YES;
+  }
+});
