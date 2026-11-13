@@ -95,7 +95,6 @@ nodejs
 noto-fonts-emoji
 ntfs-3g
 nvme-cli
-nwg-displays
 nwg-look
 obsidian
 openvpn
@@ -150,7 +149,6 @@ udiskie
 umbriel-git
 usbutils
 uv
-uwsm
 vicinae-bin
 vim
 vscodium-bin
