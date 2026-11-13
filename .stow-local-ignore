@@ -1,0 +1,4 @@
+# Never deploy these via stow (READMEs are docs; the rest is runtime/noise)
+README\.md
+\.bak$
+htop_history
